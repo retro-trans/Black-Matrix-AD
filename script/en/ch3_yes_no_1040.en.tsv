@@ -1,0 +1,4 @@
+# Black/Matrix AD - Chapter 3: yes/no choice at group 279
+# No manual wrapping: patchline.py supplies pixel-aware line breaks.
+0010403A	Yes
+00104048	No

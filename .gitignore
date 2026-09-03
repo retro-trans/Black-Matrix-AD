@@ -1,0 +1,11 @@
+# Original disc images, extracted game files, and patched build output are
+# copyrighted game data and never belong in the repository.  The repo holds
+# the tools, docs, and translation scripts needed to rebuild the patch from
+# an original dump.
+/*.bin
+/*.cue
+/build/
+/extracted/
+
+__pycache__/
+.claude/

@@ -1,0 +1,5 @@
+# Black/Matrix AD - destination choice at group 313
+# No manual wrapping: patchline.py supplies pixel-aware line breaks.
+0011C036	Innermost chamber
+0011C044	Next room
+0011C054	Go to town

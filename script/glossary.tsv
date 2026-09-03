@@ -1,0 +1,392 @@
+# Canonical English terminology for the Black/Matrix AD translation.
+#
+# Columns are tab-separated. English script sources refer to an entry with
+# `$$Japanese term ID$$`; the build replaces that control with
+# `preferred_english`. `allowed_english` only documents contextual alternatives.
+# If grammar needs a stable different form, add a longer exact Japanese phrase
+# as its own ID (for example, the singular/plural stuffed-friend entries).
+#
+# Keep proper names literal here. Character mannerisms and pronouns belong in
+# speakers.tsv because they depend on who is talking.
+japanese	preferred_english	allowed_english	category	notes
+羽	wings		world	The wings growing from a person's back; use the plural in normal prose.
+世界	world		world	The setting/world as a whole.
+飼い主	owner		role	The owner in the owner/slave relationship; do not paraphrase this away.
+奴隷	slave		role	A person in the owner/slave relationship.
+ヌイグルミさん達	stuffed friends		object	Plural form used by Michette for her collection.
+ヌイグルミさん	stuffed friend	stuffed toy|stuffed animal	object	Michette's affectionate term for a stuffed toy or a person she treats as one.
+アベル	Abel		name	Player protagonist and white-wing slave.
+ドミナ	Domina		name	Pure-hearted first master; warm, composed speech.
+プリカ	Prica		name	Childlike second master; affectionate and emotional speech.
+クレージュ	Courreges		name	Tomboyish third master; uses ボク/キミ.
+ミシェット	Michette		name	Whimsical fourth master who treasures the stuffed toy Kain.
+プラハ	Prague		name	Mature fifth master; proud and defensively affectionate.
+ゼロ	Zero		name	Secret male sixth master; rough オレ/オマエ register.
+カイン	Kain		name	Proper name. Stretch surrounding interjections, not the spelling of the name.
+ご主人様	Master		role	Respectful title for Abel's selected black-wing master; distinct from 飼い主.
+おにいちゃん	big brother		address	Affectionate form of address; relationship is explicit, but the speaker's name is not.
+お兄ちゃん	big brother		address	Kanji spelling of Prica's affectionate address for Abel; kept identical to おにいちゃん.
+十ヶ月	ten months		measurement	Write out the number in dialogue.
+高熱	fever		condition	A dangerously high fever; modifiers such as raging are optional.
+事故	accident		world	The accident that injured the protagonist.
+落雷	lightning strike	lightning	world	The major lightning event.
+雷	lightning		world	Ordinary references to lightning.
+薬草	herbs	medicinal herbs	item	Medicinal plants gathered in the mountains.
+医者	doctor		role	Use doctor unless later context establishes a specialized title.
+風邪	cold		condition	An ordinary illness; do not intensify it to fever unless the Japanese says so.
+兵士達	soldiers		role	Plural group of soldiers.
+死体	bodies	corpses	world	Dead bodies; prefer bodies in emotional dialogue unless corpse is deliberately clinical or harsh.
+記憶喪失	amnesia	memory loss	condition	The protagonist's loss of memory.
+記憶	memory		concept	A character's memories; the longer amnesia entry takes precedence where applicable.
+記憶力	memory	ability to remember	concept	A character's ability to remember; this longer entry takes precedence over 記憶.
+誕生日	birthday		calendar	A character's birthday.
+大ケガ	badly hurt	seriously injured	condition	A major injury; the control is used predicatively in English dialogue.
+兵隊さん	soldiers		role	Prica's childlike/polite way of referring to soldiers.
+血だらけ	covered in blood	bloody|drenched in blood	condition	Someone or something visibly covered in blood.
+リハビリ	rehab	rehabilitation	activity	The protagonist's physical rehabilitation in Chapter 1.
+お仕置き	punishment	discipline	concept	Prague's teasing disciplinary punishment.
+かいん	Kain		name	Hiragana spelling of カイン in Michette's childlike diary; resolve to the same proper name.
+みしぇっと	Michette		name	Hiragana self-name in Michette's childlike diary; resolve to the same proper name.
+どれい	slave		role	Hiragana spelling of 奴隷 in Michette's childlike diary.
+おはね	wings		world	Michette's childlike/polite wording for a person's wings.
+いけにえ	sacrifice		world	A ritual victim offered at the festival; preserve the ominous literal meaning even when Michette does not understand it.
+罪	sin		world	A central moral and religious concept in Black/Matrix; do not weaken it to mistake or wrongdoing.
+愛	love		world	A central virtue/ideal in Black/Matrix.
+可愛い	cute	adorable	description	A character or expression described as endearingly cute; this longer entry prevents the standalone 愛 term from matching inside 可愛い.
+かわいい	cute	adorable	description	Hiragana spelling of 可愛い; use the same English adjective.
+かぁわい〜い	cute	adorable	description	Prica's stretched childlike pronunciation of かわいい.
+熱病	fever		condition	A severe fever or feverish illness.
+薬	medicine		item	Medicine administered during illness.
+５ヶ月	five months		measurement	Full-width numeral form in Zero's diary; write out the number.
+１ヶ月	one month		measurement	Full-width numeral form in diary prose; write out the number.
+回復	recovery		condition	Physical recovery from illness or injury.
+自由	freedom	liberty	world	A central ideal and character-associated sin in Black/Matrix.
+カゴの鳥	caged bird		idiom	A person protected or confined like a bird in a cage.
+駕籠の鳥	caged bird		idiom	Kanji spelling of カゴの鳥; resolve both source forms identically.
+ネックレス	necklace		item	The necklace Domina gives Abel before he goes into town.
+お守り	protective charm	good-luck charm	item	An object carried or worn for protection.
+野菜	vegetables	vegetable	item	Vegetables used as food or cooking ingredients.
+スープ	soup		item	Prepared soup; retain the simple food name.
+プレゼント	gift	present	item	An item explicitly given as a personal gift.
+食材	ingredients	food ingredients	item	Ingredients intended for cooking.
+鍋料理	hot pot		food	A cooked communal hot-pot dish.
+ベーコン	bacon		food	Prepared bacon.
+サンぺー・ハヨシヤ	Sanpei Hayoshiya		name	An in-world legendary fishing master; the line appears to allude to Japanese fishing fiction, but no authoritative profile was found.
+伝説の怪魚	legendary monster fish		creature	The supposedly uncatchable giant fish mentioned in Zero's item reaction.
+おにちゃん	big brother		address	Prica's shortened childlike spelling of おにいちゃん.
+おにいぢゃん	big brother		address	Prica's slurred/mispronounced form of おにいちゃん.
+おにいちゃ〜ん	big brother		address	Prica's elongated call to her big brother.
+日記	diary	journal	item	A personal written diary.
+こけももジャム	lingonberry jam		food	Jam made from lingonberries.
+ブルーベリー	blueberries	blueberry	food	Blueberries used as food or an ingredient.
+ご褒美	reward		role	A reward a master grants for good service or behavior.
+奉仕	serve	service	role	Service performed for a master; the preferred form is verbal for dialogue controls.
+血	blood		world	Blood as a physical substance and recurring dark motif; longer compounds take precedence.
+ペンペン草	shepherd's purse		plant	Colloquial Japanese name for shepherd's purse, one of the seven spring herbs.
+春の七草	seven spring herbs		plant	The traditional seven edible herbs of spring.
+ヘチマ	loofah		plant	The loofah plant; its mature fruit can be made into scrubbers.
+まんじゅしゃげ	red spider lily		plant	Hiragana spelling of the red spider lily, associated with graves.
+クロッカス	crocus		plant	The crocus flower.
+ヒヤシンス	hyacinth		plant	The hyacinth flower.
+台風	typhoon		weather	A tropical cyclone; use typhoon in this Japanese setting.
+アブラナ	rapeseed	canola	plant	The oilseed rape plant grown for edible oil.
+ひまわり	sunflower		plant	The sunflower.
+ベルガモット	bergamot		plant	The red-flowered bergamot used for herbal tea.
+ハーブティー	herbal tea		food	Tea brewed from dried herbs.
+サフラン	saffron		plant	The saffron flower and culinary spice.
+調味料	seasonings	seasoning	food	Seasonings used in everyday cooking.
+水鉄砲	water-gun fight	water pistol|squirt gun	activity	Zero's suggested water play with squirt guns.
+レシピ	recipe		food	A cooking recipe.
+首輪	collar		slavery	A slave collar; retain the concrete object and coercive context.
+ペット	pet		role	An owned animal/pet; the Inquisitor uses it to dehumanize Abel.
+ヌイグルミ	stuffed toy	stuffed animal	object	Plain form of Michette's stuffed-toy term, without her affectionate honorific.
+恋	romance	romantic love	concept	Romantic attraction, distinguished from the forbidden ideal 愛 in the Inquisitor's lecture.
+発情期	mating season	heat	condition	The Inquisitor's clinical, dehumanizing explanation of romantic attraction.
+欲情	lust	sexual desire	concept	Sexual desire in the Inquisitor's clinical lecture.
+種族	species		world	A biological species or race in the phrase preservation of the species.
+七つの大罪	Seven Deadly Sins		world	The setting's seven forbidden virtues, treated as grave sins by the Angelas Church.
+猫っ可愛がり	dote on	pamper	idiom	To lavish affection on someone like a pet; this longer entry prevents 愛 from matching inside 可愛がり.
+この世	this world		world	Idiomatic reference to the world/existence, distinct in source spelling from 世界.
+章	Chapter		ui	Capitalize in chapter-selection UI text.
+鍋物	hot pot		food	A hot-pot dish; exact source variant used alongside 鍋料理.
+オカルト	occult		concept	The in-world category applied to forbidden or supernatural books and lore.
+七草	seven herbs		plant	The traditional seasonal set of seven herbs; kept distinct from the prepared porridge.
+七草粥	seven-herb porridge		food	Rice porridge prepared with the traditional seven herbs.
+デントロビウム	dendrobium		plant	The flowering orchid Prica names as her favorite seasonal bloom.
+水浴び	splash in the water	bathe|water play	activity	Casual cooling-off play in water during the Chapter 1 summer event.
+おくさん	wife		address	Prica's childlike hiragana form for the domestic role she imagines with Abel.
+人類の終末	Armageddon	End of Humanity	lore	The occult-library book title and apocalyptic event; its parenthetical reading is Armageddon.
+人類の終末（ハルマゲドン）	Armageddon		lore	Full Japanese title with its explicit Armageddon reading.
+７つの大罪	Seven Deadly Sins		world	Full-width-numeral spelling of the setting's seven gravest sins.
+七つの美徳	Seven Virtues		world	The setting's formally praised seven virtues, reversing conventional morality.
+憤怒	Wrath	anger	virtue	Formal virtue label in the Angelas doctrine.
+驕り	Pride	arrogance	virtue	Formal virtue label in the Angelas doctrine.
+嫉妬	Envy	jealousy	virtue	Formal virtue label in the Angelas doctrine.
+怠惰	Sloth	idleness	virtue	Formal virtue label in the Angelas doctrine.
+暴食	Gluttony		virtue	Formal virtue label in the Angelas doctrine.
+強欲	Greed	avarice	virtue	Formal virtue label in the Angelas doctrine.
+正義	Justice		world	Formal sin label in the setting's reversed Angelas morality.
+人権	Human Rights		world	Formal sin label in the setting's reversed Angelas morality.
+弱者	The Weak	weak people	world	Formal sin label and doctrinal category for people deemed weak.
+友情	Friendship		world	Formal sin label in the setting's reversed Angelas morality.
+平等	Equality		world	Formal sin label in the setting's reversed Angelas morality.
+弱肉強食	survival of the fittest	law of the jungle	ideology	Angelas doctrine that the strong should dominate the weak.
+アンゲルス教典	Angelas Scripture		lore	The Angelas Church's sacred doctrinal text.
+リリス	Lilith		name	The first woman and later archangel in Black/Matrix lore; common biblical romanization.
+メフィストフェレス	Mephistopheles	Mephisto	name	The archangel tied to Lilith in the game's mythology.
+メフィスト・フェレス	Mephistopheles	Mephisto	name	Punctuated spelling used in the Ribeira lore scene; the archangel who led the black-wing ancestors in the Genesis War.
+大天使	Archangel		lore	The title borne by Mephistopheles and other leaders of the black-wing faction in the game's reversed cosmology.
+ミカエル	Michael		name	The combat archangel; use the established biblical English name.
+大悪神ゴッド	God, the Great Evil Deity	Great Evil God	name	The creator's evil aspect or title in the game's reversed cosmology.
+おまじない	charm	spell	magic	A folk charm or simple spell, including the occult-library handbook.
+黒魔術	black magic		magic	Forbidden magic attributed to Lilith in the occult handbook.
+カカオ	cacao	cocoa	food	Cacao beans used as the base of the handbook's chocolate recipe.
+トリカブト	monkshood	aconite	plant	The poisonous plant added to the occult handbook's recipe.
+羽目	predicament	fate|plight	idiom	An adverse situation in the idiom 羽目になる; prevents a false 羽/wings match.
+ゴルゴダ	Golgotha		location	The prison where Abel is taken; Japanese guides identify Chapter 2 as Golgotha Prison.
+異端審問官	Inquisitor		role	An officer of the Angelas Church who arrests and judges alleged heretics.
+反抗奴隷	rebel slave	rebellious slave	world	The authorities' formal stigma for a slave judged to have defied a master or the social order.
+レブロブス	Leburobs		name	Gruff former gladiator and bearer of Freedom; spelling follows the long-standing English Black/Matrix guide usage.
+ガイウス	Gaius		name	Former chivalrous bandit known for stealing from the powerful to help the poor; bearer of Justice.
+行動力	Movement	MOV	system	Movement capability in battle; shown by the MOV stat in the interface.
+回復薬	healing item	potion	item	A consumable used to restore a fallen or injured unit during battle.
+返り血（ＢＰ）	Blood Points (BP)	BP	system	Human blood harvested as the game's resource for magic and weapon rituals.
+剣血	Bloodforging	blood forging	system	The ritual that infuses a weapon with Blood Points to awaken one of its latent abilities.
+潜在能力	latent ability	weapon ability	system	A weapon's unlockable special property or technique, activated through Bloodforging.
+ピリポ	Piripo		name	Frail black-wing prison guard who gradually finds the courage to help Abel; spelling follows the long-standing English Black/Matrix guide usage.
+ヨハネ	Yohane	John	name	Former High Priest of the Temple of the Sun; elderly, learned, secretive, and archaic in speech.
+発情	heat	lust	condition	Animal sexual heat, used clinically and dehumanizingly when the setting dismisses love.
+執着心	attachment	obsession|fixation	emotion	A possessive or obsessive attachment, contrasted with genuine love.
+所有欲	possessiveness	possessive desire	emotion	The desire to possess another person, contrasted with genuine love.
+疾風のガイ	Gai the Gale		name	Gaius's established outlaw epithet, tied to his speed and reputation.
+生けにえ	sacrifice		world	Kanji spelling of the ritual offering; kept identical to いけにえ.
+大神官	High Priest		role	Senior Angelas religious office formerly held by Yohane.
+魔道	sorcery	arcane arts	magic	The formal occult arts wielded by High Priests and other powerful magic users.
+神聖ゾンビ魔法	Sacred Zombie Magic		magic	Yohane's ancient necromantic art for animating corpses.
+ゾンビ爆	Zombie Bomb		magic	Yohane's spell that weaponizes an animated corpse in an explosion.
+カロン	Charon	Karon	name	Golgotha's popular warden; the conventional English form of the underworld ferryman's name fits the prison role.
+メフィスト	Mephisto		name	Short form used for Mephistopheles in the game's Genesis War lore.
+創世記戦争	Genesis War	War of Genesis	lore	The ancient war won by Mephisto, Lilith, and their faction.
+獄長	warden	prison warden	role	The officer in command of a prison; Prague or Charon may hold this post depending on context.
+大邪神	Great Evil Deity	Great Evil God	lore	The setting's prophesied evil divinity; keep distinct from the fuller title 大悪神ゴッド.
+救世主	Messiah	Savior	lore	The prophesied savior whose sign appears through Abel's power.
+暗黒魔法	dark magic		magic	Yohane's powerful time-dependent school of magic.
+太陽の神殿	Temple of the Sun	Sun Temple	location	The major temple in Ribeira formerly led by High Priest Yohane.
+リベイラ	Ribeira		location	The holy city and religious capital surrounding the Temple of the Sun.
+神の鎖	Chain of God	God's Chain	location	The colossal chain rising from Ribeira into the sky.
+邪道騎士	Heretic Knight	Heretical Knight	role	A warrior wearing demonic armor modeled on the Great Evil Deity's legendary armor; use the natural English title consistently.
+ルピルピ	Rupirupi	Lupilupi	name	Yohane's devoted disciple and a lively Heretic Knight; romanization follows the long-standing English Black/Matrix guide.
+ユダ	Juda	Judah	name	The male Angelas commander who embodies jealousy and cannot tolerate anyone more beautiful; he speaks in a vain, flamboyantly feminine register.
+召喚魔法	summoning magic		magic	Magic used to call or manifest a combat summon.
+お師匠様	Master	mentor	title	Rupirupi's formal and devoted title for Yohane; preserve the respectful warmth rather than spelling out an honorific.
+お師匠さま	Master	mentor	title	Kana-variant of Rupirupi's formal title for Yohane; keep identical to お師匠様.
+ガブリエル	Gabriel		name	One of the seven Great Evil Deities in Yohane's reversed-cosmology account; conventional angelic romanization.
+ラファエル	Raphael		name	One of the seven Great Evil Deities in Yohane's reversed-cosmology account; conventional angelic romanization.
+ウリエル	Uriel		name	One of the seven Great Evil Deities in Yohane's reversed-cosmology account; conventional angelic romanization.
+サリエル	Sariel		name	One of the seven Great Evil Deities in Yohane's reversed-cosmology account; conventional angelic romanization.
+ラグエル	Raguel		name	One of the seven Great Evil Deities in Yohane's reversed-cosmology account; conventional angelic romanization.
+メタトロン	Metatron		name	The most feared of the seven Great Evil Deities; conventional angelic romanization.
+大悪神・ゴッド	God, the Great Evil Deity	Great Evil God God	name	Punctuated spelling of the creator's evil title in Yohane's Genesis War account.
+父なる大神サタン	Father Satan	Father God Satan	name	Reverential title for Satan in the black-wing Genesis War doctrine.
+封印の間	Sealed Chamber	sealed room	location	The restricted chamber inside the Temple of the Sun where the Great Evil Deity Armor was sealed.
+神官	priest	cleric	role	A member of the Angelas religious hierarchy; use lowercase except where a formal title requires capitalization.
+神官魔法	priestly magic	clerical magic	magic	The varied magic practiced by the Temple of the Sun's priests.
+ガイさん	Gai	Mr. Gai	name	Piripo's familiar, respectful way of addressing Gaius in party dialogue.
+教皇庁	Papal Office	Holy See	organization	The central Angelas Church authority that funds Golgotha and directs its treatment of Yohane.
+パンデモニウム	Pandemonium		location	The city where Leburobs lived as a slave and gladiator before killing his master.
+生けにえの待合室	Sacrifice Waiting Room	waiting room for sacrifices	location	Golgotha's holding area for condemned prisoners awaiting sacrifice.
+死刑囚	condemned prisoner	death-row prisoner	role	A prisoner sentenced to death and held in Golgotha's Sacrifice Waiting Room.
+逃亡奴隷	runaway slave	fugitive slave	role	The authorities' label for an enslaved person who escaped ownership.
+愛人	lover	mistress|paramour	role	One of Juda's favored attendants or lovers; preserve her possessive, demeaning implication.
+生き血	lifeblood	living blood	lore	The living blood drained from anyone who wears cursed demonic armor.
+生命力	life force	vitality	lore	The wearer's vitality, steadily consumed by cursed demonic armor.
+余命	time left	remaining lifespan	lore	The short remainder of a person's life, especially Rupirupi's after donning demonic armor.
+封印	seal	sealing	lore	The magical binding placed on Great Evil Deity Armor and the act or mechanism that prevents its use.
+邪神	evil deity	evil god	lore	A white-wing divinity defeated in the Genesis War; keep distinct from the stronger title Great Evil Deity.
+大罪	grave sin	great sin	world	A serious sin in the setting's inverted moral order; keep distinct from the formal Seven Deadly Sins.
+大善神サタン	Satan, the Great Good Deity	Great Good God Satan	name	The black-wing religion's supreme good deity, invoked by Juda against believers in the evil deities.
+大善神	Great Good Deity	Great Good God	lore	Formal title for the supreme deity of the black-wing faith; use with the deity's name when the Japanese separates them.
+大罪人	grave sinner	serious offender	role	A person condemned for an exceptionally serious sin and subjected to punishment worse than death.
+生命の源	source of life	life source	lore	Blood's doctrinal role as the medium that feeds and develops Great Evil Deity Armor.
+生きた鎧	living armor	living suit of armor	lore	Armor that grows by drinking blood and progressively raises its wearer's abilities.
+七大邪神	Seven Great Evil Deities	Seven Great Evil Gods	lore	The seven named Great Evil Deities whose souls and names are tied to the seven legendary armors.
+カナン	Canaan		location	A city whose ruler secretly purchased and guards one of the Great Evil Deity armors.
+御主人	master	owner	role	A formal spelling of master used when referring to Abel's selected master; keep distinct from the harsher ownership term 飼い主.
+教皇	Pope	pontiff	role	The supreme authority who sends orders from the Papal Office.
+異端審問会	Inquisitorial Council	Inquisition	organization	The Angelas Church headquarters' direct unit responsible for investigating and punishing heresy.
+アンゲルス教団	Angelas Church	Angelas Order	organization	The continent-spanning religious institution that enforces the inverted moral order.
+アンゲルス教	Angelas Church	Angelas faith	organization	Shorter source form for the Angelas Church, used when referring to the religion or its headquarters.
+総本山	headquarters	central temple	location	The Angelas Church's central seat, identified with the Papal Office.
+背徳の街	City of Vice	City of Immorality	location	Ribeira's disparaging nickname among outsiders.
+愛想	patience	affection|regard	idiom	In 愛想をつかす, the speaker loses patience with or gives up on someone; do not misread the embedded 愛 as romantic love.
+オスカー	Oscar		name	A Heretic Knight encountered in Ribeira; outwardly a courteous gentleman, with an affectedly polite and sinister speaking style.
+守護神	guardian deity	guardian god	lore	A protective deity or patron; use deity consistently with the setting's religious terminology.
+欲望	desire	lust|craving	world	Desire as a moral or doctrinal concept in the setting's inverted value system; choose a stronger contextual word only when the Japanese requires it.
+人券	gladiator ticket	person-ticket	world	A Pandemonium betting ticket for a particular gladiator, coined as a human counterpart to a horse-racing ticket.
+繁殖奴隷	breeding slave	breeder slave	role	A slave forced into selective breeding for gladiator bloodlines in Pandemonium.
+肌奴隷	pleasure slave	skin slave	role	A slave exploited for sexual pleasure; translate the euphemistic compound naturally rather than as someone with fine skin.
+剣闘士	gladiator	arena fighter	role	A combatant forced or trained to fight in Pandemonium's lethal arena.
+剣闘	gladiatorial combat	arena fighting	world	Pandemonium's lethal organized gladiator fighting.
+七冠人	Seven-Crowned champion	Seven-Crowned	role	A legendary gladiator who has earned seven arena crowns; Leburobs is recognized as a retired example.
+コズミ	kozumi	muscle stiffness	world	Arena jargon for muscular soreness or stiffness used when evaluating a gladiator's condition.
+テラ銭	house cut	venue fee	world	The organizer's deduction from arena-gambling payouts; a stylized spelling of the Japanese gambling term terazen.
+週刊剣闘士新聞	Weekly Gladiator News	Weekly Gladiator Newspaper	item	A Pandemonium tip sheet sold for predictions on upcoming arena matches.
+闘技場	arena	colosseum	location	Pandemonium's lethal gladiatorial arena and gambling venue.
+剣闘奴隷	gladiatorial slave	gladiator slave	role	A slave bred or forced to fight in lethal arena matches.
+剣闘界の帝王	Emperor of the Arena	Emperor of the Gladiator World	title	The celebrated arena epithet attributed to Leburobs's father.
+桜の女王	Cherry Blossom Queen	Queen of Cherry Blossoms	title	The celebrated arena epithet attributed to Leburobs's mother.
+ダロム	Dalom		name	Leburobs's frail former acquaintance from Pandemonium; timid, fatalistic, and unable to follow Leburobs's pursuit of freedom.
+レブ	Leb		name	The familiar short form used by old acquaintances for Leburobs.
+ジェル	Jeru	Gel|Jell	name	A polite but battle-confident former bandit and optional white-wing recruit in the Ribeira-road encounter.
+ルカ	Luca	Luka	name	A covert Angelas-aligned manipulator with a sly Kansai-inflected voice; conventional Luca romanization is controlled here.
+邪教	heresy	heretical faith	world	A faith or doctrine condemned as heretical by the setting's dominant religion.
+傭兵	mercenary	hired soldier	role	A professional soldier who fights for pay.
+盗賊	bandit	thief	role	An armed outlaw or member of a bandit group.
+領主	lord	ruler	role	The ruler who controls a city or territory.
+大義賊	righteous bandit	great noble bandit	title	Gaius's proud description of his outlaw career stealing and fighting under a claimed moral cause.
+戦力	combat strength	fighting strength	world	A person or group's practical usefulness and strength in battle.
+教団	religious order	order	organization	A religious institution or sect when the source does not specify the Angelas Church by its full name.
+イルカ	dolphin		world	The animal name; this longer control prevents the character-name ID ルカ from matching inside イルカ.
+邪教徒	heretic	cultist	role	A follower of a doctrine condemned as heresy by the dominant religion.
+邪教の教え	heretical teaching	heretical doctrine	world	A specific teaching condemned as heresy; use the complete phrase instead of controlling only the embedded root 邪教.
+せり市	auction	auction market	world	An auction event; in Pandemonium this commonly refers to the sale of slaves.
+セリ	auction	bidding sale	world	The katakana spelling for an auction, used for Pandemonium's sale of enslaved people.
+入札	bid	written bid	world	A formal bid submitted in an auction; the Pandemonium sale uses written bids.
+パドック	paddock	viewing pen	location	The auction viewing pen where enslaved lots are inspected before bidding.
+ライラ	Lila		name	A woman sold at Pandemonium's slave auction; her stable selector is confirmed again in a later self-identifying branch.
+シャムシェル	Shamshel		name	A woman sold at Pandemonium's slave auction; her stable selector is confirmed again in a later recruitment branch.
+エルリム	Elrim		name	A woman sold at Pandemonium's slave auction; her stable selector is confirmed again in a later recruitment branch.
+ゼファル	Zephal	Zephar	name	A cruel, trap-setting arena opponent and slave hunter from Leburobs's past; the Japanese spelling and epithet are corroborated by Japanese player documentation.
+不発弾のゼファル	Zephal the Dud	Unexploded Bomb Zephal	title	Zephal's derisive arena epithet; keep the compact Dud rendering in dialogue while the exact Japanese remains centrally controlled.
+不発弾	unexploded bomb	dud	world	A bomb that failed to detonate; use dud only where the context or epithet calls for the shorter idiom.
+奴隷狩り	slave hunter	slave hunting	role	A person who captures people to sell into slavery.
+奴隷ハンター	slave hunter		role	The katakana form of slave hunter, used as Zephal's occupation.
+奴隷市	slave market		location	Pandemonium's market for buying and selling enslaved people.
+奴隷商人	slave trader	slave merchant	role	A person who buys and sells enslaved people.
+閃光のゼロ	Zero the Flash	Flash Zero	title	Zero's arena epithet, naming his exceptional speed.
+退廃の剣闘士	Decadent Gladiator	Degenerate Gladiator	title	Zephal's arena epithet describing his vicious, corrupt reputation.
+夜伽	bed service	attend in bed	world	A euphemism for sexually attending a master; translate naturally without obscuring the coercive context.
+勝人投票権	winner ballot	winner-vote ticket	item	A Pandemonium arena voting or wagering ticket retained while a stopped match is reviewed.
+子種	seed	offspring	world	A deliberately crude reference to a man's reproductive role in Zephal's argument.
+出生比率	birth ratio	sex ratio	world	The relative numbers of men and women born, invoked in an arena opponent's doctrinal argument.
+脱獄	break out	prison break|jailbreak	world	Escape from imprisonment; dialogue should frame this controlled verb so its tense is supplied by the surrounding English.
+セリフ	line	dialogue	world	A spoken line of dialogue; this longer control also distinguishes the word from the unrelated auction term セリ.
+セリ、なずな、ごぎょう、はこべら	Japanese parsley, shepherd's purse, cudweed, chickweed		world	The first four plants in the traditional Seven Herbs of Spring list; the full phrase avoids confusing plant-name セリ with auction セリ.
+大悪神	Great Evil Deity	Great Evil God	lore	The evil creator deity in the setting's reversed theology when the source omits the fuller name God.
+看守兵	prison guards	guard soldiers	role	Armed guards serving at Golgotha Prison.
+独房	solitary cell	isolation cell	location	A prison cell used to isolate a single prisoner.
+ファインブラッド	Fineblood	fine-blood	role	Pandemonium arena jargon for an elite gladiator bred and raised for exceptional combat ability.
+Ｇ１戦線	G1 season	G1 circuit	world	The arena's top-grade competitive season, borrowing Japanese horse-racing terminology.
+ミニオン	Minion		name	A cheerful young Papal agent known as Minion of the Abyss who follows the party out of curiosity.
+フィム	Fim	Fim/Fim	name	A route-dependent recruit encountered after the Pandemonium arena events.
+ルビィ	Ruby	Ruby/Rubii	name	A route-dependent recruit and Papal intelligence operative known as Ruby of Intrigue.
+ポイゾニスト	Poisonist	Poisoner	name	A poison-wielding enemy encountered during the Golgotha escape battle.
+猛毒	deadly poison	virulent poison	world	Exceptionally lethal poison or venom.
+野良奴隷	stray slave	ownerless slave	role	A dehumanizing label for a slave found without an owner, distinct from a confirmed fugitive slave.
+商品購入・委任証明書	purchase authorization certificate	purchase delegation certificate	item	A document authorizing a slave to buy goods on an owner's behalf.
+奴隷認識票	slave identification card	slave ID tag	item	An identification document or tag used by authorities to register and inspect enslaved people.
+ケデロン	Kederon	Kedron	location	A cemetery village protected from war by the black-wing belief that graves and remains are sacred to reincarnation.
+年貢	levy	annual levy|tax	world	Kederon's heavy compulsory payment used largely to fund medical care for its elderly residents.
+マステマ	Mastema		name	An elderly Kederon warrior and member of the Elder Death Squad, famed in youth as a thousand-slayer and the Thunder God.
+千人殺し	thousand-slayer	killer of a thousand	title	Mastema's boast that he slew a thousand people in his youth.
+雷神	Thunder God	god of thunder	title	Mastema's martial epithet from his younger days.
+Ｄｒピンク	Dr. Pink	Doctor Pink	title	The Greed Doctors' proposed nickname for Domina if she joined their medical group.
+無料診療所	free clinic	free medical clinic	location	The Kederon clinic that treats poor young people and slaves without charging them.
+パルタ	Pulta	Palta	name	Piripo's younger brother; use the spelling found in Japanese guide and cast documentation.
+マモン	Mammon	Mamon	name	The Greed-aligned lord who became the region's new ruler and imposed extreme levies on Kederon.
+パウア	Paua	Power	name	A bold black-wing Kederon recruit who romanticizes outlaw life and admires Leburobs's strength.
+烈火のパウア	Paua of the Raging Flame	Blazing Paua	title	Paua's self-proclaimed martial epithet.
+ファウスト	Faust		name	An immortal, wingless contractor bound to Mephisto who repeatedly tests the party; speak with detached, controlled menace.
+羽目になる	wind up	end up	idiom	Japanese idiom meaning to end up in an unwanted situation; this prevents the unrelated wings term 羽 from matching inside 羽目.
+バアル	Baal		name	The Gluttony-aligned lord who invites the party to his mansion; outwardly courteous but manipulative and predatory.
+アークエン	Arquen		name	A timid white-wing former slave recruited after the Pandemonium Inquisition battle; grows determined to shape her own future.
+競売	auction	bidding sale	world	Kanji spelling for an auction; translate consistently with the established auction terminology.
+ガイ	Gai	Gaius	name	Gaius's familiar shortened name, used by party companions; keep distinct from his full name ガイウス.
+パリティ	Parity		name	An observant delivery worker later revealed as the Pope's gardener and intelligence aide; outwardly guileless and cheerful.
+ジャガイモ	potatoes	potato	food	Ordinary potatoes; this longer entry prevents the character-name term ガイ from matching inside ジャガイモ.
+バアル・ゼブル	Baal-Zebul		name	The full self-introduced name of Baal, Canaan's Gluttony-aligned lord; use this entry instead of assembling it from バアル.
+アヌビス	Anubis		name	Alternative name given for the Great Evil Deity Michael in Baal-Zebul's armor lore.
+最後の審判	Last Judgment	final judgment	lore	The prophesied judgment at which Anubis separates the people.
+解放奴隷	freed slave	emancipated slave	role	A formerly enslaved person whom Baal-Zebul claims to have released.
+極刑	death penalty	capital punishment	world	The gravest judicial punishment threatened by the Order.
+裁判	trial	judicial trial	world	A formal judicial proceeding, especially the Order-sponsored trial Baal-Zebul proposes.
+ヴァンパイヤメイド	vampire maid	vampiric maid	role	Baal-Zebul's blood-dependent mansion servants and combatants.
+自首	surrender	turn oneself in	world	Voluntarily submitting oneself to legal or religious authorities for judgment.
+ご主人	master	owner	address	A respectful but less honorific reference to someone's master; distinct from the more deferential ご主人様.
+ベギルド	Begird		location	The City of Lust named in the Chapter 4 transition recap; retain the in-disc katakana name.
+主人殺し	master-killer	master slayer	role	A pointed epithet for Leburobs, referring to his killing of his former master.
+悪魔の鎧	devil armor	demonic armor	lore	Armor associated with a devil; keep distinct from the Great Evil Deity's armor.
+サタン	Satan		name	The supreme deity invoked by the black-wing faith; use within longer established titles when those do not apply.
+ハ・サタン	Ha-Satan		name	The marked form of Satan's name used by Moze in Noah; preserve the in-disc distinction from ordinary サタン.
+守護天使	guardian angel	protective angel	lore	An angel charged with guarding Satan; Luca identifies the Archangels by this role.
+大天使の鎧	Archangel armor	archangel armor	lore	The ancient armor worn by Satan's guardian Archangels, presented as the counterpart to the Great Evil Deity armor.
+勝利の賢者	Sages of Victory	Victory Sages	role	The named force Luca expects to assemble before committing to a decisive battle.
+残酷・邪道騎士団	Cruel Heretic Knight Corps	cruel heretical knight corps	organization	Mammon's prepared corps of cruel Heretic Knights.
+ケルビム	Cherubim		name	Formal strategist of Begird's underground organization, explicitly self-identified under selector 0x3E.
+マルコ	Marco		name	Young leader of Begird's underground organization, explicitly self-identified under selector 0x14.
+白き羽・解放革命戦線	White-Wing Liberation Revolutionary Front		organization	Cherubim's named white-wing underground organization headquartered in Begird.
+セラフィム	Seraphim		name	The deceased first leader of the White-Wing Liberation Revolutionary Front and Marco's close friend; Cherubim is his father.
+グザファン	Guzafan		name	Marco's embittered former associate, explicitly recognized in the Begird confrontation under selector 0x61.
+アスタルテ	Astarte		name	Begird's flirtatious ruler, explicitly self-identified in the city-arrival scene under selector 0x3F.
+デュナ	Duna		name	Female Begird underground soldier recruited after the Guzafan aftermath; the party-join announcement explicitly names her.
+悪魔の海峡	Demon Strait		location	The strait said to contain the Angelas headquarters, located by Marco's group in the Chapter 4 transition recap.
+ソドムとゴモラ	Sodom and Gomorrah		location	Twin remote cities and military base visited in Chapter 4; use the conventional biblical English place names.
+背徳の都	City of Depravity	depraved city	location	Alias for Sodom and Gomorrah, a military base founded across wing colors.
+火薬	gunpowder	powder	item	Explosive powder used in weapons; longest-match entry prevents the unrelated shorter term 薬 from being applied inside it.
+タルシス	Talsis		name	Begird recruit directly addressed by Astarte under selector 0x49 before the party-join announcement.
+スタン	Stan		name	Sodom's elected representative and acting lord, explicitly self-identified under selector 0x66.
+ベルフェ	Belphe		name	Gomorrah's formal city representative, explicitly self-identified under selector 0x67.
+ノア	Noah		location	The abandoned settlement where Sodom's displaced weak and elderly are said to live.
+リン	Lin		name	Gomorrah resident rescued after the Belphe conflict; the party-join announcement explicitly names her.
+プリン	pudding		food	A dessert mentioned by Prica; longest-match entry prevents the character-name term リン from matching inside it.
+リンゴ	apple		food	An ordinary apple; longest-match entry prevents the character-name term リン from matching inside it.
+ホルマリン	formaldehyde		item	Preservative used by the Greed Doctors; longest-match entry prevents the character-name term リン from matching inside it.
+ダーリン	darling	dear	address	Luca's flirtatious address for Abel; longest-match entry prevents the character-name term リン from matching inside it.
+モーゼ	Moze		name	Heretic Knight who later self-identifies while guarding the stone tablets; selector 0x64 marks his analytical observations.
+さまよえる民	wandering people	wandering folk	lore	Moze's theological designation for the people chosen by God and tested on their journey.
+流刑囚	exiled convicts	exiles	role	Convicts cast into Noah to endure prolonged punishment; keep distinct from ordinary prisoners.
+バベルの塔	Tower of Babel		location	The prison tower where those guilty of the seven deadly sins receive the most painful punishment.
+ディアボロス	Diabolos		location	The Promised Land floating above the clouds and containing the Angelas headquarters.
+約束の地	Promised Land	promised land	location	The scriptural destination above the clouds to which Moze vows to guide the wandering people.
+七つの鎖	seven chains	Seven Chains	lore	The seven chains extending toward Heaven that seal the Great Evil Deity and uphold the world.
+神の子羊	Lamb of God	God's Lamb	lore	The scriptural figure who opens the seals one by one and initiates the world's calamities.
+ハルマゲドン	Armageddon		scripture	The Angelas scripture describing the catastrophe unleashed when the chain seals are opened.
+古の盟約	ancient covenant	ancient pact	lore	The covenant inscribed on Moze's stone tablet, binding him to guide the wandering people.
+ルーイソス	Looisos		name	The demon whose relic became Moze's Heretic Knight armor and preserves memories of every event in Heaven.
+石板	stone tablet	tablet	lore	The ancient inscribed tablet guarded and invoked by Moze to reveal the path to the Promised Land.
+生命の樹	Tree of Life		lore	The sacred tree named in Yohane's invocation before the Gates of Heaven.
+天国の門	Gates of Heaven	Heaven's Gate	location	The gate opened after Yohane presents Moze's stone tablet and recites the invocation.
+ゾンビエンジェル	Zombie Angel		role	An undead angel encountered in the late-game descent; longest-match entry prevents the character name ジェル from matching inside it.
+堕天使	Fallen Angel	fallen angel	faction	White-winged angels imprisoned beneath the earth after the Genesis War, now feral and trapped in an endless cycle of violence.
+生贄	sacrifice	living sacrifice	lore	A living offering whose blood or life sustains a ritual; the source encodes 贄 with gaiji 0x81AF.
+エデンの園	Garden of Eden	Eden	location	The ruined ancestral continent beneath the sea, created by God and destroyed in the great flood.
+ゴッド	God		name	The creator deity in the game's reversed cosmology; moral titles vary with the speaker's faith.
+大神ゴッド	God, the Great Deity	Great Deity God	name	Moze's reverential title for God when recounting the destruction of the Garden of Eden.
+大邪神ゴッド	God, the Great Evil Deity	Great Evil Deity God	name	A title joining God's proper name to the Great Evil Deity epithet in the reversed cosmology.
+アダム	Adam		name	An ancestral ape named in Moze's account of the Garden of Eden.
+イブ	Eve		name	An ancestral ape named alongside Adam in Moze's account of the Garden of Eden.
+サル	ape		lore	The game's theological term for the wingless ancestors of humanity.
+サル達	apes		lore	Plural form of the wingless ancestral apes in the Garden of Eden account.
+メスザル	female ape		lore	The female ape created as Adam's first wife, abandoned by God, and later taken in by Mephisto.
+オスザル	male ape		lore	The male form used when the occult library identifies Adam as an ancestral ape.
+知恵の実	Fruit of Wisdom	fruit of wisdom	lore	The heavenly fruit Mephisto gave the ancestral apes so they could know themselves.
+隷属の地ノア	Noah, the Land of Servitude	Land of Servitude, Noah	location	The full scriptural epithet for Noah and its ark.
+冥界の門	Gate of the Underworld	Underworld Gate	location	The sealed gate before the Promised Land, said to require both divine and evil-deity power to open.
+上級神官	high priest	senior priest	role	A senior cleric guarding the Tower of Babel and strongly inheriting Archangel blood.
+両性具有	both male and female	dual-sexed	lore	The sex characteristic attributed to the Tower of Babel's high priests through their Archangel blood.
+オサル	ape	little ape	lore	Luca's coy or derisively polite form for the ancestral apes; retain her register in the surrounding sentence.
+大神サタン	Satan, the Great God	Great God Satan	name	The Inquisitor's reverential full title for Satan when rallying the Angelas faithful.
+友愛	Fellowship	brotherly love	item	The virtue named by Faust's pact sword; capitalize it as part of the weapon name Sword of Fellowship.
+黒き聖母	Black Madonna	Black Holy Mother	title	The official epithet by which the Pope identifies herself during the final-seal revelation.
+ベルゼブブ	Beelzebub		name	The Archangel whose armor is worn by Juda and who governs ambition and jealousy.
+ベヒーモス	Behemoth		name	The Archangel who commanded Mephisto's navy and whose armor is worn by Mammon.
+モーロック	Morlock	Moloch	name	The harvest Archangel who demands sacrifices and whose armor is worn by Baal-Zebul.
+ベルフェゴール	Belphegor		name	The beauty-associated Archangel whose armor is worn by Astarte; distinct from the recruit Belphe.
+アラストル	Alastor		name	The tempestuous Archangel whose armor is worn by Cherubim.
+リニア	Linear		location	The magical city above the subterranean prison where the sealed beings are held.
+ヤペテ	Japheth		name	Noah's daughter in the game's genealogy, named during the Pope's account of humanity's competing futures.
+白き羽解放戦線	White-Wing Liberation Front	White Feather Liberation Front	organization	The resistance organization led first by Cherubim and later carried on by Guzafan in Seraphim's name.
+封印の鎖	sealing chain	chain of seals	lore	One of the chains that bind and sustain the world's order; use the full term instead of composing it from the generic seal entry.
+天魔７２将	Seventy-Two Demon Generals	72 Celestial-Demon Generals	organization	The host of demon generals who served the ancient Archangels and are summoned during the final conflict.
+お庭番	garden keeper	garden guard	role	A covert Papal household post held by several recruitable companions alongside ranks in the Intelligence Ministry.
+諜報省	Intelligence Ministry	intelligence department	organization	The Papal intelligence service in which several companions secretly hold ranked posts.

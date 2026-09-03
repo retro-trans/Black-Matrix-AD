@@ -1,0 +1,20 @@
+# Black/Matrix AD - English script: mid-Chapter 1 system choices
+# offset<TAB>english        = in-box line break (the game's 0xA0FF)
+000500AE	Yes
+000500BC	No
+000500CC	Explain
+000508AE	Yes
+000508BC	No
+000508CC	Explain
+0005103A	Yes
+00051048	No
+00051058	Explain
+0005183A	Yes
+00051848	No
+00051858	Explain
+0005194E	LEVEL 1
+00051964	LEVEL 2
+0005197C	LEVEL 3
+000519CA	LEVEL 1
+000519E0	LEVEL 2
+000519F8	LEVEL 3
