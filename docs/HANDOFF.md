@@ -1,5 +1,29 @@
 # Handoff — Black/Matrix AD translation project
 
+> **Open issues (2026-09-04), both in the occult-library shelf scene — full
+> detail in `docs/HANDOFF-2026-09-04-book-menu-ap-lock.md`:**
+>
+> 1. **Choice-menu glyph overlap** (cramped text like "Si n: Freedom"). The VWF
+>    positions the menu's cells during the open animation (deferred), by which
+>    time the global "current record" pointer has moved to an empty record, so
+>    advances are read from the wrong data. Confirmed with a live capture. No
+>    safe flag-gate exists (the AP box shares the window flag and renders fine);
+>    needs a per-window record fix or non-deferred menu placement.
+> 2. **`AP: LOW!` dismissal hard-resets the machine** (Dreamcast logo), and the
+>    behaviour flips freeze↔reset with tiny group-106 layout changes — i.e. the
+>    interpreter is dispatching a bad offset at runtime (all branch targets are
+>    static-valid). The `-1` close-handle fix did NOT resolve it. The exact
+>    faulting PC is still needed; flycast's GDB stub does not work on this build.
+>
+> **Fixed (2026-09-04):** the occult-library menu's stale *trailing* glyph (the
+> "V" at every row's right edge) — a separate defect from the overlap. Root
+> cause: PSI2 choice options store at a fixed 15-unit stride but the menu width
+> is the uncapped longest option, so any option over 15 units over-reads into the
+> next option's slot. The four long occult labels are shortened, and
+> `tools/scriptpack.py` now warns on any `st 0x1D` option over 15 stored units.
+> **105 other menu options across the game still exceed the limit**
+> (`docs/menu-labels-over-15.txt`) and need a shortening pass.
+
 > **Update (2026-09-04):** the Prague cabin scene restart was root-caused to
 > unrelocated PSI2 branch targets in the repacker and fixed — see
 > `docs/HANDOFF-2026-09-04-scene-restart.md`. The current build awaits a play
@@ -51,11 +75,12 @@ preserved with an invisible trailing space when a translated record's u16
 count has different parity; without it, PSI's aligned 32-bit operand reader
 can read from the middle of a value and stall the script.
 
-`SCENARIO.DAT` has no free sectors before `SOUND.DAT`, so the repacker keeps
-its ISO extent fixed by making the archive's 60 identical unused `0x11`
-placeholder groups share one physical sector. All 562 logical group IDs stay
-present. The current intro grows by 11,880 bytes while the output remains
-1,964,032 bytes.
+`SCENARIO.DAT` has no free sectors before `SOUND.DAT`, so the complete build
+relocates it to verified free space at LBA 50,000. All 562 logical groups,
+including the 60 unused `0x11` placeholders, remain physically sequential.
+They must not share a sector: the runtime starts each CMP2 group at the
+previous table entry's cumulative end, even though `end - count` looks like
+an equivalent start offset in an original contiguous archive.
 
 **Terminology and speakers are enforced.** `script/glossary.tsv` is the
 canonical Japanese-to-English term list. English source text marks a term as

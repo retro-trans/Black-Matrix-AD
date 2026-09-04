@@ -113,7 +113,8 @@ Write-Output "redream pid $($proc.Id), working set $([int]($proc.WorkingSet64/1M
 $h = [Mem]::OpenProcess([Mem]::QUERY -bor [Mem]::VM_READ, $false, [uint32]$proc.Id)
 if ($h -eq [IntPtr]::Zero) { Write-Output "OpenProcess failed: $([Runtime.InteropServices.Marshal]::GetLastWin32Error())"; exit 1 }
 
-$exe = "E:\Projects\Black Matrix AD\extracted\1ST_READ.BIN"
+$repoRoot = Split-Path -Parent $PSScriptRoot
+$exe = Join-Path $repoRoot "extracted\1ST_READ.BIN"
 $anchor = New-Object byte[] 4096
 $fsA = [System.IO.File]::OpenRead($exe)
 $fsA.Read($anchor, 0, 4096) | Out-Null

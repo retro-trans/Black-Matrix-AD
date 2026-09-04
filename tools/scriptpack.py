@@ -10,11 +10,10 @@ program must decode cleanly, with every branch target on a statement
 boundary, or the build stops.
 
 The original file occupies exactly the sectors before SOUND.DAT and cannot
-grow in place. CMP2 contains many identical one-sector 0x11 placeholder
-groups, which are logically retained while sharing one physical sector. With
-``--expand`` the output ends at its physical CMP2 payload instead of being
-padded to the original extent; inject.py can relocate that file into verified
-free ISO space when the complete translation outgrows its old allocation.
+grow in place. With ``--expand`` the output ends at its physical CMP2 payload
+instead of being padded to the original extent; inject.py can relocate that
+file into verified free ISO space when the complete translation outgrows its
+old allocation.
 
     python tools/scriptpack.py script/en/intro.en.tsv
     python tools/scriptpack.py --out build/SCENARIO.vwf.dat script/en/*.en.tsv
@@ -40,6 +39,22 @@ OUT = os.path.join(ROOT, "build", "SCENARIO.vwf.dat")
 PSI_MAGIC = b"PSI22.00"
 MAX_LINE_UNITS = 192
 
+# Statement 0x1D is a menu choice. Its handler (0x8C08C8E6) copies each option
+# into a buffer with a fixed 15-word stride and caps the copy at 15 units, so a
+# stored option longer than this is truncated on screen and, worse, makes the
+# whole menu over-read into the next option. Keep every choice option at or
+# under this many stored u16 units.
+MENU_CHOICE_STATEMENT = 0x1D
+MENU_CHOICE_MAX_UNITS = 15
+
+# Every choice-menu option whose stored count exceeds MENU_CHOICE_MAX_UNITS,
+# collected across all repacked groups so the build can report them together.
+# This is a warning rather than a hard failure only because the English script
+# still carries a backlog of pre-existing over-limit menu options (mostly in
+# not-yet-play-tested ch2-4 menus). Once that backlog is cleared, promote this
+# to a build-stopping error.
+MENU_OVERSIZE = []
+
 
 def align_sector(n):
     return (n + SECTOR - 1) // SECTOR * SECTOR
@@ -57,14 +72,23 @@ def cmp2_entries(data):
 
 def split_groups(data):
     groups = []
+    previous_end = 0
     for i, (count, end) in enumerate(cmp2_entries(data)):
-        if end < count:
-            raise ValueError("CMP2 group %d has an invalid extent" % i)
-        start = (end - count) * SECTOR
+        # The runtime starts each group at the preceding table entry's end;
+        # the current entry supplies its sector count and new cumulative end.
+        # In original archives this equals end-count, but enforcing the real
+        # invariant prevents non-contiguous/shared entries that validate on
+        # disk yet make the game load the wrong group.
+        if end != previous_end + count:
+            raise ValueError("CMP2 group %d is non-contiguous: previous end "
+                             "%d + count %d != end %d"
+                             % (i, previous_end, count, end))
+        start = previous_end * SECTOR
         finish = end * SECTOR
         if finish > len(data):
             raise ValueError("CMP2 group %d extends past the file" % i)
         groups.append(data[start:finish])
+        previous_end = end
     return groups
 
 
@@ -143,6 +167,17 @@ def repack_psi(program, replacements):
             raise ValueError("translated offset %X is not a text statement "
                              "in the decoded program" % off)
 
+    # Choice-menu records (statement 0x1D) are stored by the interpreter in a
+    # fixed 15-word-per-option buffer (handler 0x8C08C8E6), but the menu's
+    # column width comes from the *uncapped* longest option. A stored count
+    # above 15 makes every row over-read one word into the next option's slot,
+    # painting that option's leading glyph at the far right of every row (the
+    # stale "V" of "Virtue" seen in the occult-library menu). Collect any such
+    # option below so the build can report it.
+    choice_offsets = {pos for pos in walked.boundaries
+                      if struct.unpack_from("<H", program, pos)[0]
+                      == MENU_CHOICE_STATEMENT}
+
     changes = []
     expected = {}
     for off, text in sorted(replacements.items()):
@@ -152,6 +187,8 @@ def repack_psi(program, replacements):
         cols = patchline.NARR_COLS if kind == "NARR" else patchline.COLS
         wrapped, encoded = encode_text(text, cols=cols)
         encoded = preserve_record_alignment(encoded, old_length)
+        if off in choice_offsets and len(encoded) // 2 > MENU_CHOICE_MAX_UNITS:
+            MENU_OVERSIZE.append((off, len(encoded) // 2, wrapped))
         replacement = program[off:off + 2] + struct.pack("<H", len(encoded) // 2) + encoded
         old_end = off + 4 + old_length * 2
         if (len(replacement) - (old_end - off)) % 4:
@@ -273,7 +310,6 @@ def rebuild(source, translations, fixed_size=True):
         header += b"\x00" * (header_sectors * SECTOR - len(header))
     out = bytearray(header)
     new_entries = [(header_sectors, header_sectors)]
-    shared_placeholder = None
     placeholders = 0
     new_starts = {0: 0}
 
@@ -281,13 +317,8 @@ def rebuild(source, translations, fixed_size=True):
         group = rebuilt_groups[i]
         if len(group) == SECTOR and group == b"\x11" * SECTOR:
             placeholders += 1
-            if shared_placeholder is None:
-                shared_placeholder = len(out) // SECTOR
-                out += group
-            start = shared_placeholder
-        else:
-            start = len(out) // SECTOR
-            out += group
+        start = len(out) // SECTOR
+        out += group
         count = len(group) // SECTOR
         new_entries.append((count, start + count))
         new_starts[i] = start * SECTOR
@@ -360,8 +391,16 @@ def main(argv):
     print("  %d translated records, %d moved to new offsets" % (len(offsets), moved))
     print("  text/program growth: %+d bytes; relocated branch targets: %d"
           % (growth, refs))
-    print("  %d placeholder groups share one sector; physical payload %d bytes"
+    print("  %d placeholder groups retained; physical payload %d bytes"
           % (placeholders, physical))
+
+    if MENU_OVERSIZE:
+        print("  WARNING: %d choice-menu option(s) exceed the runtime's "
+              "%d-unit limit and will render a stale glyph at the right edge "
+              "of every row of their menu (fix by shortening the label):"
+              % (len(MENU_OVERSIZE), MENU_CHOICE_MAX_UNITS))
+        for off, stored, wrapped in sorted(MENU_OVERSIZE):
+            print("    %06X  %2d units  %r" % (off, stored, wrapped))
     return 0
 
 

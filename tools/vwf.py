@@ -111,16 +111,26 @@ TEXT_CREATE_CALL_OLD = b'\xCB\xB2'       # BSR GRID_CREATE
 TEXT_CREATE_PTRS = (0x8C05E4C4, 0x8C05EB10)
 GRID_PITCH_CALL = 0x8C060544
 GRID_PITCH_CALL_OLD = b'\x1C\xE9'        # MOV #28,R9
-EXPAND_TEXT_GRIDS = False                # diagnostic stability baseline
+EXPAND_TEXT_GRIDS = False
 
-# PSI opcode 0x18 closes the active text window through this pointer. Expanded
-# grids can finish releasing their window before the opcode polls again, leaving
-# the handle at -1. The stock helper resolves the handle and then dereferences
-# the result without checking for NULL. Invalid handles must therefore take the
-# same global-cleanup path the helper uses after a normal close completes.
+# The text-window close poll at 0x8C08C7AC calls the helper at 0x8C08AF52
+# through this pointer, passing the active window handle. The helper hands the
+# handle straight to 0x8C05E64C with no NULL/-1 check, so a handle of -1 (which
+# occurs when a window finishes releasing before the next poll - observed on the
+# occult-library AP-warning path, where 0x8C263B04 sits at -1) is dereferenced
+# and hard-resets the machine. Routing non-positive handles to the global
+# cleanup routine the helper already uses after a normal close (0x8C06B2DC)
+# avoids the bad dereference while leaving valid handles on the stock path.
+# This is independent of the expanded-grid experiment; it fixes the AP-shortage
+# reset even on the stock 17/19-column baseline.
 TEXT_CLOSE = 0x8C08AF52
 TEXT_CLOSE_PTR = 0x8C08C828
 TEXT_GLOBAL_CLOSE = 0x8C06B2DC
+# Enabling this (route -1 close handles to global cleanup) did NOT fix the
+# AP-shortage reset - the crash flips between freeze and reset with small
+# layout changes, which points at the interpreter dispatching a bad offset
+# rather than a fixed native null-deref. Left off until the real cause is found.
+SAFE_TEXT_CLOSE = False
 
 def _glyph(a, reg):
     """Emit: R0 = the glyph index at character `reg` of the record in R1.
@@ -668,7 +678,7 @@ def apply(exaggerate=None):
     poke(PLACE_DEAD, stub_bytes)
     poke(REC_HOOK, hook_bytes)
     poke(CODE, code_bytes)
-    if EXPAND_TEXT_GRIDS:
+    if SAFE_TEXT_CLOSE:
         close_ptr_off = TEXT_CLOSE_PTR - LOAD_BASE
         if bytes(exe[close_ptr_off:close_ptr_off + 4]) != struct.pack("<I", TEXT_CLOSE):
             raise ValueError("%08X does not hold the expected text-close pointer"
@@ -722,10 +732,11 @@ def main(argv):
               % ", ".join("%08X" % site for site in sites))
         print("  grid pitch  compacted for expanded text grids at %08X"
               % GRID_PITCH_CALL)
-        print("  text close  cleans already-released handles at %08X"
-              % TEXT_CLOSE_PTR)
     else:
         print("  columns     stock 17/19-cell grids (stability baseline)")
+    if SAFE_TEXT_CLOSE:
+        print("  text close  routes -1 handles to global cleanup at %08X"
+              % TEXT_CLOSE_PTR)
     return 0
 
 

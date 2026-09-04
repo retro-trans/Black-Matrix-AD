@@ -6,6 +6,7 @@
 /*.cue
 /build/
 /extracted/
+/original disc/
 
 __pycache__/
 .claude/

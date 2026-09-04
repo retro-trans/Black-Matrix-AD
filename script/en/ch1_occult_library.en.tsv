@@ -2,25 +2,26 @@
 # System book text and menu labels. No manual wrapping: patchline.py supplies pixel-aware line breaks.
 0006682A	Yes
 00066838	No
+00066848	Read it? (3 AP)
 00066986	$$人類の終末$$
-00066998	The Latest Encyclopedia of the $$７つの大罪$$
-000669B4	History of the Gods, Vol. I
-000669CC	History of the Gods, Vol. II
-000669FC	Special Edition: $$おまじない$$s...
-00066A92	The $$七つの大罪$$: $$自由$$
-00066AB0	The $$七つの大罪$$: $$正義$$
-00066ACC	The $$七つの大罪$$: $$人権$$
-00066AE8	The $$七つの大罪$$: $$弱者$$
-00066B04	The $$七つの大罪$$: $$友情$$
-00066B20	The $$七つの大罪$$: $$平等$$
-00066B3C	The $$七つの大罪$$: $$愛$$
-00066BBA	The $$七つの美徳$$: $$憤怒$$
-00066BD8	The $$七つの美徳$$: $$驕り$$
-00066BF4	The $$七つの美徳$$: $$嫉妬$$
-00066C10	The $$七つの美徳$$: $$怠惰$$
-00066C2C	The $$七つの美徳$$: $$暴食$$
-00066C48	The $$七つの美徳$$: $$強欲$$
-00066C64	The $$七つの美徳$$: $$欲情$$
+00066998	$$７つの大罪|Sins$$ Guide
+000669B4	Gods' Hist. I
+000669CC	Gods' Hist. II
+000669FC	$$おまじない|Charm$$ Handbook
+00066A92	$$七つの大罪|Sin$$: $$自由|Freedom$$
+00066AB0	$$七つの大罪|Sin$$: $$正義$$
+00066ACC	$$七つの大罪|Sin$$: $$人権|Rights$$
+00066AE8	$$七つの大罪|Sin$$: $$弱者$$
+00066B04	$$七つの大罪|Sin$$: $$友情|Friends$$
+00066B20	$$七つの大罪|Sin$$: $$平等$$
+00066B3C	$$七つの大罪|Sin$$: $$愛|Love$$
+00066BBA	$$七つの美徳|Virtue$$: $$憤怒$$
+00066BD8	$$七つの美徳|Virtue$$: $$驕り$$
+00066BF4	$$七つの美徳|Virtue$$: $$嫉妬$$
+00066C10	$$七つの美徳|Virtue$$: $$怠惰$$
+00066C2C	$$七つの美徳|Virtue$$: $$暴食|Excess$$
+00066C48	$$七つの美徳|Virtue$$: $$強欲$$
+00066C64	$$七つの美徳|Virtue$$: $$欲情|Lust$$
 00066CCA	"$$人類の終末（ハルマゲドン）$$"
 00066CF6	Unless the seven $$封印$$s on Heaven's throne are opened, the $$世界$$ will remain in its evil state.
 00066D52	But when the $$神の子羊$$ opens the $$封印$$s one by one, calamities, death, and conflict spread across the $$世界$$...

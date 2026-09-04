@@ -256,12 +256,16 @@ def groups(data):
     if data[:4] != b"CMP2":
         raise ValueError("not a CMP2 container")
     count = struct.unpack_from("<I", data, 8)[0]
+    previous_end = 0
     for i in range(count):
         n, end = struct.unpack_from("<II", data, 12 + i * 8)
-        start = (end - n) * SECTOR
+        if end != previous_end + n:
+            raise ValueError("CMP2 group %d is non-contiguous" % i)
+        start = previous_end * SECTOR
         block = data[start:end * SECTOR]
         if block[:8] == PSI_MAGIC:
             yield i, start, block
+        previous_end = end
 
 
 def check(data):

@@ -58,8 +58,8 @@ the interpreter in `1ST_READ.BIN` showed that model was wrong end to end:
 
 `python tools/build.py` has been run; `build/disc/` holds the fixed image:
 
-- `build/SCENARIO.vwf.dat`: 2,240,512 bytes, 10,287 translated records,
-  growth +399,568 bytes, 5,203 relocated branch targets, relocated to
+- `build/SCENARIO.vwf.dat`: 2,361,344 bytes, 10,288 translated records,
+  growth +399,580 bytes, 5,203 relocated branch targets, relocated to
   LBA 50,000.
 - The group-load buffer at `0x8C700000` extends to `0x8C70B000` (next
   static objects referenced at `0x8C70B000`/`0x8C70C800`), so the largest
@@ -79,6 +79,17 @@ the interpreter in `1ST_READ.BIN` showed that model was wrong end to end:
 3. The older notes in `docs/HANDOFF.md` and `docs/text-engine.md` predate
    this fix; where they talk about labels or the 26 relocated references,
    this document supersedes them.
+
+## Follow-up: CMP2 groups are cumulative (2026-09-04)
+
+Do not deduplicate the 60 `0x11` placeholder groups. The runtime derives a
+group's start from the preceding entry's cumulative end, then reads the
+current entry's sector count. Making several logical entries point at one
+physical placeholder made later free-action interactions load an earlier
+controller sector; the visible result was a freeze before messages such as
+"Keep out of the fields!!" could open. `tools/scriptpack.py` now retains every
+placeholder sector and rejects any non-contiguous CMP2 table, while the
+expanded archive remains safely relocatable at LBA 50,000.
 
 ## Evidence trail (for re-verification)
 

@@ -136,12 +136,15 @@ def strings(data):
             voice = struct.unpack("<I", data[i + 8:i + 12])[0]
             i += 12
             continue
-        if op in (0x0014, 0x0015, 0x001D):
+        if op in (0x0014, 0x0015, 0x001D, 0x0020):
             length = word(i + 2)
             if 0 < length <= 0x200 and i + 4 + 2 * length <= n:
                 chars = [word(i + 4 + 2 * k) for k in range(length)]
                 if all(map(_printable, chars)):
-                    kind = {0x0014: "NARR", 0x0015: "TALK", 0x001D: "PICK"}[op]
+                    kind = {
+                        0x0014: "NARR", 0x0015: "TALK",
+                        0x001D: "PICK", 0x0020: "PROMPT",
+                    }[op]
                     yield (i, kind, voice, "".join(map(decode_char, chars)))
                     voice = None
                     i += 4 + 2 * length + (4 if op == 0x001D else 0)

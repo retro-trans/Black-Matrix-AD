@@ -3,7 +3,9 @@
 English TSV files may contain ``$$Japanese term ID$$``. The marker is never
 written to the game: it is resolved to `preferred_english` from
 script/glossary.tsv before wrapping and encoding. Changing one glossary value
-therefore changes every marked occurrence.
+therefore changes every marked occurrence. Space-constrained UI may use
+``$$Japanese term ID|short label$$``; the term ID is still validated, while
+the explicit display alias is written to the game.
 """
 
 import csv
@@ -15,7 +17,7 @@ from collections import Counter
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 GLOSSARY = os.path.join(ROOT, "script", "glossary.tsv")
-TOKEN_RE = re.compile(r"\$\$([^$\r\n]+)\$\$")
+TOKEN_RE = re.compile(r"\$\$([^$|\r\n]+)(?:\|([^$\r\n]+))?\$\$")
 
 
 def load_glossary(path=GLOSSARY):
@@ -45,10 +47,12 @@ def expand_text(text, entries=None):
     entries = entries or load_glossary()
 
     def replace(match):
-        term_id = match.group(1)
+        term_id, display_alias = match.group(1), match.group(2)
         if term_id not in entries:
             raise ValueError("unknown glossary term ID: $$%s$$" % term_id)
-        value = entries[term_id]["preferred_english"].strip()
+        value = (display_alias or entries[term_id]["preferred_english"]).strip()
+        if not value:
+            raise ValueError("empty glossary display value: $$%s$$" % term_id)
         return _capitalize_at_sentence_start(text, match.start(), value)
 
     expanded = TOKEN_RE.sub(replace, text)
@@ -105,4 +109,4 @@ def source_term_counts(japanese, entries=None):
 
 
 def token_counts(text):
-    return Counter(TOKEN_RE.findall(text))
+    return Counter(match.group(1) for match in TOKEN_RE.finditer(text))

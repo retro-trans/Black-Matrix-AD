@@ -13,7 +13,8 @@ That is easy to do by hand and hard to spot, so the order lives here:
     3. uistr.py    optional UI string edits     -> 1ST_READ.vwf.bin
     4. glossary.py enforce canonical terminology
     5. scriptpack.py repack translated script  -> SCENARIO.vwf.dat
-    6. inject.py   write all files into the disc copy
+    6. hud.py      localize the free-action HUD     -> EVENT.vwf.dat
+    7. inject.py   write all files into the disc copy
 
     python tools/build.py                    # build and inject
     python tools/build.py --no-inject        # build only
@@ -50,6 +51,13 @@ UI_STRINGS = [
     (0x891B6, "Him?"),
     (0x891C4, "Her?"),
     (0x89334, "Is this OK?"),
+]
+
+# Fixed-size executable messages with live fields in their trailing words.
+# Preserve those fields verbatim while translating only the static prefix.
+UI_PREFIX_STRINGS = [
+    # AP shortage warning; the final two words render the current/required AP.
+    (0x88C82, 2, "AP: LOW! "),
 ]
 
 # The name-entry save structure reserves seven u16 character slots per name.
@@ -126,12 +134,17 @@ def main(argv):
     print("3. UI strings")
     for off, text in UI_STRINGS:
         run("tools/uistr.py", "put", hex(off), text)
+    for off, preserve, text in UI_PREFIX_STRINGS:
+        run("tools/uistr.py", "put-prefix", hex(off), str(preserve), text)
 
     print("4. checking canonical terminology")
     run("tools/glossary.py", "check", GLOSSARY, *SCRIPT_FILES)
 
     print("5. repacking translated scripts")
     run("tools/scriptpack.py", "--expand", *SCRIPT_FILES)
+
+    print("6. localizing the free-action HUD")
+    run("tools/hud.py", "install")
 
     if "--no-inject" in argv:
         print("\nnot injecting (--no-inject)")
@@ -141,11 +154,13 @@ def main(argv):
         raise SystemExit("no disc copy at %s - copy the images into build/disc"
                          % TRACK)
 
-    print("6. injecting into the disc copy")
+    print("7. injecting into the disc copy")
     run("tools/inject.py", "put", TRACK, "1ST_READ.BIN",
         os.path.join(BUILD, "1ST_READ.vwf.bin"))
     run("tools/inject.py", "put", TRACK, "SYSTEM.DAT",
         os.path.join(BUILD, "SYSTEM.vwf.dat"))
+    run("tools/inject.py", "put", TRACK, "EVENT.DAT",
+        os.path.join(BUILD, "EVENT.vwf.dat"))
 
     scenario = os.path.join(BUILD, "SCENARIO.vwf.dat")
     if os.path.exists(scenario):
