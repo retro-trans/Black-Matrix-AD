@@ -45,6 +45,7 @@ sys.path.insert(0, HERE)
 import sh4asm
 import widths as W
 import fontdump as fd
+import textlayout
 
 LOAD_BASE = 0x8C010000
 
@@ -103,8 +104,9 @@ NGLYPH = 4608                 # every glyph index the blit will accept
 # The three text-window creation paths call 0x8C0602D6 with columns in R5.
 # One uses a direct BSR and two load the allocator address from literals before
 # an indirect JSR. Route all three through a tail-jumping stub so unrelated
-# grid/menu windows do not receive a larger allocation. Narration has two rows
-# and expands from 19 to 38 cells. Spoken dialogue has three rows and can use
+# grid/menu windows do not receive a larger allocation. Both text grids use
+# 33 columns because NARR instructions can write into spoken windows too.
+# Spoken dialogue has three rows and can use
 # at most 33 columns: its transition object has 100 per-cell state slots, so a
 # 42-column grid (126 cells) corrupts adjacent state and hangs during opening
 # or closing.
@@ -114,7 +116,9 @@ TEXT_CREATE_CALL_OLD = b'\xCB\xB2'       # BSR GRID_CREATE
 TEXT_CREATE_PTRS = (0x8C05E4C4, 0x8C05EB10)
 GRID_PITCH_CALL = 0x8C060544
 GRID_PITCH_CALL_OLD = b'\x1C\xE9'        # MOV #28,R9
-EXPAND_TEXT_GRIDS = False
+ROW_PITCH_CALL = 0x8C0605AA
+ROW_PITCH_CALL_OLD = b'\x08\x40\x08\x40'  # SHLL2 R0 twice: row * 16
+EXPAND_TEXT_GRIDS = textlayout.EXPAND_TEXT_GRIDS
 
 # The text-window close poll at 0x8C08C7AC calls the helper at 0x8C08AF52
 # through this pointer, passing the active window handle. The helper hands the
@@ -580,14 +584,14 @@ def build_record_stub():
     a.mov(5, 0)
     a.cmp_eq_i(17)
     a.bf("not_spoken")
-    a.mov_i(33, 5)                       # spoken dialogue: 17 -> 33 (99 cells)
+    a.mov_i(textlayout.SPOKEN_COLS, 5)    # 33 * 3 = 99 transition cells
     a.bra("column_ready")
     a.nop()
     a.label("not_spoken")
     a.mov(5, 0)
     a.cmp_eq_i(19)
     a.bf("column_ready")
-    a.mov_i(38, 5)                       # narration: 19 -> 38
+    a.mov_i(textlayout.NARRATION_COLS, 5) # shared width; opcode != window type
     a.label("column_ready")
     a.mov_l_pc("grid_create", 0)
     a.jmp(0)
@@ -596,18 +600,39 @@ def build_record_stub():
     # 0x8C060504 normally starts every cell 28 pixels after the previous one.
     # Expanded text grids would otherwise initialise unused nodes far beyond
     # the box. Visible glyphs are moved by the VWF hook, but unused nodes are
-    # revisited by transitions such as PSI opcode 0x2B. Keep the 33- and
-    # 38-column grids inside the stock span with a 14-pixel initial pitch. The
-    # instruction after the hook remains the original FPU delay slot.
+    # revisited by transitions such as PSI opcode 0x2B. Both text window
+    # types now use 33 columns, at 14px pitch including the trailing quad.
+    # The instruction after the hook remains the original FPU delay slot.
     a.label("pitch_stub")
     a.mov_i(28, 9)
     a.mov_w_atd_r0(8, 11)                # context+8 = columns
     a.extu_w(0, 0)
-    a.mov_i(33, 1)
-    a.cmp_hs(1, 0)
+    a.cmp_eq_i(textlayout.SPOKEN_COLS)
     a.bf("pitch_done")
     a.mov_i(14, 9)
     a.label("pitch_done")
+    a.rts()
+    a.nop()
+
+    # Normal-height row path only (ctx+14 != 1). Keep compact menus' separate
+    # row*14 path and other grids' row*16 unchanged. R0 enters as row index;
+    # R1 is scratch after the division helper. Return the integer Y to the
+    # original LDS/FLOAT sequence without touching FPU state or cell counts.
+    a.label("row_pitch_stub")
+    a.mov(0, 1)
+    a.mov_w_atd_r0(8, 11)
+    a.cmp_eq_i(textlayout.SPOKEN_COLS)
+    a.bt("row_pitch_text")
+    a.cmp_eq_i(textlayout.NARRATION_COLS)
+    a.bt("row_pitch_text")
+    a.mov_i(16, 0)
+    a.bra("row_pitch_multiply")
+    a.nop()
+    a.label("row_pitch_text")
+    a.mov_i(textlayout.TEXT_ROW_PITCH, 0)
+    a.label("row_pitch_multiply")
+    a.mul_l(0, 1)
+    a.sts_macl(0)
     a.rts()
     a.nop()
     return a
@@ -716,6 +741,13 @@ def apply(exaggerate=None):
         if not -2048 <= pitch_disp <= 2047:
             raise ValueError("the grid-pitch call cannot reach the pitch stub")
         poke(GRID_PITCH_CALL, struct.pack("<H", 0xB000 | (pitch_disp & 0xFFF)))
+        row_off = ROW_PITCH_CALL - LOAD_BASE
+        if bytes(exe[row_off:row_off+4]) != ROW_PITCH_CALL_OLD:
+            raise ValueError('unexpected row-pitch instructions at %08X' % ROW_PITCH_CALL)
+        row_disp = (stub.labels['row_pitch_stub'] - (ROW_PITCH_CALL+4)) // 2
+        if not -2048 <= row_disp <= 2047:
+            raise ValueError('row-pitch hook cannot reach its stub')
+        poke(ROW_PITCH_CALL, struct.pack('<HH',0xB000 | (row_disp & 0xFFF),0x0009))
     poke(PLACE, tramp_bytes)
     poke(PLACE_DEAD, stub_bytes)
     poke(REC_HOOK, hook_bytes)
@@ -771,7 +803,7 @@ def main(argv):
     print("  record      resolved by this cell's atlas handle (deferred-menu safe)")
     if EXPAND_TEXT_GRIDS:
         sites = (TEXT_CREATE_CALL,) + TEXT_CREATE_PTRS
-        print("  columns     expanded (spoken 17->33, narration 19->38) at %s"
+        print("  columns     expanded (spoken 17->33, narration 19->33) at %s"
               % ", ".join("%08X" % site for site in sites))
         print("  grid pitch  compacted for expanded text grids at %08X"
               % GRID_PITCH_CALL)

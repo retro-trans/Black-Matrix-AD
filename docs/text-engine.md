@@ -1,5 +1,47 @@
 # Black/Matrix AD — text engine
 
+> **Current width correction:** TALK and NARR now both wrap at **33**, and
+> both native 17/19-column windows allocate 33 columns. The text opcode does
+> not identify the active window: NARR records 0x1B6FA/0x1B7A6 display inside
+> a spoken window. The former 38-column wrapper split `slave` at native cell
+> 33, and emitted a newline AFTER an already full 33-cell row, skipping a row.
+> The full-row newline omission is correct; the inconsistent column counts
+> were not. Both text types now use initial X pitch 14 and Y pitch 18.
+> Historical 38-column descriptions below no longer describe the build.
+>
+> **Main menu records:** field 0x88B26 (pointer 0x3DC4C) and deployment
+> 0x89818 (pointer 0x5D6D8) originally have 28 words, seven four-cell labels.
+> mainmenu.py relocates them as 63-word records into RAM 0x8C0F6800/0x8C0F6880.
+> Constructor width instructions at file 0x3DBD4/0x3DBDA and
+> 0x5D666/0x5D670 change 4->9 together, matching the stored row stride.
+> Original records/neighboring strings and other grid constructors are intact.
+> Each menu has 63 nodes, below the 100-node transition budget.
+
+> **Row pitch:** 33/38-column normal text grids now place rows at 0,18,36px.
+> `ROW_PITCH_CALL` at `0x8C0605AA` replaces the two SHLL2 instructions with a
+> call to `row_pitch_stub`; other grid widths retain row*16, and the compact
+> ctx+14==1 branch retains row*14. Texture and quad height remain 16px.
+> This changes three-line coverage from 48px to 52px; live border clearance
+> and transition testing are pending. Historical row*16 descriptions below
+> describe the original instructions.
+
+> **Current font:** `tools/latin.py` now defaults to the bundled Bizin Gothic
+> Regular v0.0.4, requested 19px, horizontal factor 1.5, fitted to 16 rows.
+> Letters/digits use all 16 rows collectively; oversized punctuation is fitted
+> separately on their baseline instead of shrinking the alphabet.
+> The user approved widening after the natural-proportion in-game test: Latin
+> ink is up to 13px wide, punctuation up to 20px. H is 12x12px; height and
+> native row layout are unchanged. The Verdana measurements below are historical.
+> See `assets/fonts/bizin-gothic/README.md` for provenance and license.
+
+> **2026-09-07:** dialogue/narration expansion is enabled again after the PSI
+> alignment/branch fixes. `tools/textlayout.py` shares the 33/38-column limits
+> between native allocation and script wrapping. Choice/prompt wrapping stays
+> at its previous limit. Initial cell pitch is 14 for 33-column dialogue and
+> 13 for 38-column narration, including the trailing quad in the bounds check.
+> Native text close remains unpatched. The older close-hook hypothesis below
+> is superseded; expanded-grid cold-boot testing is still required.
+
 Everything below is read out of `1ST_READ.BIN` with `tools/sh4dis.py`.
 Addresses are Dreamcast RAM; `1ST_READ.BIN` loads at `0x8C010000`, so
 `file offset = address - 0x8C010000`.
@@ -399,8 +441,8 @@ repositioned by the VWF hook, but unused cells retained that geometry and were
 revisited by the `0x2B` screen-fade transition after the sixth narration line.
 That consistently killed Redream's rendering window. The `MOV #28,R9` at
 `0x8C060544` is now routed through a small conditional stub: 33- and
-38-column text grids use a 14-pixel initialization pitch, while ordinary grids
-keep 28. This contains every expanded text node within the stock horizontal
+38-column text grids use 14- and 13-pixel initialization pitches respectively,
+while ordinary grids keep 28. This contains every expanded text node within the stock horizontal
 span; the VWF still assigns final visible positions.
 
 The stub preserves the BSR return address and tail-jumps to the real allocator:

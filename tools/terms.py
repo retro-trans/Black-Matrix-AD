@@ -88,6 +88,11 @@ def source_term_counts(japanese, entries=None):
         # unrelated words such as 暖かいんだ. A preceding Japanese word
         # character proves this is a suffix/substring rather than the name.
         row = entries[term_id]
+        # Contextual UI labels (e.g. 状態 = Status) are not prose terminology
+        # (状態 in speech can mean condition/state). Validate their canonical
+        # controls on exact label records, without imposing UI grammar on prose.
+        if row.get('category', '').strip() == 'menu_label' and japanese.strip() != term_id:
+            return False
         if (row.get("category", "").strip() == "name" and
                 all(0x3040 <= ord(ch) <= 0x309F for ch in term_id) and
                 pos > 0 and japanese_word_char(japanese[pos - 1])):

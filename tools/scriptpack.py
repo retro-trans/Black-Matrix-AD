@@ -184,7 +184,10 @@ def repack_psi(program, replacements):
         if off not in records:
             raise ValueError("offset %X is not a text record in its PSI2 group" % off)
         kind, old_length, old_text = records[off]
-        cols = patchline.NARR_COLS if kind == "NARR" else patchline.COLS
+        # Only dialogue/narration receive extra native cell nodes. Preserve
+        # the existing wrapping of independent menu and prompt records.
+        cols = (patchline.NARR_COLS if kind == "NARR" else
+                patchline.COLS if kind == "TALK" else 17)
         wrapped, encoded = encode_text(text, cols=cols)
         encoded = preserve_record_alignment(encoded, old_length)
         if off in choice_offsets and len(encoded) // 2 > MENU_CHOICE_MAX_UNITS:

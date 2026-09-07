@@ -1,0 +1,10 @@
+# Speaker: System. Both free-action and deployment main menus.
+id	japanese	english
+status	状態	$$状態$$
+ritual	儀式	$$儀式$$
+items	アイテム	$$アイテム$$
+shop	ショップ	$$ショップ$$
+abilities	潜在一覧	$$潜在一覧$$
+system	システム	$$システム$$
+exit	出る	Exit
+deploy	出撃	Deploy
