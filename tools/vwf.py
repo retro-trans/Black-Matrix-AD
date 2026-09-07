@@ -58,6 +58,9 @@ PLACE       = 0x8C0603B4      # "place one character" - replaced by a trampoline
 PLACE_DEAD  = 0x8C0603C0      # its body, dead once the trampoline is in
 PLACE_END   = 0x8C060432      # first byte we must not touch
 REC_HOOK    = 0x8C0600EA      # in the layout loop, where R12 is the line record
+LINE_RECORDS = 0x8C1D5018    # 32 line records, each 0x190 bytes
+LINE_RECORD_STRIDE = 0x190
+LINE_RECORD_COUNT = 32
 
 # --- our arena: 6845 bytes of zeros at the tail of the image, still zero in
 # --- a live RAM dump taken after the game had booted and run
@@ -158,6 +161,11 @@ def build_code():
     a.long_("colour_tab", COLOUR_TAB)
     a.long_("win_tab", WIN_TAB)
     a.long_("g_record", G_RECORD)
+    a.long_("line_records", LINE_RECORDS)
+    a.word_("record_stride", LINE_RECORD_STRIDE)
+    a.word_("record_atlas", 0x188)
+    a.word_("record_flags", 0x184)
+    a.word_("record_live", 0x8000)
     a.long_("g_widen", G_WIDEN)
     a.long_("float_tab", FLOAT_TAB)
     a.long_("adv_tab", ADV_TAB)
@@ -409,11 +417,45 @@ def build_code():
     #
     # At column 0 the two bearings are the same character's and cancel, which
     # keeps the left edge of every row exactly where the game put it.
+    # Deferred menu placement does not pass through REC_HOOK. G_RECORD may
+    # describe another window (even an empty/released line) by this point.
+    # R11 is the atlas handle supplied to THIS placement call, so resolve its
+    # owning live record. Handles are shared by a line's cells, not by windows.
+    # Never use an unmatched record or read beyond its character storage.
+    a.mov(11, 0)
+    a.cmp_eq_i(-1)
+    a.bt("adj_out")
+    a.mov_l_pc("line_records", 1)
+    a.mov_i(LINE_RECORD_COUNT, 2)
+    a.label("record_search")
+    a.mov_w_pc("record_flags", 0)
+    a.mov_w_r0(1, 3)
+    a.mov_w_pc("record_live", 5)
+    a.tst(5, 3)
+    a.bt("record_next")
+    a.mov_w_at(1, 3)
+    a.extu_w(3, 3)
+    a.cmp_hs(3, 10)                      # character index must be < count
+    a.bt("record_next")
+    a.mov_w_pc("n192", 5)
+    a.cmp_hs(3, 5)                       # count must be <= 192
+    a.bf("record_next")
+    a.mov_w_pc("record_atlas", 0)
+    a.mov_l_r0(1, 3)
+    a.cmp_eq(11, 3)
+    a.bt("record_found")
+    a.label("record_next")
+    a.mov_w_pc("record_stride", 5)
+    a.add(5, 1)
+    a.add_i(-1, 2)
+    a.tst(2, 2)
+    a.bf("record_search")
+    a.bra("adj_out")
+    a.nop()
+    a.label("record_found")
+    a.cmp_hs(4, 10)                      # prevent negative row-start indices
+    a.bf("adj_out")
     a.mov_i(0, 13)                       # R13 = accumulator
-    a.mov_l_pc("g_record", 0)
-    a.mov_l_at(0, 1)                     # R1 = line record
-    a.tst(1, 1)
-    a.bt("adj_out")                      # no record yet: leave the node alone
 
     a.mov(10, 2)
     a.sub(4, 2)                          # R2 = first character on this row
@@ -726,6 +768,7 @@ def main(argv):
           % (ADV_TAB, NGLYPH,
              "" if exaggerate is None else "  (forced to %d)" % exaggerate))
     print("  bearings    %08X  %d glyphs" % (BEAR_TAB, NGLYPH))
+    print("  record      resolved by this cell's atlas handle (deferred-menu safe)")
     if EXPAND_TEXT_GRIDS:
         sites = (TEXT_CREATE_CALL,) + TEXT_CREATE_PTRS
         print("  columns     expanded (spoken 17->33, narration 19->38) at %s"

@@ -4,6 +4,7 @@ The lower-right action HUD is not made from script strings.  Its labels are
 pre-rendered in an ARGB1555, square-twiddled PVR texture at file offset
 0x53310.  Replace the complete Japanese command set and keep the archive the
 same size so EVENT.DAT can be injected back into its original ISO extent.
+The cooking control screen is localized through cooking.py in the same pass.
 
     python tools/hud.py install
 """
@@ -15,6 +16,8 @@ import sys
 from PIL import Image, ImageDraw, ImageFont
 
 import gfx
+import cooking
+import woodcutting
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -114,11 +117,15 @@ def install(source=SOURCE, output=OUTPUT):
                     continue
                 _put(data, x0 + x, y0 + y, colour)
 
+    cooking_tiles = cooking.patch(data, os.path.dirname(output))
+    woodcutting_tiles = woodcutting.patch(data, os.path.dirname(output))
     os.makedirs(os.path.dirname(output), exist_ok=True)
     open(output, "wb").write(data)
     print("wrote %s (%d bytes)" % (output, len(data)))
     print("  localized HUD commands: %s"
           % ", ".join(text for cell, text in LABELS))
+    print("  localized cooking instructions (%d tiles, existing atlas capacity 512)" % cooking_tiles)
+    print("  localized woodcutting instructions (%d tiles, existing atlas capacity 512)" % woodcutting_tiles)
 
 
 def main(argv):

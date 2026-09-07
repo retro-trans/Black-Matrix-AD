@@ -390,3 +390,9 @@ japanese	preferred_english	allowed_english	category	notes
 天魔７２将	Seventy-Two Demon Generals	72 Celestial-Demon Generals	organization	The host of demon generals who served the ancient Archangels and are summoned during the final conflict.
 お庭番	garden keeper	garden guard	role	A covert Papal household post held by several recruitable companions alongside ranks in the Intelligence Ministry.
 諜報省	Intelligence Ministry	intelligence department	organization	The Papal intelligence service in which several companions secretly hold ranked posts.
+料理をしますか？	Cook?		menu	Cooking activity confirmation prompt; the AP cost is appended separately.
+掃除をしますか？	Clean?		menu	Cleaning activity confirmation prompt; the AP cost is appended separately.
+『料理』	Cooking		menu	Title of the cooking minigame control instructions.
+まき割りをしますか？	Chop wood?		menu	Wood-chopping confirmation prompt; the AP cost is appended separately.
+柵の外に出ますか？	Go past the gate?		menu	System confirmation at the rehabilitation-house fence gate.
+『まき割り』	Woodcutting		menu	Title of the wood-chopping minigame control instructions.

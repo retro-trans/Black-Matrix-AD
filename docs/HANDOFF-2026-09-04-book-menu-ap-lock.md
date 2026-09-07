@@ -2,6 +2,79 @@
 
 Date: 2026-09-04
 
+## Update 2026-09-05: menu ownership and AP decoder fixes
+
+Implemented and injected into the Disc 1 build. **A cold-boot play test is still
+required**; instruction-level and archive verification are not an emulator
+playthrough. Do not restore a save state containing the old code/script.
+
+### AP reset: the earlier "all branch targets are valid" conclusion was wrong
+
+`tools/psi2.py` described mode-3 (`st 0x09`) sub `0x23` as `ee`. The dispatch
+table entry at `0x8C09A408 + 0x23*4` actually points to `0x8C08E1E6`, which
+calls the expression reader **once**, stores the cost at `0x8C264894`, then
+polls the native AP modal. Its signature is `e`.
+
+In original group 106, the warning is at `0x84`, its expression ends at
+`0x92`, and the next statement is `st 0x03` at `0x92`, with target operand
+at `0x94`. The incorrect second expression interpreted that statement word as
+variable tag 3, the low target word `0x2FA2` as a variable index, and its zero
+high word as the expression terminator. The walker therefore silently omitted
+the unconditional jump from both relocation and validation.
+
+After translation, the warning begins at `0x8C` and the jump field is at
+`0x9C`. Previously it still held `0x2FA2`, jumping to file `0x2FB2` inside
+translated text. With the corrected signature it holds `0x5A22`, targeting
+file `0x5A32`, the original exit's relocated `st 0x12` return. This explains
+why text-layout changes changed the failure symptoms. No modal bypass, AP-cost
+change, or speculative native close patch is involved.
+
+The original archive passes the corrected walker for all 501 PSI2 programs.
+The previous translated archive fails it in nine groups. The rebuilt archive
+passes, and every one of its 7,533 branch destinations maps to the same
+statement as in the original program. The build now relocates 5,217 changed
+targets, 11 more than before this fix.
+
+### Menu: resolve the record from the atlas used by the placement call
+
+The user left the Seven Sins menu open for a read-only RAM capture:
+`build/book-menu-20260905-before.bin` (local, git-ignored). It confirms:
+
+- Window 22, context `0x8C1E7A3C`, 14 columns, 7 rows, 98 cells.
+- Record 0 at `0x8C1D5018`: 98 glyphs, flags `0x8800`, atlas handle 12.
+- `G_RECORD` points at empty record 1, `0x8C1D51A8`.
+- Every occupied menu cell's atlas handle is 12.
+
+The replacement placement routine already preserves its **actual** atlas
+argument in R11. `vwf_adjust` now searches the 32-record pool for that handle
+in a live record with a valid count and character index. The pen no longer
+reads `G_RECORD`. Unmatched/released records, invalid handles/counts, and
+negative row-start indices leave the quad unchanged instead of reading
+unrelated character storage. This also handles immediate dialogue/AP placement
+without a broad window-flag bypass.
+
+The hook is 688 bytes (`0x8C0F546C..0x8C0F571C`), leaving 228 bytes before
+the float table. Stock grid widths, font, AP warning fields, native close code,
+and transition behavior are unchanged.
+
+### Verification and remaining work
+
+- `python -m unittest discover -s tests -v`: nine tests pass. A small strict
+  integer SH-4 runner executes the emitted pen/UV routine, not a duplicate
+  Python implementation. Synthetic tests cover stale globals, deferred menus,
+  dialogue/AP widths, invalid records, non-text grids and idempotent UV height.
+- Optional local-fixture test replays the new SH-4 on all 98 captured menu
+  cells. All match the font metrics; 82 previously incorrect X positions change.
+- AP tests check the original handler bytes, a minimal swallowed-jump fixture,
+  and relocation of the library AP exit after growing its prompt.
+- Full build succeeds; all four disc payloads match the generated files.
+- Cold boot in Flycast, verify book-menu spacing and ordinary dialogue, then
+  dismiss `AP: LOW! (1/3)` and confirm movement resumes. This was requested
+  from the user after the rebuilt disc was verified; results are pending.
+- The 105 other overlong choice labels remain out of scope for this fix.
+
+Everything below predates these fixes and is retained as investigation history.
+
 ## Update 2026-09-04 (later): menu artifact root-caused and fixed
 
 **The choice-menu "stale glyph at the far right of every row" is fixed.** It was

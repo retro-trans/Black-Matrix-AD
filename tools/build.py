@@ -51,6 +51,9 @@ UI_STRINGS = [
     (0x891B6, "Him?"),
     (0x891C4, "Her?"),
     (0x89334, "Is this OK?"),
+    # Three fixed five-cell rows; keep each label within its own slot.
+    (0x88B62, "Save Load Setup"),
+    (0x89854, "Save Load Setup"),
 ]
 
 # Fixed-size executable messages with live fields in their trailing words.

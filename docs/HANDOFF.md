@@ -1,5 +1,36 @@
 # Handoff — Black/Matrix AD translation project
 
+> **Start here (2026-09-07):** [current consolidated handoff](HANDOFF-2026-09-07.md)
+> covers the complete change set, build/test evidence, local prerequisites,
+> pending Flycast checks, and the current 93-choice backlog. Counts and
+> diagnoses in older entries below are historical snapshots.
+
+> **Activity/field UI update 2026-09-05:** the build now includes cooking,
+> cleaning and woodcutting prompts; cooking/woodcutting control graphics;
+> Save/Load/Setup field-menu rows; and six route gate confirmations.
+> Gate responses fit the 15-cell choice slots, and Prague's question wraps
+> to two lines. See `docs/activity-ui.md` for offsets and implementation.
+> Full build: 10,298 translated records, 5,252 relocated targets; 15 tests pass.
+> The unrelated overlong-choice backlog is now 93, down from 105.
+> Rebuilt/injected Disc 1 CUE is in `build/disc`; cold-boot play test pending.
+
+> **Update 2026-09-05: fixes implemented and rebuilt; cold-boot play test pending.**
+> Both library issues below now have targeted fixes. `tools/vwf.py` resolves
+> each placement's live line record by its atlas handle instead of reading the
+> shared `G_RECORD`. Replaying the emitted SH-4 on the user's captured 98-cell
+> menu corrects all 82 incorrect X positions. The AP reset was a decoder error:
+> mode-3 sub `0x23` takes **one** expression, not two. The second supposed
+> expression swallowed the following exit jump, preventing its relocation.
+> In group 106 the field at `0x9C` now targets file offset `0x5A32` (return)
+> instead of `0x2FB2` (inside translated text). All 501 programs and 7,533
+> branch destinations verify against the original control flow. Nine regression
+> tests pass (`python -m unittest discover -s tests -v`). See the new top section
+> in `docs/HANDOFF-2026-09-04-book-menu-ap-lock.md` for evidence and retest steps.
+> The 105 overlong choice labels elsewhere remain a separate backlog.
+>
+> The 2026-09-04 notes below are historical; in particular, their assertion that
+> every AP-path branch was already relocated was based on the faulty decoder.
+
 > **Open issues (2026-09-04), both in the occult-library shelf scene — full
 > detail in `docs/HANDOFF-2026-09-04-book-menu-ap-lock.md`:**
 >

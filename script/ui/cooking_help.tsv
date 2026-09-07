@@ -1,0 +1,11 @@
+# Static cooking-help graphic. Speaker: System (not character dialogue).
+id	japanese	english
+title	『料理』	$$『料理』$$
+subtitle	コントロール説明	Controls
+green	緑系の食材を調理	Green $$食材$$
+blue	青系の食材を調理	Blue $$食材$$
+red	赤系の食材を調理	Red $$食材$$
+yellow	黄色系の食材を調理	Yellow $$食材$$
+step1	一定時間、調理する順番に食材が表示されます。	1. $$食材$$ briefly appear in cooking order.
+step2a	に対応したボタンで	Press the matching color button
+step2b	表示された食材	to cook each $$食材|ingredient$$ in the speech bubble.

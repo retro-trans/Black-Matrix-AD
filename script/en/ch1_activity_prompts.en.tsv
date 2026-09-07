@@ -1,0 +1,5 @@
+# Non-diegetic system prompts; no character speaker. AP costs stay unchanged.
+# Prompt phrases are glossary-controlled independently of dialogue terminology.
+00051068	$$まき割りをしますか？$$ (4 AP)
+00051868	$$料理をしますか？$$ (3 AP)
+00061848	$$掃除をしますか？$$ (2 AP)

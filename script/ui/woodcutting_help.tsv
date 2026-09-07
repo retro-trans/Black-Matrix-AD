@@ -1,0 +1,8 @@
+# Static woodcutting-help graphic. Speaker: System (not character dialogue).
+id	japanese	english
+title	『まき割り』	$$『まき割り』$$
+subtitle	コントロール説明	Controls
+unused	使用しません	Not used
+swing	斧を振り下ろす	Swing the axe
+step1	斧を振りかぶるモーション中にタイミング良く	As the axe is raised, time your swing
+step2	斧を振り下ろして「まき」を割って下さい。	to split the firewood.
