@@ -18,6 +18,8 @@ from PIL import Image, ImageDraw, ImageFont
 import gfx
 import cooking
 import woodcutting
+import chapter_cards
+import config_load_ui
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -119,6 +121,8 @@ def install(source=SOURCE, output=OUTPUT):
 
     cooking_tiles = cooking.patch(data, os.path.dirname(output))
     woodcutting_tiles = woodcutting.patch(data, os.path.dirname(output))
+    chapter_tiles = chapter_cards.patch(data, os.path.dirname(output))
+    config_load_ui.patch_event(data, os.path.dirname(output))
     os.makedirs(os.path.dirname(output), exist_ok=True)
     open(output, "wb").write(data)
     print("wrote %s (%d bytes)" % (output, len(data)))
@@ -126,6 +130,8 @@ def install(source=SOURCE, output=OUTPUT):
           % ", ".join(text for cell, text in LABELS))
     print("  localized cooking instructions (%d tiles, existing atlas capacity 512)" % cooking_tiles)
     print("  localized woodcutting instructions (%d tiles, existing atlas capacity 512)" % woodcutting_tiles)
+    print("  localized Chapter 1 end / Chapter 2 opening (%s tiles)" % chapter_tiles)
+    print("  localized Free Action banner")
 
 
 def main(argv):

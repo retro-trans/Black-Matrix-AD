@@ -10,10 +10,12 @@ That is easy to do by hand and hard to spot, so the order lives here:
     1. latin.py    redraw the Latin glyphs      -> FONT.vwf.bin, SYSTEM.vwf.dat
     2. vwf.py      assemble the VWF patch       -> 1ST_READ.vwf.bin
                    (reads FONT.vwf.bin for its metrics)
-    3. uistr.py    optional UI string edits     -> 1ST_READ.vwf.bin
+    3. uistr.py / field_battle_ui.py / config_load_ui.py
+                   strings and UI sprites     -> 1ST_READ.vwf.bin,
+                                                 PARAMETA.vwf.dat, SYSTEM.vwf.dat
     4. glossary.py enforce canonical terminology
     5. scriptpack.py repack translated script  -> SCENARIO.vwf.dat
-    6. hud.py      localize the free-action HUD     -> EVENT.vwf.dat
+    6. hud.py      HUD, activity help, chapter cards -> EVENT.vwf.dat
     7. inject.py   write all files into the disc copy
 
     python tools/build.py                    # build and inject
@@ -139,6 +141,8 @@ def main(argv):
         run("tools/uistr.py", "put", hex(off), text)
     for off, preserve, text in UI_PREFIX_STRINGS:
         run("tools/uistr.py", "put-prefix", hex(off), str(preserve), text)
+    run("tools/field_battle_ui.py")
+    run("tools/config_load_ui.py")
 
     print("4. checking canonical terminology")
     run("tools/glossary.py", "check", GLOSSARY, *SCRIPT_FILES)
@@ -164,6 +168,8 @@ def main(argv):
         os.path.join(BUILD, "SYSTEM.vwf.dat"))
     run("tools/inject.py", "put", TRACK, "EVENT.DAT",
         os.path.join(BUILD, "EVENT.vwf.dat"))
+    run("tools/inject.py", "put", TRACK, "PARAMETA.DAT",
+        os.path.join(BUILD, "PARAMETA.vwf.dat"))
 
     scenario = os.path.join(BUILD, "SCENARIO.vwf.dat")
     if os.path.exists(scenario):

@@ -1,0 +1,6 @@
+# Speaker: System. Names have eight allocated u16 slots; descriptions 2x19.
+id	japanese	english
+stick_name	木の棒	$$木の棒|Stick$$
+prison_clothes	囚人服	$$囚人服|Jailwear$$
+stick_description	棒きれ。	A wooden stick.\n
+clothes_description	囚人が着せられる服。	Clothes issued to\nprisoners.

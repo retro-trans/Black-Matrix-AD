@@ -1,0 +1,40 @@
+# Speaker: System. Text records and native sprite labels share this source.
+id	japanese	english
+pick_vmu	拡張ソケット選択	Pick VMU
+pick_port	ポートを選んで下さい。	Pick a port
+pick_slot	スロットを選んで下さい。	Pick a slot.
+finish_setup	初期配置変更モードを終了します。	Finish setup?
+show_again	今後もこのヘルプを表示しますか？	Show help again?
+show_help	全てのヘルプメッセージを表示します。	Show all help.
+hide_help	ヘルプメッセージを一切、表示しません。	Hide all help.
+manual_help	ヘルプメッセージを項目毎に設定します。	Set help by topic.
+default_help	ヘルプメッセージの表示を初期設定にします。	Use help defaults.
+exit_help	この項目を選択してＡボタンを押すと前画面に戻ります。	A: Go back.
+start_help	スタートボタンを押すと、初期配置変更モードを終了します。	Press START to end\nunit placement.\n
+show	表示する	Show
+hide	表示しない	Hide
+manual	手動設定	Manual
+defaults	初期設定	Defaults
+confirm	決定	OK
+back	戻る	Back
+port	ポート	Port
+slot	ソケット	Slot
+chapter_1	一章	$$章|Ch.$$ 1
+chapter_2	二章	$$章|Ch.$$ 2
+chapter_3	三章	$$章|Ch.$$ 3
+chapter_4	四章	$$章|Ch.$$ 4
+chapter_5	五章	$$章|Ch.$$ 5
+chapter_6	六章	$$章|Ch.$$ 6
+chapter_7	七章	$$章|Ch.$$ 7
+chapter_8	八章	$$章|Ch.$$ 8
+chapter_9	九章	$$章|Ch.$$ 9
+chapter_10	十章	$$章|Ch.$$ 10
+chapter_11	十一章	$$章|Ch.$$ 11
+chapter_final	最終章	$$章|Final$$
+free_action	自由行動	$$自由|Free$$ Action
+move_heading	移動	Move
+status_heading	状態	Status
+equip_button	装備	Equip
+magic_button	魔法	Magic
+empty_equipment	装備してません	Empty
+vertical_attack	縦	V

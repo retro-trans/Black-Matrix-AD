@@ -396,3 +396,8 @@ japanese	preferred_english	allowed_english	category	notes
 まき割りをしますか？	Chop wood?		menu	Wood-chopping confirmation prompt; the AP cost is appended separately.
 柵の外に出ますか？	Go past the gate?		menu	System confirmation at the rehabilitation-house fence gate.
 『まき割り』	Woodcutting		menu	Title of the wood-chopping minigame control instructions.
+パンドラの箱庭	Pandora's Garden		chapter	Chapter 1 title; hakoniwa is a miniature or enclosed garden, not Pandora's box.
+街を出ますか？	Leave town?		menu	System confirmation before leaving a town.
+ここまでをセーブしますか？	Save progress?		menu	System prompt to save the progress made so far.
+木の棒	Wooden Stick		item	Basic wooden weapon; shortened to Stick in eight-character item-name fields.
+囚人服	Prison Clothes		item	Clothing issued to prisoners; shortened to Jailwear in eight-character item-name fields.

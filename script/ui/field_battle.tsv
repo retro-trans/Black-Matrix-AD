@@ -1,0 +1,23 @@
+# Speaker: System. Menu abbreviations fit fixed engine slots; do not widen rows.
+id	japanese	english
+status	状　　態	Stat
+ritual	儀　　式	Rite
+items	アイテム	Item
+shop	ショップ	Shop
+abilities	潜在一覧	Abil
+system	システム	Sys
+exit	出　　る	Exit
+deploy	出　　撃	Go!
+move	移　動	Mov
+attack	攻　撃	Atk
+magic	魔　法	Mag
+item_battle	道　具	Itm
+status_battle	状　態	Sta
+refill	補　血	$$血|BP+$$
+stance	待機型	Stn
+armor	鎧召喚	Arm
+guard	防　御	Grd
+evade	回　避	Eva
+counter	反　撃	Ctr
+refill_heading	補血	$$血|BP$$
+position_help	ユニットの初期配置が変更できます。変更したいユニットを選択後、変更場所を指定してください。	Set starting spots.\nSelect a unit, then\nchoose a new spot.

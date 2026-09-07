@@ -1,0 +1,24 @@
+# Speaker: System. Each page is exactly three 19-cell rows after padding.
+id	japanese	english
+attack_types	攻撃は「通常攻撃」と「潜在発動」の２種類があります各攻撃とも行動力を１消費します。	Attack: Normal or\nLatent. Both cost\n1 $$行動力|AP$$.
+normal_attack	「通常攻撃」装備している武器で物理攻撃を行います。	Normal attack:\nPhysical hit with\nequipped weapon.
+latent_attack	「潜在発動」ＢＰを消費して武器の潜在能力による特殊攻撃等を行います。	$$潜在能力$$:\nWeapon specials\ncost BP.
+attack_range	方向ボタンの上下で「通常」か「潜在」を選択します。選択後、攻撃、発動可能範囲が黄マスで表示されます。	Up/Down: pick mode.\nYellow tiles show\nits range.
+attack_target	対象を方向ボタンで指定して、Ａボタンを押すと攻撃、発動を行います。	D-pad: pick target.\nA: attack/activate.\n
+item_actions	アイテムの「使う」「捨てる」を行います。	Use or discard\nitems.\n
+item_limit	「道具」コマンドは、各ユニット１ターン中に１回使用できます。	Item command: once\nper unit per turn.\n
+item_details	リストからアイテムを選択します。この時にＸボタンを押すと、アイテムの効果内容が表示されます。	Pick an item from\nthe list. X shows\nits effects.
+item_use_range	「使う」Ａボタンを押すと、使用可能範囲が赤マスで表示されます。	Use: press A to\nshow item range\nin red tiles.
+item_use_target	使用したい対象ユニットを方向ボタンで指定してＡボタンを押すと使います。	D-pad: pick a unit.\nPress A to use\nthe item on it.
+item_discard_limit	「捨てる」「捨てる」は「使う」前なら何度でも捨てることが出来ます。	Discard any number\nof items before\nusing an item.
+item_discard_confirm	Ｙボタンを押すと捨てて良いか「はい／いいえ」のメッセージが表示されます。	Press Y to discard.\nThen confirm with\nYes or No.
+status_overview	状態画面を表示し、パラメータ閲覧、装備品変更等を行います。	View stats and\nchange equipment\non Status screen.
+status_unlimited	「状態」コマンドは、何度でも使用する事が出来ます。	Use Status as often\nas you like.\n
+status_after_attack	しかし攻撃終了後のユニットは装備品の変更と捨てる事が出来ません。	After attacking,\nno gear changes\nor discards.
+status_equipment	Ｘボタンを押すと装備品の変更と捨てる事が出来ます。方向ボタンで装備品を選択します。	X: change/discard\nequipment. D-pad:\nselect equipment.
+status_unarmed	装備品の武器を外したユニットは、攻撃を行う事が出来なくなるので注意が必要です。	Without a weapon,\na unit cannot\nattack.
+status_magic	Ｙボタンを押すとそのユニットの使用可能な魔法が表示されます。	Press Y to see\nthis unit's\navailable spells.
+bp_refill_cost	現在、進行している戦闘で得たＢＰを消費して、ＢＰ補給を行います。行動力を２消費します。	Refill with BP won\nthis fight. Costs\n2 $$行動力|AP$$.
+bp_refill_before	「補血」コマンドの使用は「移動」「攻撃」「魔法」「鎧召喚」を行う前に限ります。	$$血|BP+$$: before moving,\nattacking, magic or\narmor summoning.
+bp_refill_cap	一度に補給できるＢＰ上限は、コマンド時間が経過する度に上昇します。	BP refill cap rises\nas command time\npasses.
+bp_refill_amount	方向ボタンで補給したいＢＰ量を決めます。方向ボタン上下で１０ずつ、左右で１ずつ入力できます。	Choose BP amount:\nUp/Down: +/-10\nLeft/Right: +/-1
