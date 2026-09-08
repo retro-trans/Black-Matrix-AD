@@ -1,10 +1,10 @@
-# Speaker: System. Full labels for the relocated nine-cell main-menu records.
+# Speaker: System. Both free-action and deployment main menus.
 id	japanese	english
-status	状態	Status
-ritual	儀式	Ritual
-items	アイテム	Items
-shop	ショップ	Shop
-abilities	潜在一覧	Abilities
-system	システム	System
+status	状態	$$状態$$
+ritual	儀式	$$儀式$$
+items	アイテム	$$アイテム$$
+shop	ショップ	$$ショップ$$
+abilities	潜在一覧	$$潜在一覧$$
+system	システム	$$システム$$
 exit	出る	Exit
 deploy	出撃	Deploy

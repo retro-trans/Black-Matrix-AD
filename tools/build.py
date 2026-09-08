@@ -121,6 +121,7 @@ def main(argv):
     font = argv[argv.index("--font") + 1] if "--font" in argv else None
     size = argv[argv.index("--size") + 1] if "--size" in argv else None
     wide = argv[argv.index("--wide") + 1] if "--wide" in argv else None
+    max_width = argv[argv.index('--max-width')+1] if '--max-width' in argv else None
 
     print("1. redrawing the Latin glyphs")
     args = ["tools/latin.py", "install"]
@@ -130,6 +131,8 @@ def main(argv):
         args += ["--size", size]
     if wide:
         args += ["--wide", wide]
+    if max_width:
+        args += ['--max-width', max_width]
     run(*args)
     patch_system_names()
 
@@ -143,6 +146,7 @@ def main(argv):
         run("tools/uistr.py", "put-prefix", hex(off), str(preserve), text)
     run("tools/field_battle_ui.py")
     run("tools/config_load_ui.py")
+    run('tools/mainmenu.py')
 
     print("4. checking canonical terminology")
     run("tools/glossary.py", "check", GLOSSARY, *SCRIPT_FILES)

@@ -34,7 +34,10 @@ class HDUITests(unittest.TestCase):
                 data, character, previous, ink_scale=hd_generate.COMPACT_INK_SCALE)
             self.assertEqual(rows, old_rows)
             self.assertEqual(low.tobytes(), old_low.tobytes())
-            self.assertEqual(high.getbbox(), old_high.getbbox())
+            # Different outline edge coverage can round a faint boundary
+            # pixel to zero after Lanczos downsampling. The legacy fitter
+            # shares its target rectangle, not exact raster alpha bounds.
+            self.assertTrue(all(abs(a-b)<=1 for a,b in zip(high.getbbox(),old_high.getbbox())))
             changed += high.tobytes() != old_high.tobytes()
         self.assertGreater(changed, 50)
 

@@ -15,7 +15,14 @@ have identical SHA-256 hashes. No custom emulator, loader DLL, or BMHDFNT file
 is involved. `tools/hd_ui/run.ps1` belongs to the OLD custom-emulator prototype;
 do not use that launcher for this experiment.
 
-## Testing revision 10
+## Testing revision 11
+
+Revision 11 merges the other PC's 33-column wrapping and 18px dialogue row
+pitch fixes with this branch. The normal build now already installs the main
+menus; HD setup validates and reuses that installation. The Bizin TTF/license
+are bundled in Git, and old capture authentication no longer depends on the
+mutable baseline native font. Current launcher: `build/reusable-atlas-ui-r11/disc/`.
+Revision 10's direct-font rendering below is retained unchanged.
 
 Revision 10 replaces the fitted-font prototype with direct Bizin Gothic
 rasterization: 16px em size, one 12.5px baseline, no per-glyph X/Y resizing,
@@ -28,7 +35,7 @@ Heading-pack revision 5 renders the entire line at 15px, then splits it across
 the HUD tiles without independently stretching any word.
 
 Close Flycast and run `tools/hd_ui/run_stock_atlas.cmd`, now selecting
-`build/reusable-atlas-ui-r10/disc/`. Use a normal VMU save, not an emulator save
+`build/reusable-atlas-ui-r11/disc/`. Use a normal VMU save, not an emulator save
 state. The previous revision 9 disc remains intact. Font outlines, native
 fallback encoding, metric-table scope, emitted SH-4 pen placement and
 unsqueezed selector geometry have automated checks. All three injected files
@@ -111,7 +118,7 @@ HD atlas path handle the new labels without changing the emulator or font pack.
 
 This adapts only the menu patch from local `origin/main` commit `db857bb` and
 adds atomic validation plus HD-arena composition tests. The remote font,
-dialogue wrapping and other changes have **not** been merged. Labels live in
+dialogue wrapping and other changes were initially excluded, then merged in revision 11. Labels live in
 `script/ui/main_menu.tsv`; the old fixed-stride TSV remains for baseline builds.
 
 ### Full battle-menu labels
@@ -243,7 +250,7 @@ The stock HD pack and deployment heading use **Bizin Gothic Regular v0.0.4**
 from [the official release](https://github.com/yuru7/bizin-gothic/releases/tag/v0.0.4).
 Run `python tools/hd_ui/font_style.py` once to fetch the pinned font and its
 SIL OFL 1.1 license. Downloads are SHA-256 checked; the TTF stays under
-`build/fonts/bizin-gothic-v0.0.4/`, without installing a Windows font.
+`assets/fonts/bizin-gothic/`, now bundled in Git without installing a Windows font.
 Both stock generators share this default so regeneration retains the choice.
 
 Run `python tools/hd_ui/stock_atlas_pack.py` and
@@ -264,19 +271,19 @@ verified original captures exist. The seeder reconstructs the 128px twiddled
 palette/format XOR salt (`0x870df5a5`). New texture hashes follow the same
 stock XXH32 rule. This is offline pack generation, not an emulator patch.
 New Bizin scene captures can also be matched by `stock_atlas_pack.py` normally.
-The old MFD is used only to authenticate previous captures, never to size or
-space the new font. Native fallbacks now render Bizin as well; the standard
+Pinned RGBA fingerprints authenticate previous captures without using the old
+MFD at all. Native fallbacks now render Bizin as well; the standard
 non-experimental build retains its existing font.
 
 ### Disc/profile regeneration
 
-Based on local translation commit `34a0669`; divergent remote `db857bb` has
-not been merged. Close the test emulator before regenerating.
+Includes local translation commit `34a0669` and remote `db857bb`, reconciled
+in revision 11. Close the test emulator before regenerating its disc.
 
-`tools/hd_ui/prepare_stock_atlas.py` prepares revision 10:
+`tools/hd_ui/prepare_stock_atlas.py` prepares revision 11:
 
-- `build/reusable-atlas-ui-r10/1ST_READ.BIN`, `PARAMETA.DAT`, `SYSTEM.DAT` and a manifest with hashes.
-- `build/reusable-atlas-ui-r10/disc/`: independent copy of the translated disc.
+- `build/reusable-atlas-ui-r11/1ST_READ.BIN`, `PARAMETA.DAT`, `SYSTEM.DAT` and a manifest with hashes.
+- `build/reusable-atlas-ui-r11/disc/`: independent copy of the translated disc.
 - `build/stock-atlas-run/`: stock emulator, separate configuration and VMU copies.
 
 The previous main-menu-only build remains at `build/reusable-atlas-menu/disc/`.

@@ -4,7 +4,7 @@ move	移動	Move
 attack	攻撃	Attack
 magic	魔法	Magic
 items	道具	Items
-status	状態	Status
+status	状態	$$状態$$
 refill	補血	$$血|Refill BP$$
 stance	待機型	Stance
 summon	鎧召喚	Summon

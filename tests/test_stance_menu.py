@@ -19,7 +19,7 @@ class StanceMenuTests(unittest.TestCase):
         orig=ROOT/'extracted/1ST_READ.BIN'
         if not src.exists() or not orig.exists():self.skipTest('local executable fixtures')
         data,_=atlas.patch(src.read_bytes(),orig.read_bytes())
-        data=mainmenu.patch(bytearray(data))
+        data=mainmenu.ensure(bytearray(data))
         battle=battle_menu.patch(data)
         return data,battle
 

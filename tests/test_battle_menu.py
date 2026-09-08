@@ -48,7 +48,7 @@ class BattleMenuTests(unittest.TestCase):
         src=ROOT/'build/1ST_READ.vwf.bin';orig=ROOT/'extracted/1ST_READ.BIN'
         if not src.exists() or not orig.exists():self.skipTest('local game fixture')
         exe,_=atlas.patch(src.read_bytes(),orig.read_bytes())
-        self.verify(mainmenu.patch(bytearray(exe)))
+        self.verify(mainmenu.ensure(bytearray(exe)))
 
 
 if __name__=='__main__':unittest.main()

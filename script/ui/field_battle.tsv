@@ -2,10 +2,10 @@
 id	japanese	english
 status	状　　態	Stat
 ritual	儀　　式	Rite
-items	アイテム	Item
-shop	ショップ	Shop
-abilities	潜在一覧	Abil
-system	システム	Sys
+items	アイテム	$$アイテム|Item$$
+shop	ショップ	$$ショップ$$
+abilities	潜在一覧	$$潜在一覧|Abil$$
+system	システム	$$システム|Sys$$
 exit	出　　る	Exit
 deploy	出　　撃	Go!
 move	移　動	Mov

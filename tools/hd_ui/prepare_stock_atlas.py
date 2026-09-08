@@ -24,7 +24,7 @@ import seed_bizin_pack
 def main():
     root=atlas.ROOT
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--output',type=Path,default=root/'build/reusable-atlas-ui-r10')
+    p.add_argument('--output',type=Path,default=root/'build/reusable-atlas-ui-r11')
     out=p.parse_args().output.resolve()
     # This generator is deliberately restricted to ignored test artifacts.
     if not out.is_relative_to((root/'build').resolve()) or out==(root/'build').resolve():
@@ -48,7 +48,7 @@ def main():
     stock=Path('D:/Program/FlyCast')
     exe,manifest=atlas.patch((root/'build/1ST_READ.vwf.bin').read_bytes(),
                              (root/'extracted/1ST_READ.BIN').read_bytes())
-    exe=mainmenu.patch(bytearray(exe))
+    exe=mainmenu.ensure(bytearray(exe))
     battle=battle_menu.patch(exe)
     stance=stance_menu.patch(exe,battle)
     native_font,font_meta=bizin_font.build()
@@ -59,7 +59,7 @@ def main():
         raise ValueError('natural font renderer exceeds its arena')
     exe[atlas.vwf.CODE-atlas.BASE:atlas.vwf.CODE-atlas.BASE+len(natural_code)]=natural_code
     exe=bytes(exe)
-    manifest.update(revision=10, font=font_meta, stance_menu=stance, cross_record_spacing=True,
+    manifest.update(revision=11, font=font_meta, stance_menu=stance, cross_record_spacing=True,
                     yes_no_glyph_height=16, yes_no_top_inset=0, battle_menu_left_padding=10,
                     battle_menu=battle, main_menu_columns=mainmenu.COLS,
                     main_menu_labels=mainmenu.cooking.strings(mainmenu.UI),

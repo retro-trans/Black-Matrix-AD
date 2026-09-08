@@ -1,7 +1,7 @@
 """Full labels for the two seven-row main menus, without global grid changes.
 
-Adapted from origin/main's mainmenu.py at db857bb. Only this isolated patch is
-ported; the remote's different font, wrapping and other changes are not merged.
+Shared by the normal and HD builds. Both menus are validated atomically;
+the fixed-atlas arena immediately after their records remains reserved.
 """
 import struct
 from pathlib import Path
@@ -53,3 +53,34 @@ def patch(data):
     for off, payload in writes:
         data[off:off+len(payload)] = payload
     return data
+
+
+
+def ensure(data):
+    """Accept only our exact existing installation, otherwise patch vanilla.
+
+    The normal build now installs these menus before the HD build runs.
+    Validate by reconstructing the original sites in a copy and reapplying.
+    """
+    first_original,first_pointer,_,_=MENUS[0]
+    if struct.unpack_from('<I',data,first_pointer)[0]==vwf.LOAD_BASE+first_original:
+        return patch(data)
+    candidate=bytearray(data)
+    start=STORAGE-vwf.LOAD_BASE
+    candidate[start:start+len(MENUS)*RECORD_BYTES]=bytes(len(MENUS)*RECORD_BYTES)
+    for original,pointer,instructions,_ in MENUS:
+        struct.pack_into('<I',candidate,pointer,vwf.LOAD_BASE+original)
+        for offset,word in instructions:struct.pack_into('<H',candidate,offset,word)
+    expected=patch(candidate)
+    if expected!=data:raise ValueError('existing main-menu patch does not match current sources')
+    return data
+
+
+def install():
+    path = ROOT / 'build/1ST_READ.vwf.bin'
+    path.write_bytes(patch(bytearray(path.read_bytes())))
+    print('localized both main menus (seven nine-cell rows)')
+
+
+if __name__ == '__main__':
+    install()

@@ -15,6 +15,11 @@ import bizin_font
 import font_style
 
 CAPTURES = ('559d7642.png','adce381a.png','fdb35a3c.png')
+CAPTURE_DATA = {
+    '559d7642.png': (2,'4a7b9565b6f002dae3c3a081b8a6f60be891241928692afd8bd8f261e4429529'),
+    'adce381a.png': (1,'49938f5a189403b357d0614348ef2f05e0d0b44f5cb8074870376733897ecce5'),
+    'fdb35a3c.png': (0,'014841ec9f7183f69e58ee563933fa7b8c1dade0a41b3df9f7e1e8eb2b9023c5'),
+}
 PROFILE = font_style.ROOT/'build/stock-atlas-run/data'
 
 
@@ -30,25 +35,21 @@ def twiddled(mask):
 
 
 def install():
-    # The old MFD is only a fingerprint of known captured textures. It does
-    # not determine any Bizin outline, size, bearing, advance or baseline.
-    old,_=pack.sheets(font_style.ROOT/'build/FONT.vwf.bin',font_style.DEFAULT_TTF)
     low,high=pack.sheets(bizin_font.NATIVE,font_style.DEFAULT_TTF)
-    old_parts={i:lo for i,lo,_ in pack.segments(old,high)}
     new_parts={i:(lo,hi) for i,lo,hi in pack.segments(low,high)}
     checked=[]
     for name in CAPTURES:
         with Image.open(PROFILE/'texdump/T20101M'/name) as im:
             dump=im.convert('RGBA')
-        matches=[]
-        for i,old_mask in old_parts.items():
-            lo,hi=new_parts[i]
-            result=pack.replacement(dump,old_mask,hi)
-            if result is not None:
-                salt=int(Path(name).stem,16)^xxhash.xxh32(twiddled(old_mask),seed=7).intdigest()
-                matches.append((i,lo,result,salt))
-        if len(matches)!=1:raise ValueError('unknown or ambiguous original capture: '+name)
-        checked.append(matches[0])
+        i,digest=CAPTURE_DATA[name]
+        if dump.size!=(128,128) or hashlib.sha256(dump.tobytes()).hexdigest()!=digest:
+            raise ValueError('original capture differs from its verified fingerprint: '+name)
+        old_mask=dump.getchannel('A').transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+        lo,hi=new_parts[i]
+        result=pack.replacement(dump,old_mask,hi)
+        if result is None:raise ValueError('unexpected capture palette')
+        salt=int(Path(name).stem,16)^xxhash.xxh32(twiddled(old_mask),seed=7).intdigest()
+        checked.append((i,lo,result,salt))
     if len({i for i,_,_,_ in checked})!=3 or len({s for _,_,_,s in checked})!=1:
         raise ValueError('captured stock hashes do not agree on raw layout and palette')
     target=PROFILE/'textures/T20101M';target.mkdir(parents=True,exist_ok=True)

@@ -3,6 +3,78 @@
 > **Latest (2026-09-08):** [stock HD font, stage titles and fresh-PC setup](HANDOFF-2026-09-08.md).
 > Use that entry for the current emulator launcher and font workflow.
 
+## Historical notes from the other PC (September 7)
+
+Start with [the current font/UI handoff](HANDOFF-2026-09-07-font-ui.md).
+The other PC may contain unpushed translations: compare and preserve its work
+before merging. Missing from this checkout does not mean never translated.
+
+> **Latest screenshot fixes (2026-09-07):** both native text widths and both
+> TALK/NARR wrappers now use **33 columns**. NARR is not a window-size hint:
+> `0x1B6FA` and `0x1B7A6` write into the spoken-width town window. Assuming
+> 38 caused `sl/ave?!` and the extra blank row after the 33-character first
+> line. A native-cursor regression test covers both exact source records.
+> The 18px row pitch and current Bizin font are retained.
+>
+> `tools/mainmenu.py` translates BOTH seven-option menus (field and deployment),
+> relocating labels into `0x8C0F6800..0x8C0F6900`, after the VWF float table.
+> Their own logical/allocation widths change 4->9; unrelated menus do not.
+> Labels: Status / Ritual / Items / Shop / Abilities / System / Exit (or Deploy).
+> UI glossary labels use `menu_label`, matching exact Japanese label records
+> so ordinary prose about a person's 状態 is not forced into the UI word Status.
+>
+> `tools/chaptercards.py` localizes the **Chapter 1 ending** at EVENT SCL
+> `0x2DF6800`: Chapter 1 / Pandora's Miniature Garden / End. This was absent
+> from THIS checkout's reproducible build. The user reports another PC may
+> have unpushed work; no claim is made about that machine's translations.
+> It is now invoked by hud.py; chapter-opening cards/other chapters remain
+> outside this fix. UI source/control IDs are in `script/ui/`.
+> Full rebuild/injection completed: 25 regression tests pass, all four disc
+> payloads match, and 501 programs / 7,533 branch destinations verify.
+> Chapter card uses 87 tiles in its original allocation. Live Flycast verification remains necessary;
+> reload the rebuilt CUE from a cold boot, not an old emulator save state.
+> Older 33/38-column notes below are historical and superseded.
+
+> **Row-spacing follow-up:** normal 33/38-column text grids now use 18px row
+> pitch (previously 16), giving the 16px glyphs two pixels of leading. The hook
+> at `0x8C0605AA` replaces row*16 with a gated integer multiply; compact menus
+> and other grids retain their original pitches. Three lines span 52px rather
+> than 48px. Font scaling and cell counts are unchanged. Record-stub arena now
+> uses 108/114 bytes; check space before further additions. Third-line/border
+> clearance and scene transitions still need an in-game test.
+
+> **Current font-width follow-up:** user rejected natural proportions as too
+> narrow in game and approved 1.5x horizontal scaling. Bizin remains at 19px
+> requested size with the same 16-row band. H is 12x12px, up from 8x12px;
+> widest Latin letters are 13px and punctuation 20px, with no clipping. Earlier
+> natural-proportion settings below are historical. No native layout changes.
+
+> **Font-height follow-up:** Bizin's default is now 19px requested size, using
+> all 16 bitmap rows across the alphabet/descenders. Widest Latin letters are
+> 9px; W is 9x12px and j is 6x16px. Punctuation that exceeds the common baseline
+> band is fitted separately rather than shrinking the entire alphabet. Natural
+> proportions remain (factor 1.0), and native texture height/row pitch have not
+> changed. The 17px measurements below describe the preceding trial.
+
+> **Latest font trial:** Bizin Gothic Regular v0.0.4 is bundled with its OFL
+> license in `assets/fonts/bizin-gothic`. The user clarified that height takes
+> priority: use natural proportions, not the initial 13px-wide stretched-letter
+> experiment. Defaults are 17px requested size, factor 1.0, fitting 16 bitmap
+> rows; widest Latin letters measure 8px, punctuation up to 13px. VWF spacing
+> and the 33/38-column expansion remain enabled. Static HUD/help graphics and
+> Japanese glyphs keep their existing fonts. Full rebuild/injection completed;
+> 20 tests pass, all four disc payloads match, and all 501 programs / 7,533
+> branch destinations verify. Fresh in-game font testing is still needed.
+
+> **Latest local change 2026-09-07: expanded dialogue rows.** At the user's
+> request, re-enabled 33 spoken / 38 narration columns with synchronized
+> wrapping (`tools/textlayout.py`). Font remains Verdana 17px at 1.3x width;
+> choices/prompts retain their prior limits. Native close remains stock.
+> Initial pitches 14/13 keep unused cells within stock spans. Eighteen tests
+> pass, including emitted allocator/pitch instructions and all three hook
+> sites. This change requires a fresh Flycast cold-boot test; do not rely on
+> the previous 17/19-grid build or old emulator states.
+
 > **Start here (2026-09-07):** [current consolidated handoff](HANDOFF-2026-09-07.md)
 > covers the complete change set, build/test evidence, local prerequisites,
 > pending Flycast checks, and the current 93-choice backlog. Counts and

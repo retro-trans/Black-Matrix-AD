@@ -55,6 +55,8 @@ class SH4:
                 pass
             elif w == 0x000B:
                 self.pending = self.pr
+            elif w & 0xF0FF == 0x402B:
+                self.pending = r[n]  # JMP @Rn, with its delay slot
             elif w & 0xFF00 in (0x8900, 0x8B00):
                 if self.t == (w & 0xFF00 == 0x8900):
                     next_pc = pc + 4 + 2 * signed(w & 255, 8)

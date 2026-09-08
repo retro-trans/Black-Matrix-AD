@@ -4,7 +4,7 @@ $repo = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $runDir = Join-Path $repo 'build/stock-atlas-run'
 $emulator = Join-Path $runDir 'flycast.exe'
 $stock = 'D:/Program/FlyCast/flycast.exe'
-$discRoot = if ($HelpOnly) { 'build/reusable-atlas/disc' } elseif ($PreviousLayout) { 'build/reusable-atlas-expanded/disc' } else { 'build/reusable-atlas-ui-r10/disc' }
+$discRoot = if ($HelpOnly) { 'build/reusable-atlas/disc' } elseif ($PreviousLayout) { 'build/reusable-atlas-expanded/disc' } else { 'build/reusable-atlas-ui-r11/disc' }
 $cue = Join-Path (Join-Path $repo $discRoot) 'Black-Matrix Advanced (Japan) (Disc 1).cue'
 if (!(Test-Path -LiteralPath $cue) -or !(Test-Path -LiteralPath $emulator)) {
     throw 'Run tools/hd_ui/prepare_stock_atlas.py first.'

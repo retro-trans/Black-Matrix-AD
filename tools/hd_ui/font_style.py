@@ -13,8 +13,9 @@ ROOT = Path(__file__).resolve().parents[2]
 VERSION = '0.0.4'
 DIRECTORY = ROOT/'build/fonts/bizin-gothic-v0.0.4'
 MEMBER = 'BizinGothic_v0.0.4/BizinGothic-Regular.ttf'
-DEFAULT_TTF = DIRECTORY/MEMBER
-LICENSE = DIRECTORY/'LICENSE'
+# The merge includes the same OFL font in Git, making fresh-PC builds offline.
+DEFAULT_TTF = ROOT/'assets/fonts/bizin-gothic/BizinGothic-Regular.ttf'
+LICENSE = ROOT/'assets/fonts/bizin-gothic/LICENSE.txt'
 FONT_SHA256 = '302c6467491bde54d87f77293922b90950a49960b85f436f174b46b357a5d835'
 ZIP_SHA256 = 'e9d01c6ba56161c8a68e2998b71508110e2d70742512f6dafde1a569b0fbf877'
 LICENSE_SHA256 = '84d463be283b64d6da4645194b5a2ea57f3a99b135574cce76eea0b9e3bffada'

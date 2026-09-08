@@ -13,9 +13,8 @@ as full-width SJIS and needs no change to the game's character decoder:
     a-z   SJIS 8281-829A   glyph 193-218
     punctuation             the full-width ASCII forms, see PUNCT
 
-Metrics are bounded by what reaches the screen: the quad samples 14 of the
-cell's 16 rows, so rows 0..13 are all there is and nothing may be drawn below
-row 13.  `choose_baseline` fits the font into that band, preferring the
+Metrics are bounded by what reaches the screen: the VWF patch samples all
+16 rows, so rows 0..15 are available. `choose_baseline` fits that band, preferring the
 baseline of the font being replaced (y=11) so English and Japanese sit on the
 same line, and moving up only when a font's descenders are deeper.
 
@@ -29,14 +28,15 @@ pixels, and 95% of the pixels in the interior of a stroke).  Aliased text at a
     python tools/latin.py build              # write build/FONT.vwf.bin
     python tools/latin.py build --font tahoma.ttf --size 12
 
-The typeface is a rendering of a system font.  Typeface *designs* are not
-copyrightable in the US and a bitmap rendering is not the font program, which
-is the usual footing for translation patches, but pick something you are
-comfortable shipping.
+The default source is the bundled Bizin Gothic Regular v0.0.4, licensed under
+SIL OFL 1.1; see assets/fonts/bizin-gothic/LICENSE.txt and README.md. The
+converted artwork is the BMAD Latin bitmap trial. A --font override may use
+an absolute font path or a filename from the Windows fonts directory.
 """
 
 import os
 import sys
+import string
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -47,14 +47,11 @@ import fontdump as fd
 from PIL import Image, ImageDraw, ImageFont
 
 FONTS = r"C:\Windows\Fonts"
-# Verdana at 14 is the widest common screen face that still fits the 14-row
-# budget, and it has lining figures, which matter in a game full of numbers.
-# Tahoma 12 was the first pick and read as too condensed on screen; it only
-# used 12 of the 14 rows the quad actually samples, so there was size going
-# spare.  Georgia is the closest match to the game's serif UI but has oldstyle
-# figures, where 0123 vary in height.
-DEFAULT_FONT = "verdana.ttf"
-DEFAULT_SIZE = 17
+# Keep the font local to the project; no system-wide installation is needed.
+DEFAULT_FONT = os.path.join(ROOT, 'assets', 'fonts', 'bizin-gothic',
+                            'BizinGothic-Regular.ttf')
+DEFAULT_SIZE = 19
+MAX_INK_WIDTH = fd.GLYPH_W - 1
 THRESHOLD = 110
 
 BASELINE = 11                 # last row of a capital
@@ -62,10 +59,8 @@ MAX_ROW = 15                  # tools/vwf.py widens the sample to all 16 rows
 CELL_W, CELL_H = fd.GLYPH_W, fd.GLYPH_H
 LEFT = 1                      # leave one column before the ink
 SS = 4                        # supersample before thresholding
-# The vertical budget is full at 16 rows while the widest glyph uses 16 of a
-# 24-pixel cell, so the letterforms are pinned tall and left narrow.  Stretching
-# them horizontally is free and is what brings the proportions back.
-WIDE = 1.3                    # horizontal stretch; see build()
+# User-selected fuller letterforms; retain the 16-row height budget.
+WIDE = 1.5
 
 # ASCII to the full-width SJIS codepoint the script will be encoded with.
 PUNCT = {
@@ -148,9 +143,18 @@ def _gray(font, ch, wide):
     return big.resize((int(round(w * wide)), h), Image.LANCZOS)
 
 
-def _ink(font, ch, threshold, wide=WIDE):
+def _ink(font, ch, threshold, wide=WIDE, max_width=None):
     """Ink pixels of one character, relative to the pen at (0, baseline)."""
     img = _gray(font, ch, wide)
+    if max_width is not None:
+        if not 1 <= max_width < CELL_W:
+            raise ValueError('ink width must fit the glyph cell with its left margin')
+        bbox = img.point(lambda v: 255 if v >= threshold else 0).getbbox()
+        if bbox and bbox[2] - bbox[0] > max_width:
+            # Wide punctuation (especially em dashes) must obey the same cap.
+            # Resample only X, retaining all vertical rows and the baseline.
+            img = img.crop((bbox[0], 0, bbox[2], img.height)).resize(
+                (max_width, img.height), Image.Resampling.LANCZOS)
     px = img.load()
     penx = int(round(PAD * wide))
     # y is relative to the pen: the last row of a capital comes out at -1
@@ -158,17 +162,17 @@ def _ink(font, ch, threshold, wide=WIDE):
             if px[x, y] >= threshold]
 
 
-def choose_baseline(font, chars, threshold=THRESHOLD, wide=WIDE):
+def choose_baseline(font, chars, threshold=THRESHOLD, wide=WIDE, max_width=None):
     """The lowest baseline that still fits every ascender and descender.
 
-    Only rows 0..13 of the cell reach the screen, so a font whose descenders
+    Only rows 0..15 of the cell reach the screen, so a font whose descenders
     are deeper than the one it replaces has to sit higher.  Preferring the
     original baseline keeps English and Japanese on the same line when both
     are on screen.
     """
     top, bottom = 0, -1
     for ch in chars:
-        ink = _ink(font, ch, threshold, wide)
+        ink = _ink(font, ch, threshold, wide, max_width)
         if not ink:
             continue
         top = min(top, min(y for _, y in ink))
@@ -180,9 +184,9 @@ def choose_baseline(font, chars, threshold=THRESHOLD, wide=WIDE):
     return base
 
 
-def render_glyph(font, ch, baseline, threshold=THRESHOLD, wide=WIDE):
+def render_glyph(font, ch, baseline, threshold=THRESHOLD, wide=WIDE, max_width=None):
     """Draw one character into a fresh glyph record, or None if it is blank."""
-    ink = _ink(font, ch, threshold, wide)
+    ink = _ink(font, ch, threshold, wide, max_width)
     if not ink:
         return None, 0
     x0 = min(x for x, _ in ink)
@@ -199,7 +203,7 @@ def render_glyph(font, ch, baseline, threshold=THRESHOLD, wide=WIDE):
 
 
 def build(font_name=DEFAULT_FONT, size=DEFAULT_SIZE, punct=True,
-          threshold=THRESHOLD, mark=False, wide=WIDE):
+          threshold=THRESHOLD, mark=False, wide=WIDE, max_width=MAX_INK_WIDTH):
     """`mark` draws a bar across rows 14 and 15 of every glyph.
 
     Those rows are blank in every stock glyph and are only visible if the
@@ -209,24 +213,33 @@ def build(font_name=DEFAULT_FONT, size=DEFAULT_SIZE, punct=True,
     """
     data = bytearray(open(os.path.join(ROOT, "extracted", "FONT.BIN"), "rb").read())
     m = charmap(punct)
-    # Step down until the whole charset fits the band rather than clipping a
-    # descender: the exact ink height depends on the face, the size and the
-    # threshold, so it is not something to work out by hand per font.
+    # Fit letters/digits first: oversized quotes/brackets must not shrink the
+    # entire alphabet. All letters retain one size and natural proportions.
+    body_chars = [ch for ch in m if ch in string.ascii_letters + string.digits]
     for size in range(size, 6, -1):
         font = ImageFont.truetype(os.path.join(FONTS, font_name), size * SS)
         top, bottom = 0, -1
-        for ch in m:
-            ink = _ink(font, ch, threshold, wide)
+        for ch in body_chars:
+            ink = _ink(font, ch, threshold, wide, max_width)
             if not ink:
                 continue
             top = min(top, min(y for _, y in ink))
             bottom = max(bottom, max(y for _, y in ink))
         if bottom - top + 1 <= MAX_ROW + 1:
             break
-    baseline = choose_baseline(font, m.keys(), threshold, wide)
+    baseline = choose_baseline(font, body_chars, threshold, wide, max_width)
     clipped = {}
     for ch, index in sorted(m.items(), key=lambda kv: kv[1]):
-        rec, lost = render_glyph(font, ch, baseline, threshold, wide)
+        glyph_font = font
+        # Keep punctuation on the common baseline, reducing only an outlier's
+        # point size until it fits. Never crop descenders or stretch Y alone.
+        if ch not in body_chars:
+            for glyph_size in range(size, 6, -1):
+                glyph_font = ImageFont.truetype(os.path.join(FONTS, font_name), glyph_size * SS)
+                ink = _ink(glyph_font, ch, threshold, wide, max_width)
+                if all(0 <= y + baseline + 1 <= MAX_ROW for _, y in ink):
+                    break
+        rec, lost = render_glyph(glyph_font, ch, baseline, threshold, wide, max_width)
         if rec is None:
             continue
         if lost:
@@ -294,12 +307,12 @@ def main(argv):
     punct = "--no-punct" not in argv
 
     wide = float(argv[argv.index("--wide") + 1]) if "--wide" in argv else WIDE
+    max_width = int(argv[argv.index('--max-width')+1]) if '--max-width' in argv else MAX_INK_WIDTH
     data, m, clipped, baseline = build(font_name, size, punct,
-                                       mark="--mark" in argv, wide=wide)
+                                       mark="--mark" in argv, wide=wide, max_width=max_width)
 
     if clipped:
-        print("warning: ink outside the cell was dropped for: %s"
-              % ", ".join("%r(%d)" % (c, n) for c, n in sorted(clipped.items())))
+        raise ValueError('glyphs would clip: %r' % clipped)
 
     out_dir = os.path.join(ROOT, "build")
     if not os.path.isdir(out_dir):
@@ -341,6 +354,7 @@ def main(argv):
         print("wrote %s and %s" % (r, q))
         print("  %d glyphs from %s, requested %dpx, stretch %.2f, baseline y=%d"
               % (len(m), font_name, size, wide, baseline))
+        print('  ink width capped at %dpx; bitmap height budget %dpx' % (max_width, CELL_H))
         return 0
 
     print(__doc__)

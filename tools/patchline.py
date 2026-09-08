@@ -27,19 +27,17 @@ sys.path.insert(0, HERE)
 
 import latin
 import widths
+import textlayout
 
 SCENARIO = os.path.join(ROOT, "extracted", "SCENARIO.DAT")
 OUT = os.path.join(ROOT, "build", "SCENARIO.vwf.dat")
 LINE_BREAK = 0xA0FF
 SPACE = 0x8140
 
-# Stability baseline: retain the stock logical grid widths while isolating a
-# scene-transition failure in the expanded window lifecycle. The VWF remains
-# enabled, but script wrapping must match the stock grids until visual width is
-# decoupled from the number of nodes the engine allocates.
-COLS = 17
-NARR_COLS = 19
-ROW_PIXELS = 17 * 28
+# These are also used by the native allocation stubs in vwf.py.
+COLS = textlayout.SPOKEN_COLS
+NARR_COLS = textlayout.NARRATION_COLS
+ROW_PIXELS = textlayout.ROW_PIXELS
 
 # Stock Japanese symbol glyphs needed by diary date placeholders. Unlike the
 # Latin punctuation above, these keep their original FONT.BIN artwork.

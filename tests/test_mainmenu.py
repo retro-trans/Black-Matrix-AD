@@ -62,10 +62,19 @@ class MainMenuTests(unittest.TestCase):
         data=mainmenu.patch(self.fixture())
         with self.assertRaises(ValueError):mainmenu.patch(data)
 
+    def test_ensure_accepts_only_exact_previous_installation(self):
+        data=mainmenu.patch(self.fixture());before=bytes(data)
+        self.assertEqual(mainmenu.ensure(data),before)
+        data[mainmenu.STORAGE-mainmenu.vwf.LOAD_BASE+4]^=1
+        before=bytes(data)
+        with self.assertRaises(ValueError):mainmenu.ensure(data)
+        self.assertEqual(data,before)
+
     def test_composes_with_actual_hd_executable(self):
         src=ROOT/'build/1ST_READ.vwf.bin';orig=ROOT/'extracted/1ST_READ.BIN'
         if not src.exists() or not orig.exists():self.skipTest('local game fixture')
-        before,_=atlas.patch(src.read_bytes(),orig.read_bytes())
+        baseline,*_=mainmenu.vwf.apply()
+        before,_=atlas.patch(bytes(baseline),orig.read_bytes())
         data=self.verify_patch(before)
         self.assertEqual(data[atlas.ARENA-atlas.BASE:atlas.END-atlas.BASE],
                          before[atlas.ARENA-atlas.BASE:atlas.END-atlas.BASE])
