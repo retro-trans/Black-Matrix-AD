@@ -60,6 +60,13 @@ class SH4:
                     next_pc = pc + 4 + 2 * signed(w & 255, 8)
             elif op == 0xA:
                 self.pending = pc + 4 + 2 * signed(w & 4095, 12)
+            elif op == 0xB:
+                self.pr = pc + 4
+                self.pending = pc + 4 + 2 * signed(w & 4095, 12)
+            elif w & 0xF0FF in (0x400B, 0x402B):
+                if w & 255 == 0x0B:
+                    self.pr = pc + 4
+                self.pending = r[n]
             elif op == 0xD:
                 r[n] = self.read((pc & ~3) + 4 + 4 * (w & 255), 4)
             elif op == 0xE:
@@ -70,6 +77,8 @@ class SH4:
                 self.t = signed(r[0]) == signed(w & 255, 8)
             elif w & 0xFF00 == 0x8500:
                 r[0] = signed(self.read(r[m] + low * 2, 2), 16)
+            elif w & 0xFF00 == 0x8100:
+                self.write(r[m] + low * 2, r[0], 2)
             elif op == 6 and low in (0, 1, 2):
                 size = 1 << low
                 r[n] = signed(self.read(r[m], size), size * 8)
@@ -86,12 +95,21 @@ class SH4:
                 self.write(r[n], r[m], 1 << low)
             elif op == 2 and low == 8:
                 self.t = (r[n] & r[m]) == 0
+            elif op == 2 and low == 9:
+                r[n] &= r[m]
+            elif op == 2 and low == 6:
+                r[n] -= 4
+                self.write(r[n], r[m], 4)
+            elif op == 1:
+                self.write(r[n] + low * 4, r[m], 4)
             elif op == 3 and low == 0:
                 self.t = r[n] == r[m]
             elif op == 3 and low == 2:
                 self.t = r[n] >= r[m]
             elif op == 3 and low == 3:
                 self.t = signed(r[n]) >= signed(r[m])
+            elif op == 3 and low == 7:
+                self.t = signed(r[n]) > signed(r[m])
             elif op == 3 and low == 12:
                 r[n] += r[m]
             elif op == 3 and low == 8:

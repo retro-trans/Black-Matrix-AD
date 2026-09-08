@@ -1,5 +1,8 @@
 # Handoff — Black/Matrix AD translation project
 
+> **Latest (2026-09-08):** [stock HD font, stage titles and fresh-PC setup](HANDOFF-2026-09-08.md).
+> Use that entry for the current emulator launcher and font workflow.
+
 > **Start here (2026-09-07):** [current consolidated handoff](HANDOFF-2026-09-07.md)
 > covers the complete change set, build/test evidence, local prerequisites,
 > pending Flycast checks, and the current 93-choice backlog. Counts and

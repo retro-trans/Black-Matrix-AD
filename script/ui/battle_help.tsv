@@ -22,3 +22,10 @@ bp_refill_cost	現在、進行している戦闘で得たＢＰを消費して�
 bp_refill_before	「補血」コマンドの使用は「移動」「攻撃」「魔法」「鎧召喚」を行う前に限ります。	$$血|BP+$$: before moving,\nattacking, magic or\narmor summoning.
 bp_refill_cap	一度に補給できるＢＰ上限は、コマンド時間が経過する度に上昇します。	BP refill cap rises\nas command time\npasses.
 bp_refill_amount	方向ボタンで補給したいＢＰ量を決めます。方向ボタン上下で１０ずつ、左右で１ずつ入力できます。	Choose BP amount:\nUp/Down: +/-10\nLeft/Right: +/-1
+stance_overview	攻撃を受けた時の行動を変更します。この待機型は何度でも変更することが出来ます。	Choose a response\nto attacks. Change\nas often as needed.
+stance_enemy_turn	敵ターン中でもＢボタンを押すことで待機型の変更が出来ます。	Press B to change\nstance even during\nthe enemy's turn.
+stance_guard	「防御」防御を行うことで、攻撃時に受けるダメージを軽減します。	Guard:\nReduces damage\nfrom attacks.
+stance_counter	「反撃」攻撃を受けた後、通常攻撃で反撃を行います。	Counter: When hit,\nstrike back with a\nnormal attack.
+stance_evade	「回避」回避が成功した場合、ダメージは０となります。	Evade: A successful\ndodge means you\ntake no damage.
+stance_evade_fail	回避行動が失敗した場合、その他の待機型の時より大きなダメージを受けます。	If a dodge fails,\nyou suffer greater\ndamage than others.
+stance_confirm	方向ボタンで待機型を選択して、Ａボタンを押すと変更決定します。	D-pad: pick stance.\nPress A to confirm.\n

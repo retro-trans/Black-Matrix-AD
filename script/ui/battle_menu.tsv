@@ -1,0 +1,10 @@
+# Speaker: System. Expanded battle menu only; command order is unchanged.
+id	japanese	english
+move	移動	Move
+attack	攻撃	Attack
+magic	魔法	Magic
+items	道具	Items
+status	状態	Status
+refill	補血	$$血|Refill BP$$
+stance	待機型	Stance
+summon	鎧召喚	Summon

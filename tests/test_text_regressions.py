@@ -176,5 +176,93 @@ class VWFTests(unittest.TestCase):
         self.assertEqual(corrected, 82)
 
 
+class HDVWFLayoutTests(VWFTests):
+    """Exercise the emitted stock-atlas UI fixes, including native fallback."""
+
+    def setUp(self):
+        super().setUp()
+        self.code = vwf.build_code(ui_fixes=True)
+        self.cpu.put(vwf.CODE, self.code.assemble())
+
+    def test_help_row_crosses_nonadjacent_record_boundary(self):
+        chars = ([1, 2, 3, 4, 5, 0] * 64)
+        previous = self.record(7, chars[:192], atlas=123)
+        current = self.record(21, chars[192:], atlas=456)
+        self.cpu.write(previous + 0x18C, current, 4)
+        self.cpu.write(self.CTX + 8, 19, 2)
+        # The captured help page begins at 171; its second row splits after
+        # two letters at the 192-character boundary ("sh" / "ow item range").
+        for cell in range(57):
+            absolute = 171 + cell
+            start = 171 + cell // 19 * 19
+            index = absolute % 192
+            expected = (self.bear[chars[start]]
+                        + sum(self.adv[g] for g in chars[start:absolute])
+                        - self.bear[chars[absolute]])
+            with self.subTest(cell=cell):
+                self.assertEqual(self.adjust(cell, index, 123 if absolute < 192 else 456), expected)
+
+    def test_released_predecessor_is_not_used(self):
+        previous = self.record(7, [1] * 192, atlas=123, live=False)
+        current = self.record(21, [1] * 192, atlas=456)
+        self.cpu.write(previous + 0x18C, current, 4)
+        self.assertEqual(self.adjust(2, 0, 456), 321.0)
+
+    def test_captured_item_help_spacing(self):
+        path = Path(vwf.ROOT) / 'build/hd-ui/spacing-live-ram.bin'
+        if not path.exists():
+            self.skipTest('optional local item-help capture is absent')
+        self.cpu.mem[:] = path.read_bytes()
+        self.cpu.put(vwf.CODE, self.code.assemble())
+        ctx = 0x8C1E77C8
+        self.assertEqual(self.cpu.read(ctx, 4), 18)
+        self.assertEqual(self.cpu.read(ctx+8, 2), 19)
+        node = self.cpu.read(vwf.WIN_TAB + 18*28 + 24, 4)
+        chars = [self.cpu.read(vwf.LINE_RECORDS + (i//192)*400 + 4 + (i%192)*2, 2)
+                 for i in range(384)]
+        adv = lambda g: self.cpu.read(vwf.ADV_TAB+g, 1)
+        bear = lambda g: self.cpu.read(vwf.BEAR_TAB+g, 1)
+        for cell in range(57):
+            absolute = 171 + cell
+            start = 171 + cell//19*19
+            handle = self.cpu.read(node+4, 4)
+            self.cpu.r[8:13] = [ctx, cell, absolute%192, handle, node]
+            self.cpu.r[15], self.cpu.pr = 0x8C00F000, 0xFFFFFFFF
+            self.cpu.run(self.code.labels['vwf_adjust'])
+            expected = bear(chars[start]) + sum(adv(g) for g in chars[start:absolute]) - bear(chars[absolute])
+            self.assertEqual(self.cpu.read(node+12, 4),
+                             int.from_bytes(struct.pack('<f', expected), 'little'))
+            node = self.cpu.read(node+164, 4)
+
+    def test_yes_no_inset_is_idempotent_and_keeps_full_uvs(self):
+        self.record(0, [1, 2, 3, 4, 5, 0])
+        self.cpu.write(self.CTX + 8, 3, 2)
+        self.cpu.write(self.CTX + 10, 2, 2)
+        for cell in (0, 3):
+            self.adjust(cell, cell)
+            y = cell // 3 * 16
+            self.cpu.put(self.NODE + 16, struct.pack('<f', float(y)))
+            self.cpu.put(self.NODE + 32, struct.pack('<f', float(y + 14)))
+            self.cpu.write(self.NODE + 150, 0x40, 2)
+            self.cpu.write(self.NODE + 158, 0x78, 2)
+            for _ in range(3):
+                self.cpu.pr = 0xFFFFFFFF
+                self.cpu.run(self.code.labels['uv_fix'])
+                for offset, expected in ((16, y+2), (24, y+2), (32, y+13), (40, y+13)):
+                    self.assertEqual(self.cpu.read(self.NODE+offset, 4),
+                                     int.from_bytes(struct.pack('<f', expected), 'little'))
+                self.assertEqual(self.cpu.read(self.NODE + 158, 2), 0x80)
+                self.assertEqual(self.cpu.read(self.NODE + 162, 2), 0x80)
+
+    def test_battle_menu_padding_is_scoped_and_idempotent(self):
+        self.record(0, [1] * 72)
+        self.cpu.write(self.CTX + 8, 9, 2)
+        for rows, padding in ((8, 10), (7, 0), (3, 0)):
+            self.cpu.write(self.CTX + 10, rows, 2)
+            for cell in (0, 1, 9, 17, 63, 71):
+                for _ in range(2):
+                    self.assertEqual(self.adjust(cell, cell), (cell % 9)*self.adv[1]+padding)
+
+
 if __name__ == '__main__':
     unittest.main()

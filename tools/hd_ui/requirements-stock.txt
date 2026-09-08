@@ -1,0 +1,3 @@
+# Additional dependency for offline stock Flycast texture hash seeding.
+# Pillow is also required by the existing font-generation tools.
+xxhash==3.6.0

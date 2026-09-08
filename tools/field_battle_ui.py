@@ -13,7 +13,14 @@ import uistr
 ROOT = Path(__file__).resolve().parents[1]
 UI = ROOT / 'script/ui/field_battle.tsv'
 BATTLE_HELP_UI = ROOT / 'script/ui/battle_help.tsv'
+STANCE_HELP = {
+    0x7AC2A: 'stance_overview', 0x7AC9E: 'stance_enemy_turn',
+    0x7AD12: 'stance_guard', 0x7AD86: 'stance_counter',
+    0x7ADFA: 'stance_evade', 0x7AE6E: 'stance_evade_fail',
+    0x7AEE2: 'stance_confirm',
+}
 BATTLE_HELP = {
+    **STANCE_HELP,
     0x7A2A6: 'attack_types', 0x7A31A: 'normal_attack',
     0x7A38E: 'latent_attack', 0x7A402: 'attack_range',
     0x7A476: 'attack_target', 0x7A72E: 'item_actions',

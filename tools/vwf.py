@@ -151,7 +151,7 @@ def _glyph(a, reg):
     a.cmp_hs(3, 0)                       # T when glyph >= 4608
 
 
-def build_code():
+def build_code(atlas_slot_hook=None, ui_fixes=False, natural_font=False):
     """Assemble the replacement for 0x8C0603B4 plus the pen calculation."""
     a = sh4asm.Asm(CODE)
 
@@ -180,6 +180,8 @@ def build_code():
     a.word_("v0off", 150)                # (u,v) pairs at node+148; v of corner 0
     a.word_("v2off", 158)                #                          v of corner 2
     a.word_("v3off", 162)                #                          v of corner 3
+    if ui_fixes:
+        a.word_("record_next", 0x18C)
 
     # ---- vwf_place(R4=ctx, R5=cell, R6=char_index, R7=atlas, 0(sp)=attr) ---
     a.label("vwf_place")
@@ -218,7 +220,18 @@ def build_code():
     a.mov_w_pc("op81", 3)
     a.mov_w_store(3, 5)                  # cmd->opcode = 0x81
     a.mov_l_stored(11, 4, 5)             # cmd+4  = atlas handle
-    a.mov(10, 0)
+    if atlas_slot_hook is not None:
+        # Experimental game-side fixed atlas; the normal build is unchanged.
+        a.long_("atlas_slot_hook", atlas_slot_hook)
+        a.mov_l_dec(5, 15)
+        a.mov(11, 4)
+        a.mov(10, 5)
+        a.mov_l_pc("atlas_slot_hook", 3)
+        a.jsr(3)
+        a.nop()
+        a.mov_l_inc(15, 5)
+    else:
+        a.mov(10, 0)
     a.mov_w_stored_r0(8, 5)              # cmd+8  = index within the record
     a.mov_i(12, 0)
     a.mov_l_r0(12, 1)
@@ -324,6 +337,22 @@ def build_code():
     a.bra("pow_y")
     a.shll(3)
     a.label("pow_y_done")
+    if ui_fixes and not natural_font:
+        # Fit Yes/No within its selection band, including its cursor offset.
+        # Sample all sixteen atlas rows into eleven screen rows, inset by two.
+        # Other menus/dialogue retain their existing size and UV coverage.
+        a.mov_w_atd_r0(8, 8); a.cmp_eq_i(3); a.bf("selector_done")
+        a.mov_w_atd_r0(10, 8); a.cmp_eq_i(2); a.bf("selector_done")
+        # Derive Y from the cell, not the previously adjusted node: repeated
+        # placement must not accumulate the inset.
+        a.mov_i(2, 13); a.mov_i(3, 0); a.cmp_hs(0, 9)
+        a.bf("selector_top"); a.add_i(16, 13)
+        a.label("selector_top"); a.mov_i(11, 3)
+        a.mov_l_pc("float_tab", 1); a.mov(13, 0); a.shll2(0)
+        a.mov_l_r0(1, 2)
+        a.mov_i(16, 0); a.mov_l_str_r0(2, 12)
+        a.mov_i(24, 0); a.mov_l_str_r0(2, 12)
+        a.label("selector_done")
     a.add(13, 3)                         # index of the new bottom edge
     a.mov_w_pc("ntab", 2)
     a.cmp_ge(2, 3)
@@ -453,16 +482,39 @@ def build_code():
     a.bra("adj_out")
     a.nop()
     a.label("record_found")
-    a.cmp_hs(4, 10)                      # prevent negative row-start indices
-    a.bf("adj_out")
+    if not ui_fixes:
+        a.cmp_hs(4, 10)                  # prevent negative row-start indices
+        a.bf("adj_out")
     a.mov_i(0, 13)                       # R13 = accumulator
 
     a.mov(10, 2)
     a.sub(4, 2)                          # R2 = first character on this row
     a.mov(2, 6)                          # R6 = keep it
+    if ui_fixes:
+        a.mov(1, 14)                     # current record, retained across scan
+        a.mov(10, 4)                     # advance-loop end index
+        a.cmp_pz(2); a.bt("row_ready")
+        # A row may straddle two native 192-character records. Find the
+        # owning predecessor by its next pointer, never physical adjacency.
+        a.mov_l_pc("line_records", 1); a.mov_i(LINE_RECORD_COUNT, 5)
+        a.label("previous_scan")
+        a.mov_w_pc("record_next", 0); a.mov_l_r0(1, 3)
+        a.cmp_eq(14, 3); a.bf("previous_next")
+        a.mov_w_pc("record_flags", 0); a.mov_w_r0(1, 3)
+        a.mov_w_pc("record_live", 0); a.tst(0, 3); a.bt("previous_next")
+        a.mov_w_at(1, 3); a.extu_w(3, 3)
+        a.mov_w_pc("n192", 0); a.cmp_eq(0, 3); a.bf("previous_next")
+        a.add(3, 2); a.cmp_pz(2); a.bf("adj_out")
+        a.mov(2, 6); a.mov(3, 4)
+        a.bra("row_ready"); a.nop()
+        a.label("previous_next")
+        a.mov_w_pc("record_stride", 3); a.add(3, 1)
+        a.add_i(-1, 5); a.tst(5, 5); a.bf("previous_scan")
+        a.bra("adj_out"); a.nop()
+        a.label("row_ready")
 
     a.label("adv_loop")
-    a.cmp_hs(10, 2)
+    a.cmp_hs(4 if ui_fixes else 10, 2)
     a.bt("adv_done")
     _glyph(a, 2)                         # R0 = glyph at index R2, T set if bad
     a.bt("adv_next")
@@ -475,6 +527,8 @@ def build_code():
     a.add_i(1, 2)
     a.label("adv_done")
 
+    if ui_fixes:
+        a.cmp_pz(6); a.bf("bear_1")      # already added predecessor's bearing
     _glyph(a, 6)                         # bearing of the row's first glyph
     a.bt("bear_1")
     a.mov_l_pc("bear_tab", 3)
@@ -482,6 +536,11 @@ def build_code():
     a.extu_b(0, 0)
     a.add(0, 13)
     a.label("bear_1")
+    if ui_fixes:
+        a.cmp_eq(14, 1); a.bt("current_bearing")
+        a.mov(14, 1); a.mov_i(0, 2); a.mov(10, 4); a.mov_i(-1, 6)
+        a.bra("adv_loop"); a.nop()
+        a.label("current_bearing")
 
     _glyph(a, 10)                        # bearing of this glyph
     a.bt("bear_2")
@@ -490,6 +549,13 @@ def build_code():
     a.extu_b(0, 0)
     a.sub(0, 13)
     a.label("bear_2")
+
+    if ui_fixes:
+        # Padding belongs to the battle menu, not to the shared font metrics.
+        a.mov_w_atd_r0(8, 8); a.cmp_eq_i(9); a.bf("indent_done")
+        a.mov_w_atd_r0(10, 8); a.cmp_eq_i(8); a.bf("indent_done")
+        a.add_i(10, 13)
+        a.label("indent_done")
 
     a.mov(13, 0)                         # px
     a.cmp_pz(0)
