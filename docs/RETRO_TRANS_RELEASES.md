@@ -1,5 +1,11 @@
 # Black Matrix AD: preparing Retro Trans-compatible patches
 
+> **Superseded distribution choice (2026-11-02): use DCP.** The user explicitly
+> requested DCP instead of standalone raw-track xdelta. Follow
+> `docs/releases/v0.9.0/DCP.md` for the current format and validation model.
+> The raw-track protocol instructions below are historical, not the current
+> publication route. Keep original and complete translated images local.
+
 This guide prepares a future patch-only distribution. Keep this project private;
 documentation, fixes and local builds do not authorize tags, releases, uploads,
 visibility changes or publication in the public patch catalog. Perform those

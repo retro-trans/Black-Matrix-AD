@@ -1,5 +1,5 @@
 English translation of **Black/Matrix AD** for **Dreamcast**, with separate
-patches for the Japanese **Disc 1** and **Disc 2** raw Track 3 BIN files.
+**DCP packages** for the Japanese **Disc 1** and **Disc 2**.
 
 **v0.9.0 is a private experimental prerelease**, based on the frozen internal
 cumulative 0.1.13 build. The release version is 0.9.0; historical local version
@@ -8,32 +8,32 @@ All complete game images remain local.
 
 ### Apply
 
-Download through your authorized GitHub account, then use **Apply xdelta** in
-[Retro Trans](https://github.com/retro-trans/retro-trans-tools), DeltaPatcher or
-xdelta3. The public Automatic catalog does not download this private release.
-You need your own exact Japanese disc dumps.
+Download through your authorized GitHub account. Use **Apply Patch** in
+[Universal Dreamcast Patcher 2.1.8](https://github.com/DerekPascarella/UniversalDreamcastPatcher/releases/tag/2.1.8),
+or the **DCP** tab in a DCP-enabled
+[Retro Trans](https://github.com/retro-trans/retro-trans-tools) build.
+The public Automatic catalog does not download this private release.
+You need your own original Japanese disc set, with its companion tracks.
 
-| Your source file | Patch |
+| Your original disc | DCP package |
 | --- | --- |
-| Original Japanese Disc 1, raw Track 3 BIN | `Black-Matrix-AD-Disc1-Native-v0.9.0-from-original.xdelta` |
-| Original Japanese Disc 2, raw Track 3 BIN | `Black-Matrix-AD-Disc2-Native-v0.9.0-from-original.xdelta` |
+| Disc 1 | `Black-Matrix-AD-Disc1-English-v0.9.0.dcp` |
+| Disc 2 | `Black-Matrix-AD-Disc2-English-v0.9.0.dcp` |
 
-The discs are not interchangeable. These are full patches from original files;
-there are no upgrade patches from local test builds. Check `README-v0.9.0.txt`
-and `BUILD-MANIFEST.json` for source sizes/hashes. Keep checksum verification on.
-The CUE, CHD, merged BIN and extracted executable are not substitute sources.
+Select the source **CUE**, **GDI** or **CHD**, the matching DCP, and a **new output
+folder**. Keep the original CUE/GDI companion tracks together. Choose GDI or
+CUE/BIN output, apply, and boot the rebuilt descriptor. Do not select a loose
+Track 3 BIN or overwrite originals. Allow at least 12 GB of temporary/output space.
+The discs are not interchangeable, and these packages do not upgrade local test
+builds. Keep checksum verification enabled.
 
-Create a new output folder before running, for example:
-
-```text
-xdelta3 -d -s "Black-Matrix Advanced (Japan) (Disc 1) (Track 3).bin" "Black-Matrix-AD-Disc1-Native-v0.9.0-from-original.xdelta" "patched-disc1/Black-Matrix Advanced (Japan) (Disc 1) (Track 3).bin"
-```
-
-Repeat with Disc 2's source/patch. Copy each disc's unchanged Track 1, Track 2
-and CUE from your own original set into its new folder; retain the original
-basenames and CUE timing. Boot the **matching CUE**, not a loose BIN. Originals
-must not be overwritten. Converting a CHD is outside this patch procedure and
-must yield the exact documented source bytes.
+Each DCP contains native per-game-file deltas and the standard 32 KiB custom
+boot header retaining the existing VGA flag, not complete disc images or archives. A
+DCP-enabled Retro Trans build also verifies the source/target game-file-tree
+metadata, boot invariants and audio. DCP rebuilds the layout, so raw track hashes
+can differ from the earlier Track 3 release despite identical translated files.
+GDI/CHD inputs and CHD output are patcher features, not separately verified routes
+for this release; local tests use original CUE input to GDI and CUE/BIN output.
 
 **Boot fresh and load an in-game VMU save.** Old save states may retain old code
 or graphics. Keep your original VMUs/profile and backups; no saves, BIOS,
@@ -60,13 +60,13 @@ Use the same VMU for both discs and the emulator's disc-swap function when asked
 
 ### Validation and testing status
 
-Both full patches are decoded locally from their exact original source files
-and verified against each complete target's size and SHA-256. The protocol
-manifest, validation report and checksums record those identities. Companion
-tracks/CUEs are independently compared, and the local cumulative build passed
-whole-track change-scope/parity and every-ISO-payload checks. The latest badge
-tests and existing Join/Equip checks passed; the release provenance separates
-binary verification from gameplay evidence.
+Both DCP packages are applied locally to the original CUE disc sets, rebuilt
+in GDI and CUE/BIN format, then re-extracted. All game files match the frozen
+0.1.13 translated build, boot code outside allowed track-table fields matches,
+and CD audio content/sample alignment is preserved. DCP manifests and validation
+records document the file-tree identities and actual rebuilt output hashes.
+The underlying cumulative build retains its prior scope/parity and badge/font
+checks. These binary checks do not constitute gameplay or hardware testing.
 
 **This is not a full-playthrough or complete-human-proofreading claim.** Fresh
 gameplay/contrast checks for the latest battle badges, Join and Equip are still
@@ -79,15 +79,17 @@ Dreamcast hardware testing remain pending.
 
 ### Downloads and source
 
-No complete game images are distributed. Downloads contain two patches, one
-build manifest, validation records, checksums, provenance and instructions.
+No complete game images are distributed. Downloads contain two DCP packages,
+DCP-specific manifest/validation records, checksums, provenance and instructions.
 Native translated graphics are already in the patches. No optional HD texture
 pack or personal Steam Deck/full-game ZIP is bundled.
 
-The tag records the selected patch tooling and release sources. Provenance
-lists the local cumulative inputs separately; the tag alone is not a complete
-recipe to regenerate every historical translated input. Use the `.xdelta`
-downloads with your own supported original discs. Keep the repository/release
+The existing tag remains the immutable translation source snapshot; current main
+adds DCP packaging sources. The DCP manifest identifies both commits. Provenance
+lists the local cumulative inputs; the tag alone is not a complete historical
+rebuild recipe. The earlier standalone raw-track assets are superseded by DCP,
+with translated game-file content unchanged. Use the `.dcp` downloads with your
+own supported original discs. Keep the repository/release
 private; no public patch catalog addition or visibility change is authorized.
 
 ### Translation and acknowledgements
