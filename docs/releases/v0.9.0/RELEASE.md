@@ -69,10 +69,35 @@ Use the same VMU for both discs and the emulator's disc-swap function when asked
   Magic. Actual generated lettering is integrated, with original native geometry
   and palette. All other atlas descriptors are preserved.
 - **Development-profile choices retained:** Zero is unlocked from the start;
-  Domina is first in master selection. Existing VGA compatibility repairs remain.
+  Domina is initially highlighted in master selection. Existing VGA compatibility
+  repairs remain.
 
 ### Additions beyond translation
 
+- **Analog-stick movement and menu navigation.** The game itself maps the
+  Dreamcast analog stick to its existing D-pad input paths, including diagonals
+  and normal held-button repeat. The physical D-pad takes priority on each axis.
+  This is digital-style navigation, not new 360-degree or variable-speed movement;
+  map your controller's stick to the Dreamcast analog stick in your emulator.
+- **Faster battle Status opening and closing.** Status elements appear and
+  disappear together instead of revealing/removing each row in sequence, with
+  the preceding opening fade shortened. A residual pre-open pause is not claimed
+  eliminated; the original readiness checks and selection writeback remain.
+- **An in-battle S-rank checklist.** The battle system menu's **Turn** panel
+  shows Turn, CT, Blood, the provisional score and S-rank target, battle-specific
+  Turn/CT limits, tracked penalties, and relevant special objectives. Green
+  checks, red crosses and gray pending marks make progress easier to read.
+  It reads the game's own scoring rules and counters; it does not change scoring,
+  award S ranks, or guarantee a rank before the battle ends. Unranked battles are
+  identified, and special rows appear only where relevant.
+- **Checklist sprite-allocation safeguards.** The checklist reserves only the
+  sprites needed for the current battle instead of always reserving 384, leaving
+  more of the fixed engine pool available for other menus. Empty-allocation
+  guards are included. This addresses the investigated checklist-related Start
+  menu resource shortage, not every possible freeze or out-of-memory condition.
+- **Latin-first name entry.** The name-entry screen starts on its Latin page
+  and uses English Hira / Kata / Latin / Back / Done controls. All three original
+  keyboard pages remain selectable; the saved-name format is unchanged.
 - **Zero available from the start.** The game's native unlock is enabled at
   initialization, so the original unlock code is not required.
 - **Domina initially highlighted in master selection.** This changes the
@@ -82,12 +107,19 @@ Use the same VMU for both discs and the emulator's disc-swap function when asked
   captions for 18 unique voice clips while retaining the original voices and
   character/master-dependent branches. Fresh playback/timing checks remain pending.
 - **Readability and layout improvements.** Redrawn/repaired native fonts and
-  button labels, item-list and selector alignment fixes, and raised movie
-  subtitles to reduce bottom-edge clipping. No external HD texture pack is needed.
-- **VGA compatibility repairs.** Retains the cumulative build's VGA boot/video
-  compatibility work. This is not a verified physical-Dreamcast compatibility claim.
+  button labels, variable-width text/sampling repairs, item-list and selector
+  alignment fixes, and raised movie subtitles to reduce bottom-edge clipping.
+  Native translated artwork and the current font fixes are embedded in the disc
+  patches; no external HD texture pack is needed.
+- **VGA compatibility repairs.** Retains VGA boot/video work and a cable-aware
+  graphics packet-buffer allocation correction used by the character-selection
+  screens. This is not a verified physical-Dreamcast compatibility claim.
 
 These additions are bundled in v0.9.0; it is not a strict translation-only patch.
+The list was checked against both frozen release executables, not merely old
+trial-build notes; see the [feature audit](https://github.com/retro-trans/Black-Matrix-AD/blob/main/docs/releases/v0.9.0/FEATURE_AUDIT.md).
+External HD portrait/background packs and personal Steam Deck installers are not
+bundled. Automated checks do not replace gameplay, route or hardware testing.
 
 ### Validation and testing status
 

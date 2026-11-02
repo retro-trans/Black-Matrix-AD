@@ -1,5 +1,21 @@
 # Release documentation changes
 
+## 2026-11-02 — complete the bundled enhancements list
+
+At pow's request, replaced the abbreviated “Additions beyond translation” list
+in the README and live release notes. Added analog-stick navigation, simultaneous
+Status opening/closing, the in-battle S-rank checklist, its map-specific
+sprite-allocation safeguards, and Latin-first name entry. Expanded the native
+font/layout and VGA packet-buffer descriptions; retained Zero, Domina and ending
+captions with their existing limits.
+
+Read-only comparison against both manifest-authenticated frozen release
+executables passes 43 checks per disc. Added `FEATURE_AUDIT.md` and metadata-only
+`FEATURE_AUDIT.json`. Explicitly excluded unshipped historical pickup expansion,
+external HD packs and personal installers. No scoring/balance change, guaranteed
+rank, eliminated Status pause, universal freeze cure or new playtest is claimed.
+No game rebuild, new tag/version, asset upload/replacement or visibility change.
+
 ## 2026-11-02 — Automatic DCP discovery
 
 Added `DCP-AUTOMATIC.json` and its separate supplemental checksum to the
