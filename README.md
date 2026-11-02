@@ -136,7 +136,7 @@ publish this private project's contents without approval.
 
 ## Translation and acknowledgements
 
-Project direction and playtesting: **binhlt0402**. Translation, editing,
+Project direction and playtesting: **pow**. Translation, editing,
 reverse engineering and tooling were assisted by large language models,
 including Codex; the text is machine-produced and then edited, not represented
 as a hand translation by a fluent translator. Whisper supplied the initial
