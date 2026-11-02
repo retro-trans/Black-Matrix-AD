@@ -9,6 +9,11 @@ an experimental prerelease based on internal cumulative build 0.1.13.
 The release number identifies the translated game-file content; it does not imply that
 every route, screen or line has passed human review or a complete playthrough.
 
+Public publication is requested but **on hold**: the branch/tag history has
+been sanitized, but GitHub still serves removed original dialogue through old
+commit links. Do not make this repository public until those cached objects
+are removed or a separately approved clean repository is used.
+
 ## Contribute
 
 Bug reports, proofreading and playtesting are welcome through this private
@@ -25,9 +30,13 @@ You need your own exact Japanese disc dumps. No game image is distributed.
 ### Apply
 
 Use [Universal Dreamcast Patcher 2.1.8](https://github.com/DerekPascarella/UniversalDreamcastPatcher/releases/tag/2.1.8)
-and its **Apply Patch** tab. A DCP-enabled build of
-[Retro Trans](https://github.com/retro-trans/retro-trans-tools) can also use its
-**DCP** tab. Download the assets through your authorized GitHub account first;
+and its **Apply Patch** tab. **Retro Trans 0.5.19 or newer**, with DCP support,
+can also use its **DCP** tab. See the
+[Retro Trans releases](https://github.com/retro-trans/retro-trans-tools/releases).
+The published 0.5.18 Windows executable was checked and has no DCP tab;
+0.5.19 publication is being handled separately by pow. Until it is available,
+use Universal Dreamcast Patcher 2.1.8.
+Download the assets through your authorized GitHub account first;
 the public Automatic catalog does not fetch this private release.
 
 | Your original Japanese disc | DCP package |
@@ -114,9 +123,12 @@ Known limitations include:
 
 ## Source and tooling
 
-The existing v0.9.0 tag records the translation source snapshot and is not moved.
-Current main contains the DCP packaging sources. The DCP manifest identifies the
-translation and packaging commits separately. Provenance lists the frozen local
+The user authorized sanitizing the existing history before public publication.
+The v0.9.0 tag now points to the sanitized translation snapshot; main contains
+the sanitized DCP packaging sources. Issued DCP assets are byte-for-byte
+unchanged. Their original provenance records pre-sanitization commit IDs, which
+map to the sanitized IDs in [the sanitation record](docs/releases/v0.9.0/SANITIZATION.md).
+Provenance lists the frozen local
 input hashes: the tag alone is not a complete, one-command recipe for regenerating
 every historical cumulative input. Use the `.dcp` assets with your own discs.
 The earlier standalone raw-track distribution has been superseded by DCP without

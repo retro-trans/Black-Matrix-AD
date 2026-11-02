@@ -8,5 +8,10 @@
 /extracted/
 /original disc/
 
+# Original dialogue retained locally, removed from all public-candidate history.
+/script/intro.bilingual.tsv
+/script/ch1_michette.bilingual.tsv
+/docs/scenario-inventory.md
+
 __pycache__/
 .claude/
