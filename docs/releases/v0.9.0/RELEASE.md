@@ -94,7 +94,7 @@ private; no public patch catalog addition or visibility change is authorized.
 
 This is a machine translation produced with large language models and then
 edited, not a hand translation by a fluent translator. Project direction and
-playtesting: **binhlt0402**. Codex assisted editing/tooling, Whisper supplied
+playtesting: **pow**. Codex assisted editing/tooling, Whisper supplied
 initial ending transcripts, and ImageGen supplied selected localized artwork.
 Thanks to contributors and the original game's creators.
 
