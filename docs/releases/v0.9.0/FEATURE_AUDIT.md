@@ -3,8 +3,8 @@
 Reviewed 2026-11-02 after pow reported omissions in “Additions beyond translation.”
 This is a documentation correction, not a new game build or patch version.
 
-The audit reads the extracted executable from each frozen internal 0.1.13
-target and first verifies its SHA-256 against `DCP-MANIFEST-v0.9.0.json`:
+The audit reads each release executable and first verifies its SHA-256 against
+`DCP-MANIFEST-v0.9.0.json`:
 
 | Disc | Released `1ST_READ.BIN` SHA-256 |
 | --- | --- |

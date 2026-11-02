@@ -3,15 +3,11 @@
 English translation and native interface work for **Black/Matrix AD** on
 **Dreamcast**, covering the Japanese two-disc edition.
 
-This is the **public, sanitized replacement repository**. The current release is
+The current release is
 **[v0.9.0](https://github.com/retro-trans/Black-Matrix-AD/releases/tag/v0.9.0)**,
-an experimental prerelease based on internal cumulative build 0.1.13.
+an experimental English translation patch.
 The release number identifies the translated game-file content; it does not imply that
 every route, screen or line has passed human review or a complete playthrough.
-
-Original dialogue sources were removed from all retained revisions before
-publication. The earlier repository is preserved separately as a private backup;
-this replacement is independent, not a fork of that repository.
 
 ## Contribute
 
@@ -42,10 +38,9 @@ rebuilt game file, boot invariant and CD-audio content is verified.
 Initial Automatic recognition uses the published original raw-track fingerprints;
 a renamed CUE/track set is accepted when the CUE refers to the renamed tracks.
 For CHD inputs or alternate layouts, use the separate **DCP** tab with a manually
-downloaded package (available since Windows 0.5.19), or **Apply Patch** in
+downloaded package, or **Apply Patch** in
 [Universal Dreamcast Patcher 2.1.8](https://github.com/DerekPascarella/UniversalDreamcastPatcher/releases/tag/2.1.8).
-Mac 0.5.18 and Android builds do not include DCP. Automatic uses separate DCP
-catalog records, not raw-track xdelta entries; existing DCP bytes are unchanged.
+Use the Windows build linked above for these instructions.
 
 | Your original Japanese disc | DCP package |
 | --- | --- |
@@ -64,8 +59,7 @@ and target game-file-tree hashes are in `DCP-MANIFEST-v0.9.0.json`; a DCP-enable
 Retro Trans build verifies that metadata, boot invariants and audio. Ordinary
 Universal Dreamcast Patcher applies the native per-file patch checks.
 
-DCP rebuilds the disc layout. The resulting raw tracks can differ from earlier
-Track 3 builds while containing exactly the same translated game files. Local
+DCP rebuilds the disc layout and verifies the translated game files. Local
 verification covers original CUE input to GDI and CUE/BIN output on both discs.
 GDI/CHD input and CHD output are supported by the patcher, but are not separately
 claimed tested for these packages. Keep verification enabled and report any
@@ -85,9 +79,9 @@ personal full-game/Steam Deck installation packages are not release assets.
 Existing VGA compatibility repairs are retained, but physical Dreamcast hardware
 has not been verified. Emulator-specific launcher settings are not bundled.
 
-This cumulative profile also includes **Zero unlocked from the beginning** and
-**Domina initially highlighted in master selection**, as requested during
-development. It is not a translation-only, original-unlock-order profile.
+The patch also includes **Zero unlocked from the beginning** and
+**Domina initially highlighted in master selection**. It is not a
+translation-only, original-unlock-order profile.
 
 ## Additions beyond translation
 
@@ -133,16 +127,14 @@ development. It is not a translation-only, original-unlock-order profile.
   screens. This is not a verified physical-Dreamcast compatibility claim.
 
 These additions are bundled in v0.9.0; it is not a strict translation-only patch.
-The list was checked against both frozen release executables, not merely old
-trial-build notes; see the [feature audit](docs/releases/v0.9.0/FEATURE_AUDIT.md).
+The list was checked against both release executables; see the
+[feature audit](docs/releases/v0.9.0/FEATURE_AUDIT.md).
 External HD portrait/background packs and personal Steam Deck installers are not
 bundled. Automated checks do not replace gameplay, route or hardware testing.
 
 ## What is included
 
-- The cumulative English script and interface work already integrated into
-  the two local disc builds. Unbuilt working-tree edits are not automatically
-  part of the release.
+- English script and native interface work for both discs.
 - Native font/sampling and menu alignment repairs, including the current
   Equip fallback and matching Join/Remove/other footer work.
 - English story cards, disc-change prompts, results/party and battle UI work.
@@ -162,9 +154,7 @@ Both DCP packages are applied to their original CUE sets, rebuilt as GDI and
 CUE/BIN, and re-extracted. Every game file must match the frozen translated build;
 boot code outside allowed track-table fields and CD audio content/sample alignment
 must be preserved. The DCP manifest, verification records and checksums accompany
-the packages. Rebuilt raw-track identity is recorded separately, not equated with
-the earlier raw-track release. These checks do not replace gameplay or hardware
-testing.
+the packages. These checks do not replace gameplay or hardware testing.
 
 Known limitations include:
 
@@ -180,21 +170,13 @@ Known limitations include:
 
 ## Source and tooling
 
-The user authorized sanitizing the existing history before public publication.
-The v0.9.0 tag now points to the sanitized translation snapshot; main contains
-the sanitized DCP packaging sources. Issued DCP assets are byte-for-byte
-unchanged. Their original provenance records pre-sanitization commit IDs, which
-map to the sanitized IDs in [the sanitation record](docs/releases/v0.9.0/SANITIZATION.md).
-Provenance lists the frozen local
-input hashes: the tag alone is not a complete, one-command recipe for regenerating
-every historical cumulative input. Use the `.dcp` assets with your own discs.
-The earlier standalone raw-track distribution has been superseded by DCP without
-changing the translated game-file content.
+This repository contains translation tooling, localized artwork, tests and
+patch documentation. The release includes DCP packages, checksums and validation
+records for use with your own original Japanese discs.
 
-The retained sanitized history predates this release. No original or complete
-translated disc image, extracted game binary, BIOS, save, RAM capture or personal
-install package is added to the release. Do not merge unsanitized development
-history into this repository or upload original dialogue sources.
+No original or complete translated disc image, extracted game binary, BIOS,
+save, RAM capture or personal install package is distributed. Do not upload
+game images, original dialogue sources or personal saves.
 
 | Path | Contents |
 | --- | --- |

@@ -1,10 +1,8 @@
 English translation of **Black/Matrix AD** for **Dreamcast**, with separate
 **DCP packages** for the Japanese **Disc 1** and **Disc 2**.
 
-**v0.9.0 is a public experimental prerelease**, based on the frozen internal
-cumulative 0.1.13 build. The release version is 0.9.0; historical local version
-labels and in-game artwork are not being relabelled by an extra game rebuild.
-All complete game images remain local.
+**v0.9.0 is an experimental English translation patch.** You need your own
+original Japanese discs; no complete game images are distributed.
 
 ### Apply
 
@@ -21,11 +19,10 @@ hash-verified; rebuilt game files, boot invariants and CD audio are verified.
 
 Initial recognition uses the published original raw-track fingerprints; renamed
 files are accepted when the descriptor refers to them. For CHD inputs or
-alternate layouts, manually apply the package in the **DCP** tab (Windows
-0.5.19+), or use **Apply Patch** in
+alternate layouts, manually apply the package in the **DCP** tab, or use
+**Apply Patch** in
 [Universal Dreamcast Patcher 2.1.8](https://github.com/DerekPascarella/UniversalDreamcastPatcher/releases/tag/2.1.8).
-Mac/Android builds do not include DCP. Automatic discovery adds separate DCP
-metadata and does not change the game version or existing DCP bytes.
+Use the Windows build linked above for these instructions.
 You need your own original Japanese disc set, with its companion tracks.
 
 | Your original disc | DCP package |
@@ -43,8 +40,8 @@ builds. Keep checksum verification enabled.
 Each DCP contains native per-game-file deltas and the standard 32 KiB custom
 boot header retaining the existing VGA flag, not complete disc images or archives. A
 DCP-enabled Retro Trans build also verifies the source/target game-file-tree
-metadata, boot invariants and audio. DCP rebuilds the layout, so raw track hashes
-can differ from the earlier Track 3 release despite identical translated files.
+metadata, boot invariants and audio. DCP rebuilds the disc layout and verifies
+the translated game files.
 GDI/CHD inputs and CHD output are patcher features, not separately verified routes
 for this release; local tests use original CUE input to GDI and CUE/BIN output.
 
@@ -55,9 +52,7 @@ Use the same VMU for both discs and the emulator's disc-swap function when asked
 
 ### What is included
 
-- **Cumulative English translation and interface work**, as already integrated
-  into the frozen two-disc build. Working-tree changes not built into those
-  exact outputs are not automatically included.
+- **English script and native interface work for both discs.**
 - **Font and alignment repairs**, including Equip's validated live-font fallback,
   Join's matching footer font, other footer work and menu/battle alignment fixes.
 - **Story cards, disc prompts, English credits and subtitles.** Retains the
@@ -116,16 +111,16 @@ Use the same VMU for both discs and the emulator's disc-swap function when asked
   screens. This is not a verified physical-Dreamcast compatibility claim.
 
 These additions are bundled in v0.9.0; it is not a strict translation-only patch.
-The list was checked against both frozen release executables, not merely old
-trial-build notes; see the [feature audit](https://github.com/retro-trans/Black-Matrix-AD/blob/main/docs/releases/v0.9.0/FEATURE_AUDIT.md).
+The list was checked against both release executables; see the
+[feature audit](https://github.com/retro-trans/Black-Matrix-AD/blob/main/docs/releases/v0.9.0/FEATURE_AUDIT.md).
 External HD portrait/background packs and personal Steam Deck installers are not
 bundled. Automated checks do not replace gameplay, route or hardware testing.
 
 ### Validation and testing status
 
 Both DCP packages are applied locally to the original CUE disc sets, rebuilt
-in GDI and CUE/BIN format, then re-extracted. All game files match the frozen
-0.1.13 translated build, boot code outside allowed track-table fields matches,
+in GDI and CUE/BIN format, then re-extracted. All game files match the verified
+translation target, boot code outside allowed track-table fields matches,
 and CD audio content/sample alignment is preserved. DCP manifests and validation
 records document the file-tree identities and actual rebuilt output hashes.
 The underlying cumulative build retains its prior scope/parity and badge/font
@@ -147,17 +142,8 @@ DCP-specific manifest/validation records, checksums, provenance and instructions
 Native translated graphics are already in the patches. No optional HD texture
 pack or personal Steam Deck/full-game ZIP is bundled.
 
-This is an independent, sanitized public replacement; the earlier repository
-remains a private backup. The sanitized v0.9.0 tag identifies the translation
-snapshot; main adds packaging and publication documentation. The DCP manifest,
-validation and provenance JSON files are the unchanged historical build receipts:
-their `private` creation-state flag and original commit IDs are not the current
-repository visibility. The new `PUBLICATION-v0.9.0.json` maps the original source
-IDs to sanitized commits. Provenance lists the local cumulative inputs; the tag
-alone is not a complete historical rebuild recipe. Both DCP packages are
-byte-for-byte identical to the verified private release; no translated game-file
-content was changed for publication. The README and checksum file were refreshed
-for public use. Use the `.dcp` downloads with your own supported original discs.
+The repository contains translation tooling, localized artwork, tests and patch
+documentation. Use the `.dcp` downloads with your own supported original discs.
 
 ### Translation and acknowledgements
 

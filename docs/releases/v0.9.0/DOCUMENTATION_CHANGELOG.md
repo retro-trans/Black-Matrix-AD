@@ -1,5 +1,12 @@
 # Release documentation changes
 
+## 2026-11-02 — focus public descriptions on the game
+
+At pow's request, removed repository-sanitation/replacement narrative, internal
+build-version comparisons and superseded distribution details from the current
+README and release notes. Kept installation, features, validation limits, credits
+and safety guidance. Historical technical records and issued assets are unchanged.
+
 ## 2026-11-02 — complete the bundled enhancements list
 
 At pow's request, replaced the abbreviated “Additions beyond translation” list
