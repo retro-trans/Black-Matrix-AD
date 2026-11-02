@@ -28,22 +28,30 @@ You need your own exact Japanese disc dumps. No game image is distributed.
 
 ### Apply
 
-Use **[Retro Trans 0.5.19 for Windows](https://github.com/retro-trans/retro-trans-tools/releases/tag/v0.5.19)**
-and its **DCP** tab. Download `Retro-Trans-Windows-0.5.19.zip`, extract it and
-run `Retro-Trans.exe`; the ZIP includes the required runtime notices. The
-published executable was hash-verified and passed its isolated startup check:
-DCP tab present, bundled patch engine started. Mac 0.5.18 and Android builds
-do not include DCP. Alternatively, use **Apply Patch** in
+Use **[Retro Trans 0.5.20 for Windows](https://github.com/retro-trans/retro-trans-tools/releases/tag/v0.5.20)**
+and its **Automatic** tab. Download `Retro-Trans-Windows.zip`, extract it and
+run `Retro-Trans.exe`; the ZIP includes the required runtime notices.
+
+Browse to your original Japanese Disc 1 or Disc 2 **CUE**, with all three BIN
+tracks together. Automatic identifies the disc, offers experimental **v0.9.0**,
+and downloads the matching DCP when you click **Patch**. Choose a **new output
+folder** and GDI or CUE/BIN output. Every original track, downloaded package,
+rebuilt game file, boot invariant and CD-audio content is verified.
+
+Initial Automatic recognition uses the published original raw-track fingerprints;
+a renamed CUE/track set is accepted when the CUE refers to the renamed tracks.
+For CHD inputs or alternate layouts, use the separate **DCP** tab with a manually
+downloaded package (available since Windows 0.5.19), or **Apply Patch** in
 [Universal Dreamcast Patcher 2.1.8](https://github.com/DerekPascarella/UniversalDreamcastPatcher/releases/tag/2.1.8).
-Download the DCP assets from this project's release page, then select them
-locally in the **DCP** tab. These are not raw-track entries for the Automatic tab.
+Mac 0.5.18 and Android builds do not include DCP. Automatic uses separate DCP
+catalog records, not raw-track xdelta entries; existing DCP bytes are unchanged.
 
 | Your original Japanese disc | DCP package |
 | --- | --- |
 | Disc 1 | `Black-Matrix-AD-Disc1-English-v0.9.0.dcp` |
 | Disc 2 | `Black-Matrix-AD-Disc2-English-v0.9.0.dcp` |
 
-Select the original disc's **CUE**, **GDI** or **CHD**, then its matching DCP and
+When applying manually, select the original disc's **CUE**, **GDI** or **CHD**, then its matching DCP and
 a **new output folder**. Keep every companion track beside its CUE/GDI. Choose
 GDI or CUE/BIN output and apply; use the rebuilt descriptor to play. Do not
 select a loose Track 3 BIN or copy old tracks over the rebuilt result. Never

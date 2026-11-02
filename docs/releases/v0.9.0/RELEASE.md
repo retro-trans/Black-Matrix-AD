@@ -8,15 +8,23 @@ All complete game images remain local.
 
 ### Apply
 
-Use **[Retro Trans 0.5.19 for Windows](https://github.com/retro-trans/retro-trans-tools/releases/tag/v0.5.19)**
-and its **DCP** tab. Download `Retro-Trans-Windows-0.5.19.zip`, extract it and
-run `Retro-Trans.exe`; the ZIP includes the required runtime notices. The
-published EXE passed its isolated health check with the DCP tab and bundled
-engine startup. Mac/Android builds do not include DCP. Alternatively, use
-**Apply Patch** in
+Use **[Retro Trans 0.5.20 for Windows](https://github.com/retro-trans/retro-trans-tools/releases/tag/v0.5.20)**
+and its **Automatic** tab. Download `Retro-Trans-Windows.zip`, extract it and
+run `Retro-Trans.exe`; the ZIP includes the required runtime notices.
+
+Browse to your original Japanese Disc 1 or Disc 2 **CUE**, keeping all three BIN
+tracks together. Automatic identifies the disc, offers experimental **v0.9.0**
+and downloads its matching DCP when you click **Patch**. Choose a new output
+folder and GDI or CUE/BIN output. Original tracks and downloaded packages are
+hash-verified; rebuilt game files, boot invariants and CD audio are verified.
+
+Initial recognition uses the published original raw-track fingerprints; renamed
+files are accepted when the descriptor refers to them. For CHD inputs or
+alternate layouts, manually apply the package in the **DCP** tab (Windows
+0.5.19+), or use **Apply Patch** in
 [Universal Dreamcast Patcher 2.1.8](https://github.com/DerekPascarella/UniversalDreamcastPatcher/releases/tag/2.1.8).
-Download these DCP packages from this release page and select them locally;
-they are not raw-track entries for the Automatic tab.
+Mac/Android builds do not include DCP. Automatic discovery adds separate DCP
+metadata and does not change the game version or existing DCP bytes.
 You need your own original Japanese disc set, with its companion tracks.
 
 | Your original disc | DCP package |
@@ -24,7 +32,7 @@ You need your own original Japanese disc set, with its companion tracks.
 | Disc 1 | `Black-Matrix-AD-Disc1-English-v0.9.0.dcp` |
 | Disc 2 | `Black-Matrix-AD-Disc2-English-v0.9.0.dcp` |
 
-Select the source **CUE**, **GDI** or **CHD**, the matching DCP, and a **new output
+For manual application, select the source **CUE**, **GDI** or **CHD**, the matching DCP, and a **new output
 folder**. Keep the original CUE/GDI companion tracks together. Choose GDI or
 CUE/BIN output, apply, and boot the rebuilt descriptor. Do not select a loose
 Track 3 BIN or overwrite originals. Allow at least 12 GB of temporary/output space.

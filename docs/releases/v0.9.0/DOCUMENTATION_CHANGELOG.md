@@ -1,5 +1,15 @@
 # Release documentation changes
 
+## 2026-11-02 — Automatic DCP discovery
+
+Added `DCP-AUTOMATIC.json` and its separate supplemental checksum to the
+existing v0.9.0 release, retaining all eight issued assets unchanged. Retro Trans
+0.5.20 imports these as independent DCP catalog records; both original Japanese
+CUE/BIN sets are recognized and the matching DCP downloads on Patch. Updated
+README/live release instructions for Automatic, retaining the manual DCP tab
+for CHD and alternate layouts. No standalone xdelta or fake binary manifest is
+introduced. The game version, DCPs and original translation tag do not change.
+
 ## 2026-11-02 — additions beyond translation
 
 At pow's request, added a dedicated section to the public README and release
