@@ -3,20 +3,19 @@
 English translation and native interface work for **Black/Matrix AD** on
 **Dreamcast**, covering the Japanese two-disc edition.
 
-This repository and its releases are **private**. The current release is
+This is the **public, sanitized replacement repository**. The current release is
 **[v0.9.0](https://github.com/retro-trans/Black-Matrix-AD/releases/tag/v0.9.0)**,
 an experimental prerelease based on internal cumulative build 0.1.13.
 The release number identifies the translated game-file content; it does not imply that
 every route, screen or line has passed human review or a complete playthrough.
 
-Public publication is requested but **on hold**: the branch/tag history has
-been sanitized, but GitHub still serves removed original dialogue through old
-commit links. Do not make this repository public until those cached objects
-are removed or a separately approved clean repository is used.
+Original dialogue sources were removed from all retained revisions before
+publication. The earlier repository is preserved separately as a private backup;
+this replacement is independent, not a fork of that repository.
 
 ## Contribute
 
-Bug reports, proofreading and playtesting are welcome through this private
+Bug reports, proofreading and playtesting are welcome through this
 repository's Issues. Include your disc, patch version, route, screenshot and
 reproduction steps. Do not attach complete game images, BIOS files or personal
 memory cards. Machine review is not counted as human proofreading.
@@ -36,8 +35,8 @@ published executable was hash-verified and passed its isolated startup check:
 DCP tab present, bundled patch engine started. Mac 0.5.18 and Android builds
 do not include DCP. Alternatively, use **Apply Patch** in
 [Universal Dreamcast Patcher 2.1.8](https://github.com/DerekPascarella/UniversalDreamcastPatcher/releases/tag/2.1.8).
-Download the assets through your authorized GitHub account first;
-the public Automatic catalog does not fetch this private release.
+Download the DCP assets from this project's release page, then select them
+locally in the **DCP** tab. These are not raw-track entries for the Automatic tab.
 
 | Your original Japanese disc | DCP package |
 | --- | --- |
@@ -134,10 +133,10 @@ every historical cumulative input. Use the `.dcp` assets with your own discs.
 The earlier standalone raw-track distribution has been superseded by DCP without
 changing the translated game-file content.
 
-The existing repository history predates this release. No original or complete
+The retained sanitized history predates this release. No original or complete
 translated disc image, extracted game binary, BIOS, save, RAM capture or personal
-install package is added to the release. Do not redistribute GitHub access or
-publish this private project's contents without approval.
+install package is added to the release. Do not merge unsanitized development
+history into this repository or upload original dialogue sources.
 
 | Path | Contents |
 | --- | --- |

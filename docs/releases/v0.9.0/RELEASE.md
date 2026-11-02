@@ -1,18 +1,22 @@
 English translation of **Black/Matrix AD** for **Dreamcast**, with separate
 **DCP packages** for the Japanese **Disc 1** and **Disc 2**.
 
-**v0.9.0 is a private experimental prerelease**, based on the frozen internal
+**v0.9.0 is a public experimental prerelease**, based on the frozen internal
 cumulative 0.1.13 build. The release version is 0.9.0; historical local version
 labels and in-game artwork are not being relabelled by an extra game rebuild.
 All complete game images remain local.
 
 ### Apply
 
-Download through your authorized GitHub account. Use **Apply Patch** in
-[Universal Dreamcast Patcher 2.1.8](https://github.com/DerekPascarella/UniversalDreamcastPatcher/releases/tag/2.1.8),
-or the **DCP** tab in a DCP-enabled
-[Retro Trans](https://github.com/retro-trans/retro-trans-tools) build.
-The public Automatic catalog does not download this private release.
+Use **[Retro Trans 0.5.19 for Windows](https://github.com/retro-trans/retro-trans-tools/releases/tag/v0.5.19)**
+and its **DCP** tab. Download `Retro-Trans-Windows-0.5.19.zip`, extract it and
+run `Retro-Trans.exe`; the ZIP includes the required runtime notices. The
+published EXE passed its isolated health check with the DCP tab and bundled
+engine startup. Mac/Android builds do not include DCP. Alternatively, use
+**Apply Patch** in
+[Universal Dreamcast Patcher 2.1.8](https://github.com/DerekPascarella/UniversalDreamcastPatcher/releases/tag/2.1.8).
+Download these DCP packages from this release page and select them locally;
+they are not raw-track entries for the Automatic tab.
 You need your own original Japanese disc set, with its companion tracks.
 
 | Your original disc | DCP package |
@@ -84,13 +88,17 @@ DCP-specific manifest/validation records, checksums, provenance and instructions
 Native translated graphics are already in the patches. No optional HD texture
 pack or personal Steam Deck/full-game ZIP is bundled.
 
-The existing tag remains the immutable translation source snapshot; current main
-adds DCP packaging sources. The DCP manifest identifies both commits. Provenance
-lists the local cumulative inputs; the tag alone is not a complete historical
-rebuild recipe. The earlier standalone raw-track assets are superseded by DCP,
-with translated game-file content unchanged. Use the `.dcp` downloads with your
-own supported original discs. Keep the repository/release
-private; no public patch catalog addition or visibility change is authorized.
+This is an independent, sanitized public replacement; the earlier repository
+remains a private backup. The sanitized v0.9.0 tag identifies the translation
+snapshot; main adds packaging and publication documentation. The DCP manifest,
+validation and provenance JSON files are the unchanged historical build receipts:
+their `private` creation-state flag and original commit IDs are not the current
+repository visibility. The new `PUBLICATION-v0.9.0.json` maps the original source
+IDs to sanitized commits. Provenance lists the local cumulative inputs; the tag
+alone is not a complete historical rebuild recipe. Both DCP packages are
+byte-for-byte identical to the verified private release; no translated game-file
+content was changed for publication. The README and checksum file were refreshed
+for public use. Use the `.dcp` downloads with your own supported original discs.
 
 ### Translation and acknowledgements
 
@@ -100,7 +108,7 @@ playtesting: **pow**. Codex assisted editing/tooling, Whisper supplied
 initial ending transcripts, and ImageGen supplied selected localized artwork.
 Thanks to contributors and the original game's creators.
 
-Bug reports, proofreading and playtesting are welcome in this private
+Bug reports, proofreading and playtesting are welcome in this
 repository's Issues. Include the disc/version/route and reproduction details;
 do not attach game images or personal saves. Structure adapted from the
 [SRW-Z v0.9.90 release](https://github.com/retro-trans/SRW-Z/releases/tag/v0.9.90).

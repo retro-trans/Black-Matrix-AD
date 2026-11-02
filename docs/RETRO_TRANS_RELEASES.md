@@ -6,6 +6,13 @@
 > The raw-track protocol instructions below are historical, not the current
 > publication route. Keep original and complete translated images local.
 
+> **Public replacement authorized (2026-11-02).** The user explicitly approved
+> renaming the earlier repository as a private backup and publishing an independent,
+> sanitized replacement with v0.9.0 DCP assets. Current instructions are in
+> `docs/releases/v0.9.0/RELEASE.md` and `SANITIZATION.md`. The private-only text
+> below is historical and does not describe the replacement's current visibility.
+> Future uploads/releases still require explicit user authorization.
+
 This guide prepares a future patch-only distribution. Keep this project private;
 documentation, fixes and local builds do not authorize tags, releases, uploads,
 visibility changes or publication in the public patch catalog. Perform those

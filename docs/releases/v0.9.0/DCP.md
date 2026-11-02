@@ -1,12 +1,11 @@
 # v0.9.0 DCP packaging change
 
-> Current status: public publication was subsequently authorized, conditional on
-> history sanitation. Sanitized branches and tag are pushed, but the repository
-> remains private because GitHub still serves the removed dialogue through old
-> commit links. See [SANITIZATION.md](SANITIZATION.md). The historical tag-lock
-> instruction below was superseded only for the explicitly approved sanitation;
-> the issued DCP bytes remain immutable. Retro Trans DCP use requires 0.5.19+
-> with the DCP tab; the actual public 0.5.18 Windows executable lacks that tab.
+> Current status: the user authorized renaming the earlier repository as a
+> private backup and creating this independent sanitized public replacement.
+> See [SANITIZATION.md](SANITIZATION.md). The historical private-only/tag-lock
+> instructions below were superseded for this approved publication and sanitation;
+> the issued DCP bytes remain immutable. Retro Trans DCP use requires Windows
+> 0.5.19+ with the DCP tab; public 0.5.18 lacks that tab.
 > Pow has now published [Retro Trans 0.5.19 for Windows](https://github.com/retro-trans/retro-trans-tools/releases/tag/v0.5.19).
 > The actual public EXE passed its isolated health check with the DCP tab,
 > bundled engine and successful engine startup. Use the versioned Windows ZIP,

@@ -26,17 +26,30 @@ Do not merge or push an old unsanitized development branch into the cleaned
 history: that would restore the removed source. Re-clone or deliberately port
 reviewed changes into the cleaned history.
 
-## Publication gate: not yet safe
+## Independent replacement, not a visibility flip
 
 After the rewrite, authenticated GitHub API requests using the old translation
 commit still returned the removed files. No forks or pull requests were found,
 but rewriting reachable history alone did not remove GitHub's cached objects.
-The repository therefore remains **private**. Do not change visibility until
-GitHub removes those objects, or the user approves a fresh clean repository.
+The user therefore explicitly approved renaming that repository as a private
+backup and creating a fresh replacement under the original name. The backup
+stays private. Only the sanitized main branch and sanitized v0.9.0 tag are
+pushed into the independent replacement, which is not created as a fork.
+
+Before public visibility, check that the removed paths, old commits and old
+dialogue blobs are inaccessible through the replacement's GitHub API. After
+publication, repeat the checks without authentication. Preserve the local
+original-history backup and dirty development working tree; neither is uploaded.
 
 [GitHub's history-removal guidance](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)
-describes this cached-commit limitation. Do not delete, rename or recreate the
-repository without separate user approval.
+describes this cached-commit limitation. This replacement was separately
+approved by the user; no original repository or release asset was deleted.
+
+Issued DCPs and three historical build-receipt JSON files remain unchanged.
+Their pre-sanitation IDs map to the sanitized snapshots above; the manifest's
+`private` flag records its original creation state. A new publication receipt
+records the public repository identity, source mapping and artifact hashes.
+The public README/checksum files are refreshed for current patching instructions.
 
 ## Retro Trans compatibility
 
