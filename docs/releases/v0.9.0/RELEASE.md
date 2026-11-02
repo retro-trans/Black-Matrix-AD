@@ -62,6 +62,24 @@ Use the same VMU for both discs and the emulator's disc-swap function when asked
 - **Development-profile choices retained:** Zero is unlocked from the start;
   Domina is first in master selection. Existing VGA compatibility repairs remain.
 
+### Additions beyond translation
+
+- **Zero available from the start.** The game's native unlock is enabled at
+  initialization, so the original unlock code is not required.
+- **Domina initially highlighted in master selection.** This changes the
+  starting cursor, not character/route order, and does not confirm a choice
+  or force a route. Zero remains available.
+- **Subtitles for the previously voice-only post-credits scene.** Added native
+  captions for 18 unique voice clips while retaining the original voices and
+  character/master-dependent branches. Fresh playback/timing checks remain pending.
+- **Readability and layout improvements.** Redrawn/repaired native fonts and
+  button labels, item-list and selector alignment fixes, and raised movie
+  subtitles to reduce bottom-edge clipping. No external HD texture pack is needed.
+- **VGA compatibility repairs.** Retains the cumulative build's VGA boot/video
+  compatibility work. This is not a verified physical-Dreamcast compatibility claim.
+
+These additions are bundled in v0.9.0; it is not a strict translation-only patch.
+
 ### Validation and testing status
 
 Both DCP packages are applied locally to the original CUE disc sets, rebuilt
