@@ -12,7 +12,8 @@ Use **[Retro Trans 0.5.20 for Windows](https://github.com/retro-trans/retro-tran
 and its **Automatic** tab. Download `Retro-Trans-Windows.zip`, extract it and
 run `Retro-Trans.exe`; the ZIP includes the required runtime notices.
 
-Browse to your original Japanese Disc 1 or Disc 2 **CUE**, keeping all three BIN
+Click **Refresh catalog** first (especially after upgrading), then browse to
+your original Japanese Disc 1 or Disc 2 **CUE**, keeping all three BIN
 tracks together. Automatic identifies the disc, offers experimental **v0.9.0**
 and downloads its matching DCP when you click **Patch**. Choose a new output
 folder and GDI or CUE/BIN output. Original tracks and downloaded packages are
