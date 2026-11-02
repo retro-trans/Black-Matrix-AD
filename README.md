@@ -29,13 +29,13 @@ You need your own exact Japanese disc dumps. No game image is distributed.
 
 ### Apply
 
-Use [Universal Dreamcast Patcher 2.1.8](https://github.com/DerekPascarella/UniversalDreamcastPatcher/releases/tag/2.1.8)
-and its **Apply Patch** tab. **Retro Trans 0.5.19 or newer**, with DCP support,
-can also use its **DCP** tab. See the
-[Retro Trans releases](https://github.com/retro-trans/retro-trans-tools/releases).
-The published 0.5.18 Windows executable was checked and has no DCP tab;
-0.5.19 publication is being handled separately by pow. Until it is available,
-use Universal Dreamcast Patcher 2.1.8.
+Use **[Retro Trans 0.5.19 for Windows](https://github.com/retro-trans/retro-trans-tools/releases/tag/v0.5.19)**
+and its **DCP** tab. Download `Retro-Trans-Windows-0.5.19.zip`, extract it and
+run `Retro-Trans.exe`; the ZIP includes the required runtime notices. The
+published executable was hash-verified and passed its isolated startup check:
+DCP tab present, bundled patch engine started. Mac 0.5.18 and Android builds
+do not include DCP. Alternatively, use **Apply Patch** in
+[Universal Dreamcast Patcher 2.1.8](https://github.com/DerekPascarella/UniversalDreamcastPatcher/releases/tag/2.1.8).
 Download the assets through your authorized GitHub account first;
 the public Automatic catalog does not fetch this private release.
 

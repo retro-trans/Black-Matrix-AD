@@ -49,5 +49,11 @@ The actual public Retro Trans 0.5.18 Windows executable's health check reports
 only Automatic, Apply xdelta, Save conversion and Vita tabs. Its SHA-256 is
 `3b9895023b052ed40a030ee79b342501bfb81f914f66e0736492ce2a6a4fa487`.
 Use Retro Trans 0.5.19+ with its DCP tab, or Universal Dreamcast Patcher 2.1.8.
-Pow is handling Retro Trans 0.5.19 publication separately; no app build or
-release was published by this sanitation operation.
+Pow has now published [Retro Trans 0.5.19 for Windows](https://github.com/retro-trans/retro-trans-tools/releases/tag/v0.5.19).
+The actual public `Retro-Trans.exe` (64,277,366 bytes) was SHA-256 verified:
+`837b928a7efc7d1dbf65807c452eb0396fe2e528c834dcbe9f1408800383a25c`.
+Its isolated health check returned version 0.5.19, success, a DCP tab, bundled
+engine and successful engine startup. This confirms the shipped app includes
+the DCP runtime; it is not a claim that the four game round trips were repeated
+with this public EXE. Use the versioned Windows ZIP for its runtime notices.
+No app build or release was published by this sanitation operation.

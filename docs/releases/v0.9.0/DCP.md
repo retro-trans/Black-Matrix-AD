@@ -7,7 +7,10 @@
 > instruction below was superseded only for the explicitly approved sanitation;
 > the issued DCP bytes remain immutable. Retro Trans DCP use requires 0.5.19+
 > with the DCP tab; the actual public 0.5.18 Windows executable lacks that tab.
-> Pow handles Retro Trans 0.5.19 publication separately.
+> Pow has now published [Retro Trans 0.5.19 for Windows](https://github.com/retro-trans/retro-trans-tools/releases/tag/v0.5.19).
+> The actual public EXE passed its isolated health check with the DCP tab,
+> bundled engine and successful engine startup. Use the versioned Windows ZIP,
+> which includes the required runtime notices; Mac/Android do not include DCP.
 
 2026-11-02. Pow requested DCP instead of standalone raw-track xdelta. Keep the
 release private and at v0.9.0; credit pow. This changes the distribution format,
