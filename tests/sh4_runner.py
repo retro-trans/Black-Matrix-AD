@@ -1,8 +1,11 @@
-"""Small, strict integer SH-4 runner for the emitted VWF leaf routines.
+"""Small, strict SH-4 runner for the emitted VWF leaf routines.
 
 Not a Dreamcast emulator: unsupported instructions and unmapped memory fail.
 This checks the actual encoded branches, delay slots, table loads and stores.
+Single-precision FPU data moves/constants and FADD support sprite geometry;
+other unsupported arithmetic/instructions still fail.
 """
+import struct
 
 
 def signed(value, bits=32):
@@ -20,6 +23,8 @@ class SH4:
         self.macl = 0
         self.pc = 0
         self.pending = None
+        self.traps = {}  # Explicit test doubles for separately verified SDK calls.
+        self.fr = [0] * 16  # raw single-precision bits; data movement only
 
     def offset(self, addr, size):
         off = addr - self.BASE
@@ -44,6 +49,10 @@ class SH4:
         for _ in range(limit):
             if self.pc == 0xFFFFFFFF:
                 return
+            if self.pc in self.traps:
+                self.traps[self.pc](self)
+                self.pc = self.pr
+                continue
             pc = self.pc
             w = self.read(pc, 2)
             n, m, low, op = (w >> 8) & 15, (w >> 4) & 15, w & 15, w >> 12
@@ -60,6 +69,9 @@ class SH4:
             elif w & 0xFF00 in (0x8900, 0x8B00):
                 if self.t == (w & 0xFF00 == 0x8900):
                     next_pc = pc + 4 + 2 * signed(w & 255, 8)
+            elif w & 0xFF00 in (0x8D00, 0x8F00):
+                if self.t == (w & 0xFF00 == 0x8D00):
+                    self.pending = pc + 4 + 2 * signed(w & 255, 8)
             elif op == 0xA:
                 self.pending = pc + 4 + 2 * signed(w & 4095, 12)
             elif op == 0xB:
@@ -71,6 +83,8 @@ class SH4:
                 self.pending = r[n]
             elif op == 0xD:
                 r[n] = self.read((pc & ~3) + 4 + 4 * (w & 255), 4)
+            elif op == 9:
+                r[n] = signed(self.read(pc + 4 + 2 * (w & 255), 2), 16)
             elif op == 0xE:
                 r[n] = signed(w & 255, 8)
             elif op == 7:
@@ -79,26 +93,65 @@ class SH4:
                 self.t = signed(r[0]) == signed(w & 255, 8)
             elif w & 0xFF00 == 0x8500:
                 r[0] = signed(self.read(r[m] + low * 2, 2), 16)
+            elif w & 0xFF00 == 0x8400:
+                r[0] = signed(self.read(r[m] + low, 1), 8)
+            elif w & 0xFF00 == 0xC800:
+                self.t = (r[0] & (w & 255)) == 0
+            elif w & 0xFF00 == 0xC900:
+                r[0] &= w & 255
+            elif w & 0xFF00 == 0xC700:
+                r[0] = (pc & ~3) + 4 + 4 * (w & 255)
+            elif op == 0xF and (w & 0xFF) == 0x8D:
+                self.fr[n] = 0  # FLDI0 FRn
+            elif op == 0xF and (w & 0xFF) == 0x9D:
+                self.fr[n] = 0x3F800000  # FLDI1 FRn
+            elif op == 0xF and low == 12:
+                self.fr[n] = self.fr[m]  # FMOV FRm,FRn
+            elif op == 0xF and low in (0, 1):
+                a = struct.unpack('<f', struct.pack('<I', self.fr[n]))[0]
+                b = struct.unpack('<f', struct.pack('<I', self.fr[m]))[0]
+                self.fr[n] = struct.unpack('<I', struct.pack('<f', a+b if low==0 else a-b))[0]
+            elif op == 0xF and low == 8:
+                self.fr[n] = self.read(r[m], 4)  # FMOV.S @Rm,FRn
+            elif op == 0xF and low == 10:
+                self.write(r[n], self.fr[m], 4)  # FMOV.S FRm,@Rn
+            elif op == 0xF and low == 7:
+                self.write(r[0] + r[n], self.fr[m], 4)  # FRm,@(R0,Rn)
             elif w & 0xFF00 == 0x8100:
                 self.write(r[m] + low * 2, r[0], 2)
+            elif w & 0xFF00 == 0x8000:
+                self.write(r[m] + low, r[0], 1)
             elif op == 6 and low in (0, 1, 2):
                 size = 1 << low
                 r[n] = signed(self.read(r[m], size), size * 8)
+            elif op == 5:
+                r[n] = self.read(r[m] + low * 4, 4)
             elif op == 6 and low == 3:
                 r[n] = r[m]
-            elif op == 6 and low == 6:
-                value = self.read(r[m], 4)
+            elif op == 6 and low == 7:
+                r[n] = ~r[m]
+            elif op == 6 and low in (4, 5, 6):
+                size = 1 << (low - 4)
+                value = signed(self.read(r[m], size),size*8)
                 if n != m:
-                    r[m] += 4
+                    r[m] += size
                 r[n] = value
             elif op == 6 and low in (12, 13):
                 r[n] = r[m] & (255 if low == 12 else 65535)
+            elif op == 6 and low in (14, 15):
+                r[n] = signed(r[m],8 if low==14 else 16)
             elif op == 2 and low in (0, 1, 2):
                 self.write(r[n], r[m], 1 << low)
             elif op == 2 and low == 8:
                 self.t = (r[n] & r[m]) == 0
             elif op == 2 and low == 9:
                 r[n] &= r[m]
+            elif op == 2 and low == 10:
+                r[n] ^= r[m]
+            elif op == 2 and low == 11:
+                r[n] |= r[m]
+            elif op == 2 and low == 14:
+                self.macl = (r[n] & 65535) * (r[m] & 65535)
             elif op == 2 and low == 6:
                 r[n] -= 4
                 self.write(r[n], r[m], 4)
@@ -110,6 +163,8 @@ class SH4:
                 self.t = r[n] >= r[m]
             elif op == 3 and low == 3:
                 self.t = signed(r[n]) >= signed(r[m])
+            elif op == 3 and low == 6:
+                self.t = r[n] > r[m]
             elif op == 3 and low == 7:
                 self.t = signed(r[n]) > signed(r[m])
             elif op == 3 and low == 12:
@@ -127,6 +182,17 @@ class SH4:
                 self.write(r[n] + r[0], r[m], 1 << (low - 4))
             elif w & 0xF0FF in (0x4000, 0x4008):
                 r[n] <<= 1 if w & 255 == 0 else 2
+            elif w & 0xF0FF == 0x4018:
+                r[n] <<= 8
+            elif w & 0xF0FF == 0x4019:
+                r[n] >>= 8
+            elif w & 0xF0FF in (0x4001, 0x4009):
+                if w & 255 == 1:
+                    self.t = bool(r[n] & 1)
+                r[n] >>= 1 if w & 255 == 1 else 2
+            elif w & 0xF0FF == 0x4010:
+                r[n] = (r[n]-1) & 0xFFFFFFFF
+                self.t = r[n] == 0  # DT Rn
             elif w & 0xF0FF in (0x4011, 0x4015):
                 self.t = signed(r[n]) >= (0 if w & 255 == 0x11 else 1)
             elif w & 0xF0FF == 0x4022:

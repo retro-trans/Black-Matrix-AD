@@ -1,0 +1,884 @@
+{
+  "release_version": "0.9.0",
+  "internal_build_version": "0.1.13",
+  "repository": "retro-trans/Black-Matrix-AD",
+  "visibility": "private",
+  "prerelease": true,
+  "targets": [
+    {
+      "disc": 1,
+      "name": "Black-Matrix Advanced (Japan) (Disc 1) (Track 3).bin",
+      "changed": true,
+      "source_sha256": "7bb9a6d316b9627c01d5b24cd56b83a53352ca6fb08d0787b36b31b419683cd8",
+      "source_bytes": 1185760800,
+      "target_sha256": "4eb243d79a6052e4b0a643b06c23e088acb00382ccf617538a5f087b5968c268",
+      "target_bytes": 1185760800
+    },
+    {
+      "disc": 1,
+      "name": "Black-Matrix Advanced (Japan) (Disc 1) (Track 1).bin",
+      "changed": false,
+      "source_sha256": "0dfb00a7482c1cf3cd06dd072fe35b328ce151e334b4b88d00874a9402c2cf9f",
+      "source_bytes": 705600,
+      "target_sha256": "0dfb00a7482c1cf3cd06dd072fe35b328ce151e334b4b88d00874a9402c2cf9f",
+      "target_bytes": 705600
+    },
+    {
+      "disc": 1,
+      "name": "Black-Matrix Advanced (Japan) (Disc 1) (Track 2).bin",
+      "changed": false,
+      "source_sha256": "e6c6f921666e7d50c4f943f6ab0f0545732d0534903fc6e5c4b0181ed352dc85",
+      "source_bytes": 2088576,
+      "target_sha256": "e6c6f921666e7d50c4f943f6ab0f0545732d0534903fc6e5c4b0181ed352dc85",
+      "target_bytes": 2088576
+    },
+    {
+      "disc": 1,
+      "name": "Black-Matrix Advanced (Japan) (Disc 1).cue",
+      "changed": false,
+      "source_sha256": "42278a9acd5f8dec25697c8f3ae377287dd424dd5725444e668d3867e56280d2",
+      "source_bytes": 408,
+      "target_sha256": "42278a9acd5f8dec25697c8f3ae377287dd424dd5725444e668d3867e56280d2",
+      "target_bytes": 408
+    },
+    {
+      "disc": 2,
+      "name": "Black-Matrix Advanced (Japan) (Disc 2) (Track 3).bin",
+      "changed": true,
+      "source_sha256": "24d687f82d8cf09543397eb321052a2a13f92c3d24216325532fa9059934ba1b",
+      "source_bytes": 1185760800,
+      "target_sha256": "fc652c477c7a61227a332267cfe2d4153068953cf0f3710717702f759222130e",
+      "target_bytes": 1185760800
+    },
+    {
+      "disc": 2,
+      "name": "Black-Matrix Advanced (Japan) (Disc 2) (Track 1).bin",
+      "changed": false,
+      "source_sha256": "b88520987ee5787102c16040d730321ac1f3b19ecd0bdde5cf7605a8412fb5d7",
+      "source_bytes": 705600,
+      "target_sha256": "b88520987ee5787102c16040d730321ac1f3b19ecd0bdde5cf7605a8412fb5d7",
+      "target_bytes": 705600
+    },
+    {
+      "disc": 2,
+      "name": "Black-Matrix Advanced (Japan) (Disc 2) (Track 2).bin",
+      "changed": false,
+      "source_sha256": "e6c6f921666e7d50c4f943f6ab0f0545732d0534903fc6e5c4b0181ed352dc85",
+      "source_bytes": 2088576,
+      "target_sha256": "e6c6f921666e7d50c4f943f6ab0f0545732d0534903fc6e5c4b0181ed352dc85",
+      "target_bytes": 2088576
+    },
+    {
+      "disc": 2,
+      "name": "Black-Matrix Advanced (Japan) (Disc 2).cue",
+      "changed": false,
+      "source_sha256": "5a1277caa7cef626501d727d17dbf056585e9ffc1919d48d6c74def1d9bdcfe8",
+      "source_bytes": 408,
+      "target_sha256": "5a1277caa7cef626501d727d17dbf056585e9ffc1919d48d6c74def1d9bdcfe8",
+      "target_bytes": 408
+    }
+  ],
+  "source_files": [
+    {
+      "path": "assets/ui/battle-labels/action-badges-v1/generated-lettering.png",
+      "bytes": 1295660,
+      "sha256": "3a04fe2944bdfc2081e1dd716e0f8c24451c41d90ff97a91e98c725478f64a65"
+    },
+    {
+      "path": "assets/ui/battle-labels/action-badges-v1/labels.en.json",
+      "bytes": 1950,
+      "sha256": "07e1a11024ed254e8a88ca7608638441b6a74b172612da002df6cc4c85f23527"
+    },
+    {
+      "path": "assets/ui/battle-labels/action-badges-v1/prompt.txt",
+      "bytes": 2216,
+      "sha256": "52a3af6ef861e03349c4aace749c4225beb873d8059bceeb65e0e1114284a490"
+    },
+    {
+      "path": "docs/ACTION_BADGES_CHANGELOG.md",
+      "bytes": 4817,
+      "sha256": "154d3cd3e8b6328d94507dd8686afbe4ca8e11b4dd5a5f1efb3bb92d2215dc41"
+    },
+    {
+      "path": "docs/releases/v0.9.0/RELEASE.md",
+      "bytes": 5955,
+      "sha256": "af2c9810c9eed8dcd3aeec0ef5fac245baa8089fcbfebbda29906b4dd769b026"
+    },
+    {
+      "path": "docs/RETRO_TRANS_RELEASES.md",
+      "bytes": 8806,
+      "sha256": "e7e9834f249f421f8a5438fd15f282b4c7c9a278780156071547ef9fe93836cc"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8316,
+      "sha256": "a571b3bf7b1e51e5d9bf63b72e1d6716f7debe74e09759b08fb3473a7cb1dfe6"
+    },
+    {
+      "path": "tests/sh4_runner.py",
+      "bytes": 8592,
+      "sha256": "07412274bc6d0be4804b2224f86023718341c632b181c1496dd5e76c06408e7d"
+    },
+    {
+      "path": "tests/test_action_badges_english.py",
+      "bytes": 6307,
+      "sha256": "2ba5bf3cd6c48439dc384edf87bfc08f16a80f16bca4450ec8593ffdfc21d6c6"
+    },
+    {
+      "path": "tests/test_equip_fallback_font.py",
+      "bytes": 12428,
+      "sha256": "8341aadc7c901ea0b0f64b4771f1afe5d45bf28294a4c06261b73fd01b1cc2db"
+    },
+    {
+      "path": "tests/test_join_footer_font.py",
+      "bytes": 5947,
+      "sha256": "1cf32569c016d75fa51405b6aad5229cc189ef05bbc66c20b539309609f81e9e"
+    },
+    {
+      "path": "tests/test_private_release.py",
+      "bytes": 3436,
+      "sha256": "b0226eadfd368aefbf51e9ad75ef8e05756d3b623938f67694ccd2dda79059ed"
+    },
+    {
+      "path": "tools/activity_localization.py",
+      "bytes": 7585,
+      "sha256": "d60fc90cd796cf79b57bde5e8769ccc11ceff68ea2bc4d4a1193085c67491785"
+    },
+    {
+      "path": "tools/battle_system_ui.py",
+      "bytes": 3610,
+      "sha256": "88d3814d2b2823292d7c42769fa157a253d7b872d614e4284e2549fcad8959c9"
+    },
+    {
+      "path": "tools/bmtext.py",
+      "bytes": 7522,
+      "sha256": "0b6c98f2790074bf72a16de06b64210fadeb75e4e1fac3098c6df6531e640274"
+    },
+    {
+      "path": "tools/build_script.py",
+      "bytes": 4595,
+      "sha256": "b2d376ba684c71dea9ad5e946b83f91d7a86907b54c8d95a4bde35c1242e913b"
+    },
+    {
+      "path": "tools/chapter_cards.py",
+      "bytes": 2766,
+      "sha256": "1ceda72ea44fa46fe175f047911d80438f682600e45203c5b0b8d56a284d0de2"
+    },
+    {
+      "path": "tools/config_load_ui.py",
+      "bytes": 7058,
+      "sha256": "92168b2f8d0e89ec3bfa11fc504138c9ee52acce25f523602cf38e928ca40d99"
+    },
+    {
+      "path": "tools/cooking.py",
+      "bytes": 3781,
+      "sha256": "d879a3887cfaccbcff9f40db1324cd0f17fb0fe0e52f7cc84d07100e7e60424a"
+    },
+    {
+      "path": "tools/equipment_catalog.py",
+      "bytes": 4378,
+      "sha256": "b64fcabb8f2c3ca08482641365e546e3943cde7608329999f3df7a8eee61afc6"
+    },
+    {
+      "path": "tools/field_battle_ui.py",
+      "bytes": 6851,
+      "sha256": "0d29d974ec07e47bc66ba49a318d6b489fe67cd59eec58dd4d20f14ba016c60a"
+    },
+    {
+      "path": "tools/fontdump.py",
+      "bytes": 6180,
+      "sha256": "4ffdf98e2d28610c08b9916fc5acd1c82802aa878c9b864128d2c93b281da473"
+    },
+    {
+      "path": "tools/gfx.py",
+      "bytes": 7932,
+      "sha256": "989b5e2a050391d8f87fd558b30c57c0d906a0b9ece1a5525260e64b13406e2d"
+    },
+    {
+      "path": "tools/hd_ui/action_badges_english.py",
+      "bytes": 13141,
+      "sha256": "9d93df09d96a31a0c48441720ca88404ff81e11cd811a9f1f18e7fbca15a8c0c"
+    },
+    {
+      "path": "tools/hd_ui/all_title_cards.py",
+      "bytes": 11457,
+      "sha256": "06149b916683bf5dae2c6e5622f91fdc04580c6a1f88bcd379f5c78d8cc2d3f4"
+    },
+    {
+      "path": "tools/hd_ui/ap_warning_font.py",
+      "bytes": 6710,
+      "sha256": "c62cff5a55e20b4adfcf5494bb72ea59b82a67dd6b28845bf4a12bcdd890b851"
+    },
+    {
+      "path": "tools/hd_ui/attack_mode_labels.py",
+      "bytes": 9952,
+      "sha256": "3a067973697a69288adff930fdd1dba371f30f4c0925b7f60238f0190c13653b"
+    },
+    {
+      "path": "tools/hd_ui/attack_mode_split_labels.py",
+      "bytes": 7577,
+      "sha256": "7faced041238d50751dc8332f9d7e70838cc715ae264cd74ddb32ced891b35c4"
+    },
+    {
+      "path": "tools/hd_ui/attack_type_letters.py",
+      "bytes": 11047,
+      "sha256": "057c4a4fd3f7e8c81d9247200959be387f9783765f8511c9b839c30c9477dcc3"
+    },
+    {
+      "path": "tools/hd_ui/awaken_confirm.py",
+      "bytes": 7781,
+      "sha256": "6d7a2b796aa6f2b685cb9161e411c27f8f95834c252ba1c5e8bde1f89f4bd85b"
+    },
+    {
+      "path": "tools/hd_ui/battle_intro_card.py",
+      "bytes": 6254,
+      "sha256": "31b493d65ab80c5595c63dd13f268bc6100ffa99708f7b4d0465849ff461b2b4"
+    },
+    {
+      "path": "tools/hd_ui/battle_labels_native.py",
+      "bytes": 8489,
+      "sha256": "7f380d91c8327a8b1e500a24310aad3dff7d5e047d87e2580f0ca3e5b1c3203e"
+    },
+    {
+      "path": "tools/hd_ui/battle_loot.py",
+      "bytes": 2681,
+      "sha256": "f1577c93264eecc45f63e53deb08c0f0047774f268f2ad17afc5db42b808adcd"
+    },
+    {
+      "path": "tools/hd_ui/battle_menu.py",
+      "bytes": 1892,
+      "sha256": "e5add70ff903ac85ec8ef201e4bda459767ccfed672e2587e23215a5f25b3d5c"
+    },
+    {
+      "path": "tools/hd_ui/battle_selector_alignment.py",
+      "bytes": 4493,
+      "sha256": "63361dd4a680b92775a72a874472b55433342e74ccfc5ba77653f37a8a9d4e76"
+    },
+    {
+      "path": "tools/hd_ui/bizin_font.py",
+      "bytes": 3999,
+      "sha256": "2c7bc570632bbab1a7569af4a943cd1b6c7847e89394aec93aed6dc92ed165a9"
+    },
+    {
+      "path": "tools/hd_ui/blunt_attack.py",
+      "bytes": 7887,
+      "sha256": "a942c011b4fd074c8d90ab90ba02a96b472cf1df5784d399b3458b1a4d603635"
+    },
+    {
+      "path": "tools/hd_ui/buddy_native_fallback.py",
+      "bytes": 6571,
+      "sha256": "af0c06c04874de772e19a340261d2910cdda678bdd0ac07bcbaa159570c4853c"
+    },
+    {
+      "path": "tools/hd_ui/buddy_tv_control.py",
+      "bytes": 6097,
+      "sha256": "8882eca55178d016922cd4b4637fefb5203745f5a2ea82a54772129ba6f8ee4c"
+    },
+    {
+      "path": "tools/hd_ui/buddy_vga_buffer.py",
+      "bytes": 5665,
+      "sha256": "f6699667d8933909f3bdc8dc1a48d1b592df429cd844f450a6ff76c3b250b408"
+    },
+    {
+      "path": "tools/hd_ui/build_s_rank_checklist.py",
+      "bytes": 7201,
+      "sha256": "0c85edd49b3b3b373eddec36506b559468d8d19b9feeff8ebeedb8550de92b76"
+    },
+    {
+      "path": "tools/hd_ui/build_s_rank_layout_fix.py",
+      "bytes": 7593,
+      "sha256": "dcf02ee9ec5e4ee0e53aa4b93ed1ecf4644f99335a46f3e1a39b03fbadc07302"
+    },
+    {
+      "path": "tools/hd_ui/combine_imagegen_prologue.py",
+      "bytes": 8213,
+      "sha256": "2a2128fccbc04eb178cf5f94dedd5c7ef531e9dcd257f7792bf3a67ca69e8826"
+    },
+    {
+      "path": "tools/hd_ui/config_help.py",
+      "bytes": 10874,
+      "sha256": "40e795272ff4c38ccc67836a5e032ad8733dc004494e494ac350ecf417a4a076"
+    },
+    {
+      "path": "tools/hd_ui/credits_english.py",
+      "bytes": 28512,
+      "sha256": "b5ce570f0b1058d00428c717f8b6d67b2fda4a0da1f8fe4ed4cdd64e61b218ec"
+    },
+    {
+      "path": "tools/hd_ui/deployment_heading_pack.py",
+      "bytes": 10132,
+      "sha256": "4ab65414bc534e2b6de5067c9057ce641602bc737259f6e052cb525eff61f86a"
+    },
+    {
+      "path": "tools/hd_ui/disc2_prompt_imagegen.py",
+      "bytes": 5602,
+      "sha256": "35b2066733dfa3ae663d20eb8d1acc764f4ecd3c2f582fcb56e57d1aebbe1ee1"
+    },
+    {
+      "path": "tools/hd_ui/disc_swap_english.py",
+      "bytes": 14473,
+      "sha256": "049b5fd33101ae6711446538ae3d18d73f16f0689f10810109d630e4c526daf9"
+    },
+    {
+      "path": "tools/hd_ui/domina_first.py",
+      "bytes": 1492,
+      "sha256": "639ed931f5458daa724eb4435b491ea02e7375054e237d6cd8c1e08dabe50eb9"
+    },
+    {
+      "path": "tools/hd_ui/ending_caption_native.py",
+      "bytes": 7274,
+      "sha256": "e805c62642995757369f5a4a135eb36f372e9eb513883ae93aed5fc658745c2a"
+    },
+    {
+      "path": "tools/hd_ui/ending_subtitle_build.py",
+      "bytes": 12539,
+      "sha256": "6a94bd582013675ec37de3fd3cc3b472ea47cd31cfbda1d6913d50278306fd0a"
+    },
+    {
+      "path": "tools/hd_ui/ending_voice_subtitles.py",
+      "bytes": 9497,
+      "sha256": "f921221c9de05c74ea55a360f1075e5d768c84aba8c96b13a1d670ab658e410d"
+    },
+    {
+      "path": "tools/hd_ui/equip_fallback_font.py",
+      "bytes": 6328,
+      "sha256": "485122ddd9326b5d726b40b80cee8f867c5c6fa23a25b39a69d000ad91fb5fbf"
+    },
+    {
+      "path": "tools/hd_ui/equip_font_build.py",
+      "bytes": 8787,
+      "sha256": "5052cb88cab3b50e79759378fb5e34df19c075bfd72d4443310910f37b03c6af"
+    },
+    {
+      "path": "tools/hd_ui/equipment_confirm.py",
+      "bytes": 3740,
+      "sha256": "15ef2d670c6bc2df111b332ce10f3186fa8bab55b8facb968b03ba60de61567b"
+    },
+    {
+      "path": "tools/hd_ui/equipment_menu.py",
+      "bytes": 9654,
+      "sha256": "6d08fd4d32a9a8b49bd1695c90651c62db4cbe926dad2187347d2a90ef5838cc"
+    },
+    {
+      "path": "tools/hd_ui/fallback_font_pack.py",
+      "bytes": 4811,
+      "sha256": "1738aac4536283be9c7a1f27dbc1dbb6156a783cb8a492b302758e9fcf1f19de"
+    },
+    {
+      "path": "tools/hd_ui/font_record_pack.py",
+      "bytes": 7832,
+      "sha256": "642784946cb8f272ab73073108826445abfe8cfb73a56f10443653f615e7163b"
+    },
+    {
+      "path": "tools/hd_ui/font_style.py",
+      "bytes": 2665,
+      "sha256": "932627332b141b4ffb00a96c2de107e104114263dcad8fba0463f10d64ae975f"
+    },
+    {
+      "path": "tools/hd_ui/footer_remaining_font.py",
+      "bytes": 5017,
+      "sha256": "f13749bb318cceb8b151626e4e33177d9093c2860999056b468b25563f206e44"
+    },
+    {
+      "path": "tools/hd_ui/formation_menu.py",
+      "bytes": 3819,
+      "sha256": "d6a180f78c8b62c617b99375f82a0c24c9256b12d6583d9c2523509f34d41c1f"
+    },
+    {
+      "path": "tools/hd_ui/generate.py",
+      "bytes": 4859,
+      "sha256": "7de1f7ca5678b494eff2994f2e6ba186f2037223010b6c32517c59d1dc2e46f1"
+    },
+    {
+      "path": "tools/hd_ui/hd_silver_fallback.py",
+      "bytes": 11755,
+      "sha256": "1c92db3f62a5b8b0a05cac8f57fdd1bea048da5d797916ac32df4fbedad9eef8"
+    },
+    {
+      "path": "tools/hd_ui/house_layers.py",
+      "bytes": 11171,
+      "sha256": "29c654eaaa614e4e0d97096c3f0702df391186760e9ce79b6cd2efdc4010ef4c"
+    },
+    {
+      "path": "tools/hd_ui/house_texture.py",
+      "bytes": 13068,
+      "sha256": "4a884c64b8c86fe666b766d3e8dc1bf5278475fa728af86ac773434e479c0ed4"
+    },
+    {
+      "path": "tools/hd_ui/install_panel_redraw.py",
+      "bytes": 3954,
+      "sha256": "0f1b324005fc626f1a2298859de2a84923922367c3a231cb111cc06356744ce3"
+    },
+    {
+      "path": "tools/hd_ui/interface_art.py",
+      "bytes": 19211,
+      "sha256": "525747195ce72e8e106a8af25df95d715776d6182a6ac16ae15708b9e6e70331"
+    },
+    {
+      "path": "tools/hd_ui/interface_redraw.py",
+      "bytes": 11549,
+      "sha256": "7de474d3f643dbd1d78ca4926a15f7088dbcd5a5069594aefeef45d8506bde15"
+    },
+    {
+      "path": "tools/hd_ui/inventory_menu.py",
+      "bytes": 8474,
+      "sha256": "2be7ef539ac34fa4313aa92b6c2f195b97097689bf05a2d3b71798bfc628e407"
+    },
+    {
+      "path": "tools/hd_ui/join_footer_font.py",
+      "bytes": 8141,
+      "sha256": "62f754c23d0ee8b6b4bc7ca43cc63e26170003bae2ac5a01b335aca65ba3ff7b"
+    },
+    {
+      "path": "tools/hd_ui/magic_hd_followup.py",
+      "bytes": 5940,
+      "sha256": "7130abe561527698508acd6bf77e57c22f1f2a48c522c21e050baf96000bda4e"
+    },
+    {
+      "path": "tools/hd_ui/magic_label_size.py",
+      "bytes": 4834,
+      "sha256": "04881d98f6f731b8842781865737be48be5504873a57258fe9830e4d5d20cc98"
+    },
+    {
+      "path": "tools/hd_ui/magic_menu.py",
+      "bytes": 3207,
+      "sha256": "e5d5f4c3db126648adac1f145714176f579a413d6d1948d225794ae24c27967b"
+    },
+    {
+      "path": "tools/hd_ui/magic_spacing_fix.py",
+      "bytes": 5219,
+      "sha256": "374cfb5ea70c02d05de2084756c717d2fb9eb9db62a0499815949391bb0a57a8"
+    },
+    {
+      "path": "tools/hd_ui/master_selection_prompt.py",
+      "bytes": 10883,
+      "sha256": "abf071a829d388e1ee23f523e403237966ccdff379d22d2f336f5dd3c4a15958"
+    },
+    {
+      "path": "tools/hd_ui/mode_label_readability.py",
+      "bytes": 7116,
+      "sha256": "86ff7fdba8d977078befa20e7487bece7f040836f110955f873ddea21d22f137"
+    },
+    {
+      "path": "tools/hd_ui/move_label_native.py",
+      "bytes": 6533,
+      "sha256": "71e99cf02fe43848a3909e17ebf8376aba60cc598876db0aff5d1d309bf28b04"
+    },
+    {
+      "path": "tools/hd_ui/movie_subtitle_safe_area.py",
+      "bytes": 10461,
+      "sha256": "6071273f941e06f4f20d129d0a89830fa02001ce457ea6d752557cbbcda887c0"
+    },
+    {
+      "path": "tools/hd_ui/name_entry_english.py",
+      "bytes": 9760,
+      "sha256": "9ce05866cad54b12e74b57780693473d4e554ff73e796a34c37c928c56d2b09e"
+    },
+    {
+      "path": "tools/hd_ui/native_button_font.py",
+      "bytes": 5381,
+      "sha256": "b0db1218412542cd9ca4cea7c789e3fe3b09570a7760fde4c928697050396077"
+    },
+    {
+      "path": "tools/hd_ui/native_font_trial.py",
+      "bytes": 5240,
+      "sha256": "f1e8240f7ab0c951db614e54686eab6e0a5d1faccbeb258d02abbcdd90bc6d5f"
+    },
+    {
+      "path": "tools/hd_ui/native_m6x11.py",
+      "bytes": 6466,
+      "sha256": "79b4b816491307ca64e595d8446c0b84e5917ed368919588175db718b37ae578"
+    },
+    {
+      "path": "tools/hd_ui/native_readable_font.py",
+      "bytes": 6162,
+      "sha256": "d0cafd700f316e626a3aaced1d959fe15f6fa7cb1bb098486dd39c3ea0e3d05e"
+    },
+    {
+      "path": "tools/hd_ui/native_silver.py",
+      "bytes": 793,
+      "sha256": "c565f3fe4acc70834cc22069fda8c2b86c8b748d3dff97b2bcc0fb3697a57fe5"
+    },
+    {
+      "path": "tools/hd_ui/native_sword_fix.py",
+      "bytes": 6519,
+      "sha256": "0928fac00b2fef8e8b0cc0aa32b5fdde2688b1368156b5c66a61a3f1fa5d51ff"
+    },
+    {
+      "path": "tools/hd_ui/native_translation_parity.py",
+      "bytes": 7197,
+      "sha256": "e40a26d8fee09ed77fb874f1b8a35fa9ec57537650a4c60d79a34ea1e027df87"
+    },
+    {
+      "path": "tools/hd_ui/native_units_alias.py",
+      "bytes": 2573,
+      "sha256": "84f7b69520424aff0dd88804c434017ddc694ad51f61e7d74b7726a2cb27fc18"
+    },
+    {
+      "path": "tools/hd_ui/noto_font.py",
+      "bytes": 5731,
+      "sha256": "2f1bd6d5de8b2b0717ae76aff5ca848fe18ab98cefc64d8f87869358249d4965"
+    },
+    {
+      "path": "tools/hd_ui/original_prologue_control.py",
+      "bytes": 7068,
+      "sha256": "536cdb4ae4d7de30d38672b348417ba5252b3c2d4c189e53973be3a7c4fe36f4"
+    },
+    {
+      "path": "tools/hd_ui/pack_imagegen_master.py",
+      "bytes": 4169,
+      "sha256": "0028c514393d1f913848b77938a1d8f14f57505dd212aaf37b8c6074ca93591d"
+    },
+    {
+      "path": "tools/hd_ui/package_vga_buffer_pair.py",
+      "bytes": 7628,
+      "sha256": "c0d2db27dd7fb7c5d7d6b414b4e66fa791d4f3944f0180f277c0fa01912d4880"
+    },
+    {
+      "path": "tools/hd_ui/panel_redraw.py",
+      "bytes": 9313,
+      "sha256": "b449cd003c38d4ecdf6dcf3f0c9881a0459d3e0a10b89d5fd884d38930e8e51b"
+    },
+    {
+      "path": "tools/hd_ui/party_names.py",
+      "bytes": 2134,
+      "sha256": "90f4db189bac9a5ce3f72caa1d3cff1326baa822dedb55b3497e7e5ecd11afa8"
+    },
+    {
+      "path": "tools/hd_ui/prepare_disc1_buddy_diagnostic.py",
+      "bytes": 3932,
+      "sha256": "97eb7d8566ee7a6b82e38776dfb46a2c9c7f377bc263b72e832497f35cf81ae0"
+    },
+    {
+      "path": "tools/hd_ui/prologue_timing_trial.py",
+      "bytes": 15520,
+      "sha256": "69a5f8b7374fcce03d7afa2bd8c6866844f42ec80f9d64169b2c57f6b5c82458"
+    },
+    {
+      "path": "tools/hd_ui/results_party_native.py",
+      "bytes": 8104,
+      "sha256": "9650bb28a265e182e6c69e04fcb8ddcf0d7b1b28e61e8507a1f5f9115b56dae4"
+    },
+    {
+      "path": "tools/hd_ui/reusable_atlas.py",
+      "bytes": 15421,
+      "sha256": "0678eff07447dd2ff4f3602ae817d63307b67943e55578fda2b41622cced735b"
+    },
+    {
+      "path": "tools/hd_ui/run_name_entry_english.py",
+      "bytes": 3014,
+      "sha256": "595d9db41372d76be5ada7a57bc86301e09b68524e2325eaa2ceae4b02adaad6"
+    },
+    {
+      "path": "tools/hd_ui/s_rank_checklist.py",
+      "bytes": 15774,
+      "sha256": "be3335b9387d0d7a9d629809399295e72aa30ccf761efc672f4a4ac6b4810d75"
+    },
+    {
+      "path": "tools/hd_ui/s_rank_rules.py",
+      "bytes": 3670,
+      "sha256": "db80dc51892c5aed1623020ff0f397e36657ed9b8be8ee0c19a11e0c6edf79f6"
+    },
+    {
+      "path": "tools/hd_ui/seed_bizin_pack.py",
+      "bytes": 3550,
+      "sha256": "a3ba6a13d72befe8cc54263697db0800ae1bb0b0fa0909a0b214866b4325e4e4"
+    },
+    {
+      "path": "tools/hd_ui/seed_noto_pack.py",
+      "bytes": 4069,
+      "sha256": "121f55c2c3b6d73f5772a1e4471484dbeb923f32922eebb3f1c02f0a5d61f8d8"
+    },
+    {
+      "path": "tools/hd_ui/shared_disc2.py",
+      "bytes": 2780,
+      "sha256": "e5686e94e5b9478b896e32745d2c0924e7870c5aaa5ae5592cbebd454c206ad7"
+    },
+    {
+      "path": "tools/hd_ui/side_attack_label.py",
+      "bytes": 10004,
+      "sha256": "e85d1410d7853f8d7a75586aab9e936298e21d1ac1fa4a2e8c00963237c5fae4"
+    },
+    {
+      "path": "tools/hd_ui/skies_attack_letters.py",
+      "bytes": 6699,
+      "sha256": "80a9892376f02e4f5847f5de9ec61a880ed70f29b4dc69aedebbb883aa2a268e"
+    },
+    {
+      "path": "tools/hd_ui/skies_baseline_fix.py",
+      "bytes": 6839,
+      "sha256": "477b3101311bb2429f747b7551c4a4079869f8fe8f9702de18563053e767a35c"
+    },
+    {
+      "path": "tools/hd_ui/skies_confirm_footer.py",
+      "bytes": 6634,
+      "sha256": "964a2aa5d7e027c1c0fdba26ec3e1d3406603860891f6c38994e796847aaaf9d"
+    },
+    {
+      "path": "tools/hd_ui/skies_full_texture.py",
+      "bytes": 20377,
+      "sha256": "a6e21430c8d7dd026df9d52bf53b5f19359ceae92810cf7363ef738daabde2a2"
+    },
+    {
+      "path": "tools/hd_ui/skies_menu_baseline.py",
+      "bytes": 3687,
+      "sha256": "97309b120fda87701b440eb5564a0d0370dd903f231e85d5cb5badf5f2198d73"
+    },
+    {
+      "path": "tools/hd_ui/skies_rayblade_font.py",
+      "bytes": 17512,
+      "sha256": "f33a4b243dbdc7c3fddc59ce64cf7068a358cf3a03c42873e15fbdf888f95eb5"
+    },
+    {
+      "path": "tools/hd_ui/skies_rayblade_match.py",
+      "bytes": 13280,
+      "sha256": "ed87cd3b9aa3781018c5bf8cd6f001ba180c69dad676fcacf0411e45d0581daa"
+    },
+    {
+      "path": "tools/hd_ui/skies_ritual_font.py",
+      "bytes": 9447,
+      "sha256": "f1d57ef1697f18a1e5adb0453aa247ee82b26740a98b683324fae09fdd74b145"
+    },
+    {
+      "path": "tools/hd_ui/skies_selector_fix.py",
+      "bytes": 3695,
+      "sha256": "3c119f7ecba1f0e8c919bc483960beda33224d4b351fc049e5dd98faf912d3f9"
+    },
+    {
+      "path": "tools/hd_ui/skies_size_match.py",
+      "bytes": 6868,
+      "sha256": "07d0271e5b25d3212fabfeb99fc0174aedbbb4f208c199320246a50cee211f18"
+    },
+    {
+      "path": "tools/hd_ui/skies_vga_approved_baseline.py",
+      "bytes": 7939,
+      "sha256": "cf7ae5a92fb725767ca4835c81c655d0fa313a9ea36f730e72ffb46dbd3e9c65"
+    },
+    {
+      "path": "tools/hd_ui/skies_vga_compat.py",
+      "bytes": 7319,
+      "sha256": "600a2b562a307717393a7731404bfba6c05499b94672e94dc79f05e438d70222"
+    },
+    {
+      "path": "tools/hd_ui/skies_vga_font_metrics.py",
+      "bytes": 10623,
+      "sha256": "c63811334a64f013ec21353ade94574b5324c8ae58e89117db5fadbcc082e896"
+    },
+    {
+      "path": "tools/hd_ui/skies_vga_footer_labels.py",
+      "bytes": 8011,
+      "sha256": "0c48eda5eaed6aeb907d21588904dbcb1c4f9251c7bc8477ae2349340ca9e9d8"
+    },
+    {
+      "path": "tools/hd_ui/skies_vga_item_alignment.py",
+      "bytes": 7653,
+      "sha256": "953bc9a50775c8c96bb475aa16c2c6ff10c70679ed65d45f6752dd99fac12735"
+    },
+    {
+      "path": "tools/hd_ui/skies_vga_optical_baseline.py",
+      "bytes": 7833,
+      "sha256": "dfb6a275118d0b27e812da39c3c467c4ae1d0b760450f58b0f2c0a265f94fc32"
+    },
+    {
+      "path": "tools/hd_ui/skies_vga_port_slot.py",
+      "bytes": 6052,
+      "sha256": "3cd128725c675aa1f79307a5013d7ba113b2e46a007ce6045bd44fc37c9df230"
+    },
+    {
+      "path": "tools/hd_ui/skies_vga_sampling.py",
+      "bytes": 5879,
+      "sha256": "80f40f162b8e5827ad16dca42fe0055aa4459b80448cba8aed77b8af049f6179"
+    },
+    {
+      "path": "tools/hd_ui/skies_vga_sharp_footer.py",
+      "bytes": 17219,
+      "sha256": "6f0915105e03ff2abe24784c43d044acf88676c06549aa162f40565ffcb899df"
+    },
+    {
+      "path": "tools/hd_ui/skies_vga_system_alignment.py",
+      "bytes": 4335,
+      "sha256": "b59b0d9239ada5df8c9e3f8fd364a3e3bf7e434099f8bca7dc22c0efafbd45b0"
+    },
+    {
+      "path": "tools/hd_ui/skies_vga_vmu_alignment.py",
+      "bytes": 5967,
+      "sha256": "7c687da92f020cc903dc5215da062019388d913fb9be46b6f7ee2a1c0f265f8d"
+    },
+    {
+      "path": "tools/hd_ui/skies_vmu_header.py",
+      "bytes": 4229,
+      "sha256": "ba4e0c10bc0356ad0b8b740bc2f7d0475d349ecd54298eb630d48c7b79b9f6dd"
+    },
+    {
+      "path": "tools/hd_ui/status_art.py",
+      "bytes": 7402,
+      "sha256": "7ac49c5bb3148ac8e9ddf58a3c6effbbe1bf503570793c63c719f3f44f2a2e0e"
+    },
+    {
+      "path": "tools/hd_ui/status_heading.py",
+      "bytes": 2840,
+      "sha256": "997a7a5d69c091628cb974c969f50abb0a6a492b96935c7e0362d75cdb5e1cf7"
+    },
+    {
+      "path": "tools/hd_ui/stock_atlas_pack.py",
+      "bytes": 5774,
+      "sha256": "89da1c301930248aad476c6a90b79bcb18af084ae545e9d88e7ae4cc5880516c"
+    },
+    {
+      "path": "tools/hd_ui/story_cards_complete.py",
+      "bytes": 14472,
+      "sha256": "238534507960de872eb3ba6f296856327229f01bfba3fc3772ef295452291e24"
+    },
+    {
+      "path": "tools/hd_ui/story_movie_safe_build.py",
+      "bytes": 11599,
+      "sha256": "9b4bc2de9dff94a1dec64c5d43bf4d3b11bb8f44eccf4f577548ac29b36d0ab8"
+    },
+    {
+      "path": "tools/hd_ui/thinking_label_native.py",
+      "bytes": 6218,
+      "sha256": "725217fcd3a7b8a9f06a2a0097e5aa07c986c64670f0ce76d1b713a1befab1cc"
+    },
+    {
+      "path": "tools/hd_ui/ui_upscale.py",
+      "bytes": 13819,
+      "sha256": "101763f82d65c337a56e65582b4d442fc92b991350a753a1e7ff9510f720232b"
+    },
+    {
+      "path": "tools/hd_ui/units_list_redraw.py",
+      "bytes": 9341,
+      "sha256": "8d5227aa6a09b219437c3e259d5d0bc0df5ac40af548ab997cba1ff1946da4de"
+    },
+    {
+      "path": "tools/hd_ui/vertical_attack_icon.py",
+      "bytes": 4894,
+      "sha256": "7f52ee6c9fc7d3a13409bbff49d2b7673da8e069e25629c2a5e05c64b709e058"
+    },
+    {
+      "path": "tools/hd_ui/whip_remove_font.py",
+      "bytes": 12682,
+      "sha256": "1dd9ebb7a1530977e45b465d4c6771de50541fb6dfcf216dc253c125b336bc63"
+    },
+    {
+      "path": "tools/hd_ui/zero_unlocked.py",
+      "bytes": 11116,
+      "sha256": "2b6c41b50a4a26fd73d2728479ddad4de4f7020332f8a268371f831580bcfad0"
+    },
+    {
+      "path": "tools/inject.py",
+      "bytes": 7708,
+      "sha256": "f06a507b536ea96d12d99aebac0e33e58509a1e8b262bc7b8d0ddda70b8d92d9"
+    },
+    {
+      "path": "tools/japanese_audit.py",
+      "bytes": 2593,
+      "sha256": "90567ad718630b29fc5753c1cd38c498274c4378e1217bd3ebcb3008627a006d"
+    },
+    {
+      "path": "tools/latin.py",
+      "bytes": 14488,
+      "sha256": "a3499aeab3a9b64c45802e9212331b474f4b7ba55d06ecce53ecca44e5eb1fea"
+    },
+    {
+      "path": "tools/mainmenu.py",
+      "bytes": 3682,
+      "sha256": "f575039a682c351173e75ddc0180e6fec2c79bdb03ce8d1dca07be5771460e54"
+    },
+    {
+      "path": "tools/mode1_sector.py",
+      "bytes": 1716,
+      "sha256": "eb1b766227d7bb11670475edde24a7d2ed97306544cb3282539b4a2e68c352b6"
+    },
+    {
+      "path": "tools/pac.py",
+      "bytes": 4187,
+      "sha256": "71d63398ce374856067d17414ce8c40a126d632b3f569a4ebcb552677a9a0675"
+    },
+    {
+      "path": "tools/patchline.py",
+      "bytes": 6566,
+      "sha256": "f6b68de4a640221e12fe83bd440b1050f9d4e7b2b5aae61e1c9e988601adbd64"
+    },
+    {
+      "path": "tools/pickup_messages.py",
+      "bytes": 7243,
+      "sha256": "f702ae5cc10020d2409aeb124d3f2a4aebafd39952c224068018dc73c8b767b5"
+    },
+    {
+      "path": "tools/prepare_private_release.py",
+      "bytes": 11595,
+      "sha256": "f75f928028d226d80eece201cf2a1aa42c028b3a570c25a649c3d72d45ddd105"
+    },
+    {
+      "path": "tools/psi2.py",
+      "bytes": 14734,
+      "sha256": "c4ea791688282f45478d73d29e69a7248d3504455a482d512775b223dfd5e444"
+    },
+    {
+      "path": "tools/pvr_atlas.py",
+      "bytes": 5787,
+      "sha256": "e355efad2186c26c372a9b182e567d1c8de74b412834d873b0d94617d6e857df"
+    },
+    {
+      "path": "tools/remaining_messages.py",
+      "bytes": 2283,
+      "sha256": "7240032b4c244fb8c9b7a9380587bcef3f59aee6acbadfe7191c5d45f5e6248e"
+    },
+    {
+      "path": "tools/remaining_parameters.py",
+      "bytes": 3561,
+      "sha256": "84945fd37e709ecc39e3bc50ebf3c7fc906cc6dc97e0b2d186d3b5d27ed371e9"
+    },
+    {
+      "path": "tools/scriptpack.py",
+      "bytes": 18034,
+      "sha256": "92df2c5a361cb72513fb02269ffbe3012be87bd914815203c15527acfeb0f4f8"
+    },
+    {
+      "path": "tools/sh4asm.py",
+      "bytes": 12458,
+      "sha256": "1015b22c400ef72584aa7a60c0f4f31454f7babe6715ec98d42284c5778f3c9f"
+    },
+    {
+      "path": "tools/sh4dis.py",
+      "bytes": 9646,
+      "sha256": "d007373646093f7d816923031780805d7db31e1857947ae0943ce004d8ffdf5a"
+    },
+    {
+      "path": "tools/terms.py",
+      "bytes": 4850,
+      "sha256": "0a3406b6ac997bbb94020a34ad63030e2ade1f8a82130e3f69cef2794b7ad086"
+    },
+    {
+      "path": "tools/textlayout.py",
+      "bytes": 635,
+      "sha256": "fdd1e355a2a9cabd93353d67e34dfe2711d593de8bb0e27cb3e0d82ef365b2c7"
+    },
+    {
+      "path": "tools/uistr.py",
+      "bytes": 4367,
+      "sha256": "8bef95f60d2487d137aac0d93037a3f1f6cab8c4b9c96328d3f18f320141212f"
+    },
+    {
+      "path": "tools/vwf.py",
+      "bytes": 39027,
+      "sha256": "416e7ab8de0a77c3ccea29859ddd7a429ba352c8bfaa67b827a28acdef36f7fe"
+    },
+    {
+      "path": "tools/widths.py",
+      "bytes": 4031,
+      "sha256": "21374e37af13381ee9acd915646938b51320d02b32e5354b956f164230bd3aba"
+    }
+  ],
+  "source_snapshot_scope": "Selected imported cumulative patch tools and reviewed English asset; unrelated dirty edits excluded.",
+  "historical_inputs": "Earlier local cumulative translated inputs remain identified by hashes, not shipped. Snapshot alone is not a complete historical rebuild recipe.",
+  "toolchain": {
+    "repository": "retro-trans/retro-trans-tools",
+    "tag": "v0.2.1",
+    "archive_sha256": "ba015e3626b14ed143b71ee246aa4624823156f6e980769918a645ebb0cc4c33"
+  },
+  "gameplay_verified": false,
+  "hardware_verified": false,
+  "no_game_images_bios_saves_ram_or_install_zips": true,
+  "public_catalog_changed": false
+}

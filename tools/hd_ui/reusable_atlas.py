@@ -24,6 +24,11 @@ CODE = REVERSE + 256
 END = 0x8C0F6F20
 STATES = END - 32  # Per record: bit 7=fixed atlas, low 7 bits=extra size units.
 COSTS = STATES - 196  # Original allocator units for counts 0..192.
+# Unused tail of the original zero run containing ADV_TAB. The 4,608-byte
+# metric table ends here; original executable and live r34 RAM are zero.
+NAME_CODE = vwf.ADV_TAB + vwf.NGLYPH
+NAME_ALIASES = NAME_CODE + 128
+NAME_END = NAME_ALIASES + 84
 MANAGER = 0x8C1D4D70
 EXTRA_BUDGET = 128  # At most 64 KiB above original live texture allocations.
 POOL_CEILING = 448  # Leave 32 KiB of the original 256 KiB pool uncommitted.
@@ -61,11 +66,11 @@ def tables():
     return bytes(forward), struct.pack('<128H', *reverse), chars
 
 
-def build_code():
+def build_code(saved_names=False):
     a = sh4asm.Asm(CODE)
     for key, val in dict(forward=FORWARD, reverse=REVERSE, nslots=SLOTS,
                          nglyph=4608, controls=0xC000, limit=256,
-                         full_record=192, size=0x8C05D934, blit=0x8C05DC42,
+                         full_record=192, size=NAME_CODE if saved_names else 0x8C05D934, blit=0x8C05DC42,
                          records=vwf.LINE_RECORDS, stride=400,
                          flags=0x184, live=0x800, handle=0x188,
                          states=STATES, costs=COSTS, allocated=0x8000,
@@ -200,6 +205,65 @@ def build_code():
     return a
 
 
+def build_name_hook():
+    # Called in place of the native size routine; its caller already
+    # preserves R4..R10 and PR. Tail-jump to the native routine afterwards.
+    a = sh4asm.Asm(NAME_CODE)
+    a.long_('name_aliases', NAME_ALIASES)
+    a.long_('native_size', 0x8C05D934)
+    a.label('display_name')
+    a.mov_l_pc('name_aliases', 1); a.mov_i(3, 7)
+    a.label('name_next')
+    a.mov_w_at(1, 0); a.cmp_eq(4, 0); a.bf('name_skip')
+    a.mov(1, 2); a.add_i(2, 2)
+    a.mov(14, 3); a.add_i(4, 3); a.mov(4, 6)
+    a.label('name_compare')
+    a.mov_w_at(2, 0); a.mov_w_at(3, 5); a.cmp_eq(5, 0)
+    a.bf('name_skip')
+    a.add_i(2, 2); a.add_i(2, 3); a.add_i(-1, 6)
+    a.tst(6, 6); a.bf('name_compare')
+    # Entire name AND count matched. The render record has 192 glyph
+    # slots; the status-name grid has six. Clear unused alias slots.
+    a.add_i(14, 1); a.mov_w_at(1, 4); a.mov_w_store(4, 14)
+    a.add_i(2, 1); a.mov(14, 3); a.add_i(4, 3); a.mov_i(6, 6)
+    a.label('name_copy')
+    a.mov_w_at(1, 0); a.mov_w_store(0, 3)
+    a.add_i(2, 1); a.add_i(2, 3); a.add_i(-1, 6)
+    a.tst(6, 6); a.bf('name_copy'); a.bra('name_done'); a.nop()
+    a.label('name_skip')
+    a.add_i(28, 1); a.add_i(-1, 7); a.tst(7, 7); a.bf('name_next')
+    a.label('name_done')
+    a.mov_l_pc('native_size', 3); a.jmp(3); a.nop()
+    return a
+
+
+def install_saved_names(exe):
+    """Install last: retain all existing renderer labels and menu storage."""
+    import party_names
+    baseline, updated = build_code(), build_code(True)
+    before, after = baseline.assemble(), updated.assemble()
+    hook = build_name_hook().assemble()
+    table = party_names.display_alias_table()
+    original = (ROOT/'extracted/1ST_READ.BIN').read_bytes()
+    if (len(before) != len(after) or baseline.labels != updated.labels
+            or NAME_CODE+len(hook)>NAME_ALIASES or len(table)!=NAME_END-NAME_ALIASES
+            or not vwf.ADV_TAB+vwf.NGLYPH <= NAME_CODE < NAME_END < vwf.BEAR_TAB):
+        raise ValueError('saved-name hook layout changed')
+    expected = bytearray(NAME_END-NAME_CODE)
+    expected[:len(hook)] = hook
+    expected[NAME_ALIASES-NAME_CODE:] = table
+    region = exe[NAME_CODE-BASE:NAME_END-BASE]
+    if (any(original[NAME_CODE-BASE:NAME_END-BASE])
+            or (any(region) and region != expected)
+            or exe[CODE-BASE:CODE-BASE+len(before)] not in (before, after)):
+        raise ValueError('unknown renderer or occupied saved-name reservation')
+    exe[CODE-BASE:CODE-BASE+len(after)] = after
+    exe[NAME_CODE-BASE:NAME_END-BASE] = expected
+    return dict(code=NAME_CODE, bytes=len(hook), table=NAME_ALIASES,
+                names=party_names.strings(),
+                scope='exact transient glyph records only; no persistent party or save writes')
+
+
 def patch(source, original):
     exe = bytearray(source)
     forward, reverse, chars = tables()
@@ -212,6 +276,11 @@ def patch(source, original):
     v = vwf.build_code().assemble()
     if exe[vwf.CODE-BASE:vwf.CODE-BASE+len(v)] != v:
         raise ValueError('unexpected VWF baseline')
+    layout=vwf.build_record_stub(); layout_blob=layout.assemble()
+    if (exe[vwf.PLACE_DEAD-BASE:vwf.PLACE_DEAD-BASE+len(layout_blob)] != layout_blob
+            or struct.unpack_from('<I',exe,vwf.SIMPLE_TEXT_CREATE_PTR-BASE)[0]
+            != layout.labels['simple_column_stub']):
+        raise ValueError('stale VWF layout baseline; run tools/build.py --no-inject first')
     for lo, hi in ((SIZE_CALL, SIZE_CALL+4), (FILL_START, RESUME)):
         if exe[lo-BASE:hi-BASE] != original[lo-BASE:hi-BASE]:
             raise ValueError('unexpected native text-loop signature')

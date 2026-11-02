@@ -67,7 +67,7 @@ LINE_RECORD_COUNT = 32
 # --- a live RAM dump taken after the game had booted and run
 ARENA       = 0x8C0F5464
 G_RECORD    = ARENA           # 4 bytes: the current line record
-G_WIDEN     = ARENA + 4       # 1 byte: did this character get the wider quad
+G_WIDEN     = ARENA + 4       # flag, or right-edge float in pixel-aspect variant
 CODE        = ARENA + 8
 FLOAT_TAB   = 0x8C0F5800      # NTAB floats: 0.0 .. NTAB-1
 ARENA_END   = 0x8C0F6F21
@@ -114,6 +114,11 @@ GRID_CREATE = 0x8C0602D6
 TEXT_CREATE_CALL = 0x8C05FD3C
 TEXT_CREATE_CALL_OLD = b'\xCB\xB2'       # BSR GRID_CREATE
 TEXT_CREATE_PTRS = (0x8C05E4C4, 0x8C05EB10)
+# The simple constructor is shared with fixed-stride PARAMETA help. Only
+# PSI dialogue uses this descriptor (see 0x8C08C592..0x8C08C636). Other
+# 19-column simple windows must retain their stored 19-character row stride.
+SIMPLE_TEXT_CREATE_PTR = TEXT_CREATE_PTRS[0]
+SCENARIO_TEXT_DESCRIPTOR = 0x8C263B08
 GRID_PITCH_CALL = 0x8C060544
 GRID_PITCH_CALL_OLD = b'\x1C\xE9'        # MOV #28,R9
 ROW_PITCH_CALL = 0x8C0605AA
@@ -155,9 +160,25 @@ def _glyph(a, reg):
     a.cmp_hs(3, 0)                       # T when glyph >= 4608
 
 
-def build_code(atlas_slot_hook=None, ui_fixes=False, natural_font=False):
+def build_code(atlas_slot_hook=None, ui_fixes=False, natural_font=False,
+               pixel_aspect_lut=None, main_menu_padding=0, stance_menu_padding=0,
+               dialogue_space_extra=0, dialogue_size_helpers=None, latin_quad_width=56):
     """Assemble the replacement for 0x8C0603B4 plus the pen calculation."""
+    if not 0 <= main_menu_padding <= 127:
+        raise ValueError('main menu padding must fit a non-negative SH-4 immediate')
+    if not 0 <= stance_menu_padding <= 127:
+        raise ValueError('stance menu padding must fit a non-negative SH-4 immediate')
+    if not 0 <= dialogue_space_extra <= 127:
+        raise ValueError('dialogue space increment must fit a non-negative SH-4 immediate')
+    if not 1 <= latin_quad_width <= 127:
+        raise ValueError('Latin quad width must fit a positive SH-4 immediate')
+    if latin_quad_width != 56 and (pixel_aspect_lut is None or dialogue_size_helpers is not None):
+        raise ValueError('Custom Latin width requires the mapped renderer without size helpers')
     a = sh4asm.Asm(CODE)
+    if dialogue_size_helpers is not None:
+        if pixel_aspect_lut is None or not natural_font:
+            raise ValueError('Dialogue size helpers require the natural-font renderer')
+        a.labels['dialogue_x_size'],a.labels['dialogue_y_size']=dialogue_size_helpers
 
     a.long_("node_lookup", NODE_LOOKUP)
     a.long_("dispatch", DISPATCH)
@@ -186,6 +207,11 @@ def build_code(atlas_slot_hook=None, ui_fixes=False, natural_font=False):
     a.word_("v3off", 162)                #                          v of corner 3
     if ui_fixes:
         a.word_("record_next", 0x18C)
+    if pixel_aspect_lut is not None:
+        # Opt-in for natural outline fonts in the 640x240 -> 640x480 game.
+        # The 256-byte canonical atlas map marks English glyphs; 0xFF means
+        # unmapped. Japanese and other glyphs keep their original geometry.
+        a.long_("pixel_aspect_lut", pixel_aspect_lut)
 
     # ---- vwf_place(R4=ctx, R5=cell, R6=char_index, R7=atlas, 0(sp)=attr) ---
     a.label("vwf_place")
@@ -279,13 +305,25 @@ def build_code(atlas_slot_hook=None, ui_fixes=False, natural_font=False):
     # ---- uv_fix: widen the UV span the dispatcher just wrote --------------
     # in: R12 node.  Runs only when vwf_adjust widened the quad to match.
     a.label("uv_fix")
+    if dialogue_size_helpers is not None:
+        a.sts_l_pr(15)
     a.tst(12, 12)
     a.bt("uvf_out")
     a.mov_l_pc("g_widen", 0)
-    a.mov_b_at(0, 0)
-    a.extu_b(0, 0)
+    if pixel_aspect_lut is not None:
+        # In this variant G_WIDEN holds the desired right-edge float (or 0),
+        # computed by vwf_adjust. The dispatcher overwrites pre-dispatch X2,
+        # so restore it here. Never scale an already-adjusted quad again.
+        a.mov_l_at(0, 0)
+    else:
+        a.mov_b_at(0, 0)
+        a.extu_b(0, 0)
     a.tst(0, 0)
     a.bt("uvf_out")
+    if pixel_aspect_lut is not None:
+        a.mov(0, 3)
+        a.mov_i(20, 0); a.mov_l_str_r0(3, 12)
+        a.mov_i(28, 0); a.mov_l_str_r0(3, 12)
 
     # --- widen the quad and the sample to the whole atlas cell -------------
     # The renderer only samples 14 of the cell's 16 rows, which is what caps
@@ -341,6 +379,8 @@ def build_code(atlas_slot_hook=None, ui_fixes=False, natural_font=False):
     a.bra("pow_y")
     a.shll(3)
     a.label("pow_y_done")
+    if dialogue_size_helpers is not None:
+        a.bsr('dialogue_y_size'); a.nop()
     if ui_fixes and not natural_font:
         # Fit Yes/No within its selection band, including its cursor offset.
         # Sample all sixteen atlas rows into eleven screen rows, inset by two.
@@ -393,6 +433,8 @@ def build_code(atlas_slot_hook=None, ui_fixes=False, natural_font=False):
     a.mov_w_pc("v3off", 0)
     a.mov_w_str_r0(3, 12)
     a.label("uvf_out")
+    if dialogue_size_helpers is not None:
+        a.lds_l_pr(15)
     a.rts()
     a.nop()
 
@@ -403,7 +445,10 @@ def build_code(atlas_slot_hook=None, ui_fixes=False, natural_font=False):
     a.sts_l_pr(15)
     a.mov_l_pc("g_widen", 0)
     a.mov_i(0, 3)
-    a.mov_b_store(3, 0)                  # assume not widened until it is
+    if pixel_aspect_lut is not None:
+        a.mov_l_store(3, 0)
+    else:
+        a.mov_b_store(3, 0)              # assume not widened until it is
 
     a.mov_l_at(8, 1)                     # window id
     a.cmp_pz(1)
@@ -522,6 +567,15 @@ def build_code(atlas_slot_hook=None, ui_fixes=False, natural_font=False):
     a.bt("adv_done")
     _glyph(a, 2)                         # R0 = glyph at index R2, T set if bad
     a.bt("adv_next")
+    if dialogue_space_extra:
+        # Glyph zero is the blank. Only expanded scenario grids get wider
+        # spaces: menu padding and fixed-stride help must retain their metrics.
+        a.tst(0, 0); a.bf("space_done")
+        a.mov_w_atd_r0(8, 8); a.cmp_eq_i(textlayout.SPOKEN_COLS)
+        a.bf("space_restore")
+        a.add_i(dialogue_space_extra, 13)
+        a.label("space_restore"); a.mov_i(0, 0)
+        a.label("space_done")
     a.mov_l_pc("adv_tab", 3)
     a.mov_b_r0(3, 0)
     a.extu_b(0, 0)
@@ -554,12 +608,45 @@ def build_code(atlas_slot_hook=None, ui_fixes=False, natural_font=False):
     a.sub(0, 13)
     a.label("bear_2")
 
+    if pixel_aspect_lut is not None:
+        # Font advances already include the 2:1 pixel-aspect compensation.
+        # Widen only the quad, never its UV sample: the outline stays intact.
+        # Bounds-check BEFORE indexing the 256-byte English map.
+        _glyph(a, 10)
+        a.bt("aspect_done")
+        a.extu_b(0, 3); a.cmp_eq(0, 3); a.bf("aspect_done")
+        a.mov_l_pc("pixel_aspect_lut", 3); a.mov_b_r0(3, 0)
+        a.cmp_eq_i(-1); a.bt("aspect_done")
+        if dialogue_size_helpers is not None:
+            a.bsr('dialogue_x_size'); a.nop()
+        else:
+            a.mov_i(latin_quad_width, 7) # Default doubles 28 texels; dense trial uses 1:1.
+        a.label("aspect_done")
+
     if ui_fixes:
         # Padding belongs to the battle menu, not to the shared font metrics.
         a.mov_w_atd_r0(8, 8); a.cmp_eq_i(9); a.bf("indent_done")
         a.mov_w_atd_r0(10, 8); a.cmp_eq_i(8); a.bf("indent_done")
         a.add_i(10, 13)
         a.label("indent_done")
+
+    if main_menu_padding:
+        # Both localized main menus are verified 9-column, 7-row grids.
+        # Offset the text pen only: cursor/frame geometry is not touched.
+        # Other menu shapes and 33-column dialogue retain their own origin.
+        a.mov_w_atd_r0(8, 8); a.cmp_eq_i(9); a.bf("main_indent_done")
+        a.mov_w_atd_r0(10, 8); a.cmp_eq_i(7); a.bf("main_indent_done")
+        a.add_i(main_menu_padding, 13)
+        a.label("main_indent_done")
+
+    if stance_menu_padding:
+        # The expanded Guard/Evade/Counter selector is a 7-column, 3-row
+        # grid. Match main-menu padding on its text pen only; keep the
+        # selection cursor, frame, original three stance IDs and rows intact.
+        a.mov_w_atd_r0(8, 8); a.cmp_eq_i(7); a.bf("stance_indent_done")
+        a.mov_w_atd_r0(10, 8); a.cmp_eq_i(3); a.bf("stance_indent_done")
+        a.add_i(stance_menu_padding, 13)
+        a.label("stance_indent_done")
 
     a.mov(13, 0)                         # px
     a.cmp_pz(0)
@@ -593,8 +680,11 @@ def build_code(atlas_slot_hook=None, ui_fixes=False, natural_font=False):
     # Everything below has to happen *after* the dispatcher, so record that
     # this node qualifies and let uv_fix do it.
     a.mov_l_pc("g_widen", 0)
-    a.mov_i(1, 3)
-    a.mov_b_store(3, 0)
+    if pixel_aspect_lut is not None:
+        a.mov_l_store(3, 0)              # R3 still contains float(px + width)
+    else:
+        a.mov_i(1, 3)
+        a.mov_b_store(3, 0)
 
     a.label("adj_out")
     a.lds_l_pr(15)
@@ -632,8 +722,8 @@ def build_record_stub():
     """
     a = sh4asm.Asm(PLACE_DEAD)
     a.long_("g_record", G_RECORD)
-    a.long_("g_widen", G_WIDEN)
     a.long_("grid_create", GRID_CREATE)
+    a.long_("scenario_descriptor", SCENARIO_TEXT_DESCRIPTOR)
     a.word_("off188", 0x0188)
     a.label("stub")
     a.mov_l_pc("g_record", 0)
@@ -641,6 +731,20 @@ def build_record_stub():
     a.mov_w_pc("off188", 0)
     a.rts()
     a.mov_l_r0(12, 7)                    # delay slot: the original load
+
+    # R13 is the original descriptor at all three allocator call sites.
+    # The simple-window path also displays fixed 19-column help/item records.
+    # Preserve those grids; PSI's descriptor still gets the dialogue expansion,
+    # including its 19x3 variant. Width/row count alone cannot distinguish it.
+    a.label("simple_column_stub")
+    a.mov(5, 0)
+    a.cmp_eq_i(19)
+    a.bf("column_stub")
+    a.mov_l_pc("scenario_descriptor", 0)
+    a.cmp_eq(13, 0)
+    a.bt("column_stub")
+    a.bra("column_ready")
+    a.nop()
 
     # These call sites also construct small UI grids, including the 3x2
     # Yes/No selector. Expand only the two stock dialogue widths; doubling
@@ -797,7 +901,9 @@ def apply(exaggerate=None):
             if bytes(exe[ptr_off:ptr_off + 4]) != struct.pack("<I", GRID_CREATE):
                 raise ValueError("%08X does not hold the expected text-grid pointer"
                                  % ptr)
-            poke(ptr, struct.pack("<I", stub.labels["column_stub"]))
+            label = ('simple_column_stub' if ptr == SIMPLE_TEXT_CREATE_PTR
+                     else 'column_stub')
+            poke(ptr, struct.pack("<I", stub.labels[label]))
 
         pitch_off = GRID_PITCH_CALL - LOAD_BASE
         if bytes(exe[pitch_off:pitch_off + 2]) != GRID_PITCH_CALL_OLD:

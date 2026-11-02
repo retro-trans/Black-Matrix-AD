@@ -1,0 +1,37 @@
+{
+  "version": "0.1.13",
+  "asset": "generated-lettering.png",
+  "asset_sha256": "3a04fe2944bdfc2081e1dd716e0f8c24451c41d90ff97a91e98c725478f64a65",
+  "role": "Actual built-in ImageGen lettering alpha packed into the game, not reference-only",
+  "source": "CHAR.DAT texture0x1350, all169 descriptors audited",
+  "rows": [
+    {"sprite":82,"text":"Miss!"},
+    {"sprite":83,"text":"Guard"},
+    {"sprite":84,"text":"Stone","meaning":"Petrification condition; existing project short form"},
+    {"sprite":85,"text":"Poison"},
+    {"sprite":86,"text":"Paral.","meaning":"Paralysis; explicit compact abbreviation, not the verb Paralyze"},
+    {"sprite":87,"text":"Status"},
+    {"sprite":88,"text":"Sleep"},
+    {"sprite":89,"text":"Up"},
+    {"sprite":90,"text":"Down"},
+    {"sprite":91,"text":"Freeze"},
+    {"sprite":104,"split_sprites":[104,105,106],"text":"Stance","meaning":"Defensive response stance, confirmed by battle-menu/help context"},
+    {"sprite":162,"text":"Magic"}
+  ],
+  "conversion": {
+    "source_cell":[512,256],"native_conversion_cell":[73,43],
+    "same_conversion_for_every_word":true,"per_word_scaling":false,
+    "foreground_coverage_threshold":96,"native_alpha_bits":1,
+    "native_palette_peak_retained":true,"lower_right_shadow_pixels":1,
+    "old_font_masks_used":false,"hidden_transparent_RGB_ignored":true
+  },
+  "review": {
+    "accuracy_rows_examined":12,"accuracy_rows_total":12,
+    "editorial_packed_labels_examined":12,"editorial_packed_labels_total":12,
+    "reviewer":"battle_badge_meaning_review",
+    "main_final_proof_rows":12,
+    "caveats":["Stone has a dense final e at native resolution.","Miss! retains the original dark-red palette; fresh gameplay contrast remains unverified."]
+  },
+  "scope_exclusions":["Existing Normal/Latent lettering is unchanged.","This169-descriptor battle atlas audit is not a claim that all Japanese imagery throughout the game is translated."],
+  "gameplay_verified":false
+}

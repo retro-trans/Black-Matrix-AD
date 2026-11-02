@@ -9,6 +9,7 @@ from pathlib import Path
 import cooking
 import patchline
 import uistr
+import equipment_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 UI = ROOT / 'script/ui/field_battle.tsv'
@@ -38,10 +39,14 @@ ITEM_NAMES = {
     0x65392: ('stick_name', '木の棒'),
     0x654B2: ('stick_name', '木の棒'),
     0x713F2: ('prison_clothes', '囚人服'),
+    0x6D852: ('shortbow_name', 'ショートボウ'),
+    0x7146E: ('leather_clothes', '皮の服'),
 }
 ITEM_DESCRIPTIONS = {0x653A8: 'stick_description',
                      0x654C8: 'stick_description',
-                     0x7141E: 'clothes_description'}
+                     0x7141E: 'clothes_description',
+                     0x6D868: 'shortbow_description',
+                     0x7149A: 'leather_description'}
 FIELD = ('status', 'ritual', 'items', 'shop', 'abilities', 'system', 'exit')
 BATTLE = ('move', 'attack', 'magic', 'item_battle', 'status_battle',
           'refill', 'stance', 'armor')
@@ -79,22 +84,59 @@ def patch_parameters(data):
     help_text = cooking.strings(BATTLE_HELP_UI)
     for offset, key in BATTLE_HELP.items():
         record(data, offset, help_text[key].split('\\n'), 19)
+    patch_item_records(data)
+
+
+def patch_item_records(data):
+    """Validate all item text before writes; accept original or our exact text.
+
+    Also usable on an already-translated Noto archive without rebuilding it
+    from vanilla or losing other localized menus/help.
+    """
+    original = (ROOT/'extracted/PARAMETA.DAT').read_bytes()
     item_text = cooking.strings(ITEM_UI)
+    pending = []
     for offset, (key, japanese) in ITEM_NAMES.items():
         name = item_text[key]
-        current = next(uistr.walk(data, offset-2, 1), None)
+        current = next(uistr.walk(original, offset-2, 1), None)
         if current is None or current[2] != japanese or current[1] > 8:
             raise ValueError('unexpected original item name at 0x%X' % offset)
-        tail = struct.unpack_from('<%dH' % (8-current[1]), data, offset+2*current[1])
+        tail = struct.unpack_from('<%dH' % (8-current[1]), original, offset+2*current[1])
         if any(w != patchline.SPACE for w in tail) or len(name) > 8:
             raise ValueError('item name exceeds its reserved eight slots')
         # The count is independent of the fixed struct stride. Only consume
         # its verified padding; the following item flags/stats stay in place.
-        struct.pack_into('<H', data, offset-2, len(name))
-        struct.pack_into('<8H', data, offset,
-                         *(patchline.to_sjis(c) for c in name.ljust(8)))
+        target = struct.pack('<9H',len(name),*(patchline.to_sjis(c) for c in name.ljust(8)))
+        if data[offset-2:offset+16] not in (original[offset-2:offset+16],target):
+            raise ValueError('unknown translated item name at %X' % offset)
+        pending.append((offset-2,target))
     for offset, key in ITEM_DESCRIPTIONS.items():
-        record(data, offset, item_text[key].split('\\n'), 19)
+        source = original[offset-2:offset+76]
+        target = bytearray(source)
+        rows = item_text[key].split('\\n')
+        if len(rows)!=2:
+            raise ValueError('item description requires two rows')
+        record(target,2,rows,19)
+        if data[offset-2:offset+76] not in (source,target):
+            raise ValueError('unknown translated item description at %X' % offset)
+        pending.append((offset-2,target))
+    candidate = bytearray(data)
+    for offset,target in pending:candidate[offset:offset+len(target)]=target
+    catalog = equipment_catalog.patch(candidate)
+    data[:] = candidate
+    return dict(names={key:item_text[key] for key,_ in ITEM_NAMES.values()},
+                descriptions={key:item_text[key] for key in ITEM_DESCRIPTIONS.values()},
+                catalog=catalog,
+                scope='item name/padding and description words only; flags, stats and range mechanics unchanged')
+
+
+def item_records():
+    """Exact text plus padded item-list variants for HD record texture seeding."""
+    text = cooking.strings(ITEM_UI)
+    names = sorted({text[key] for key,_ in ITEM_NAMES.values()})
+    descriptions = sorted({text[key] for key in ITEM_DESCRIPTIONS.values()})
+    return [form for name in names for form in (name,name.ljust(8))] + [
+        ''.join(row.ljust(19) for row in desc.split('\\n')) for desc in descriptions] + equipment_catalog.records()
 
 
 def install():

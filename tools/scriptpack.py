@@ -21,6 +21,7 @@ old allocation.
 
 import math
 import os
+import re
 import struct
 import sys
 
@@ -49,10 +50,8 @@ MENU_CHOICE_MAX_UNITS = 15
 
 # Every choice-menu option whose stored count exceeds MENU_CHOICE_MAX_UNITS,
 # collected across all repacked groups so the build can report them together.
-# This is a warning rather than a hard failure only because the English script
-# still carries a backlog of pre-existing over-limit menu options (mostly in
-# not-yet-play-tested ch2-4 menus). Once that backlog is cleared, promote this
-# to a build-stopping error.
+# Choice records are validated after alignment padding: a 15-character label
+# in an even-parity record becomes 16 stored units and is also unsafe.
 MENU_OVERSIZE = []
 
 
@@ -190,8 +189,16 @@ def repack_psi(program, replacements):
                 patchline.COLS if kind == "TALK" else 17)
         wrapped, encoded = encode_text(text, cols=cols)
         encoded = preserve_record_alignment(encoded, old_length)
+        # AP-cost confirmations use the prompt window: a forced line break
+        # advances to another page before showing its Yes/No selector.
+        if kind == 'PROMPT' and re.search(r'\(\d+ AP\)', text) and '\n' in wrapped:
+            raise ValueError('AP prompt at %X must remain on one page: %r' % (off, wrapped))
         if off in choice_offsets and len(encoded) // 2 > MENU_CHOICE_MAX_UNITS:
             MENU_OVERSIZE.append((off, len(encoded) // 2, wrapped))
+            raise ValueError('Choice at %X stores %d units after alignment; maximum is %d: %r'
+                             % (off,len(encoded)//2,MENU_CHOICE_MAX_UNITS,wrapped))
+        if off in choice_offsets and '\n' in wrapped:
+            raise ValueError('Choice at %X must remain a single line: %r' % (off,wrapped))
         replacement = program[off:off + 2] + struct.pack("<H", len(encoded) // 2) + encoded
         old_end = off + 4 + old_length * 2
         if (len(replacement) - (old_end - off)) % 4:

@@ -21,13 +21,15 @@ def cell(slot):
             sum(((offset >> (2*b)) & 1) << b for b in range(8)))
 
 
-def sheets(source, ttf):
+def sheets(source, ttf, renderer=None):
     if ttf.resolve() == font_style.DEFAULT_TTF.resolve():
         font_style.default_font()
     data = source.read_bytes()
     font = ImageFont.truetype(str(ttf), 128)
-    natural = ttf.resolve() == font_style.DEFAULT_TTF.resolve()
-    if natural:font=bizin_font.outline(ttf)
+    if renderer is None and ttf.resolve() == font_style.DEFAULT_TTF.resolve():
+        renderer=bizin_font
+    natural = renderer is not None
+    if natural:font=renderer.outline(ttf)
     forward, _, chars = atlas.tables()
     low = Image.new('L', (256,256)); high = Image.new('L',(1024,1024))
     seen = set()
@@ -38,7 +40,7 @@ def sheets(source, ttf):
             result=generate.native_glyph(data,character)
             if result is None:continue
             _,lo=result
-            hi=bizin_font.glyph(character,font)
+            hi=renderer.glyph(character,font)
         else:
             result=generate.make_glyph(data,character,font,ink_scale=generate.COMPACT_INK_SCALE)
             if result is None:continue
@@ -85,8 +87,18 @@ def main():
     p.add_argument('--dumps',type=Path,default=atlas.ROOT/'build/stock-atlas-run/data/texdump/T20101M')
     p.add_argument('--output',type=Path,default=atlas.ROOT/'build/stock-atlas-run/data/textures/T20101M')
     p.add_argument('--preview-only',action='store_true')
-    args=p.parse_args();low,high=sheets(args.font,args.ttf)
-    preview=atlas.ROOT/'build/reusable-atlas';preview.mkdir(parents=True,exist_ok=True)
+    p.add_argument('--noto-regular',action='store_true',
+                   help='use the pinned Noto native font and direct Regular outlines')
+    args=p.parse_args()
+    renderer=bizin_font if args.ttf.resolve()==font_style.DEFAULT_TTF.resolve() else None
+    style=font_style
+    if args.noto_regular:
+        import noto_font
+        renderer=style=noto_font
+        args.font=noto_font.NATIVE;args.ttf=noto_font.default_font()
+    low,high=sheets(args.font,args.ttf,renderer=renderer)
+    preview=(renderer.OUTPUT if args.noto_regular else atlas.ROOT/'build/reusable-atlas')
+    preview.mkdir(parents=True,exist_ok=True)
     low.save(preview/'native-sheet-mask.png');high.save(preview/'hd-sheet-mask.png')
     if args.preview_only:return
     matches=[]
@@ -105,12 +117,12 @@ def main():
         raise SystemExit('No canonical atlas found. Cold-boot the test disc, open battle help, then retry. No replacements installed.')
     (preview/'stock-pack.json').write_text(json.dumps(dict(
         textures=matches, output=str(args.output),
-        font_size=bizin_font.SIZE, layout_metrics_unchanged=False,
+        font_size=renderer.SIZE if renderer else None, layout_metrics_unchanged=False,
         outline_font=str(args.ttf),
         outline_font_sha256=hashlib.sha256(args.ttf.read_bytes()).hexdigest()),
         indent=2),encoding='utf-8')
-    if args.ttf.resolve() == font_style.DEFAULT_TTF.resolve():
-        font_style.copy_license(args.output)
+    if renderer is not None:
+        style.copy_license(args.output)
     print('Installed verified standard PNG textures: '+', '.join(m['texture'] for m in matches))
     print('Fully close and restart the STOCK test emulator to load the pack.')
 

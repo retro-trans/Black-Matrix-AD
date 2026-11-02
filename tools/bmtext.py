@@ -41,6 +41,8 @@ DYNAMIC_MASTER_NAME_TOKEN = "{MASTER_NAME}"
 # JIS level-2 kanji the game keeps as custom font glyphs, in unassigned SJIS
 # slots. Readings deduced from surrounding text, not from the font bitmap.
 GAIJI = {
+    0x82F3: "狡",   # Original font bitmap: 狡猾な (latent ability descriptions).
+    0x82F4: "猾",   # Both glyphs visually checked against the MFD font.
     0x8240: "扈",   # 跋扈する
     0x8246: "?",
     0x8247: "戮",   # 大量殺戮
