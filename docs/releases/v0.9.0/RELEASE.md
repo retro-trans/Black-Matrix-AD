@@ -1,7 +1,7 @@
 English translation of **Black/Matrix AD** for **Dreamcast**, with separate
 **DCP packages** for the Japanese **Disc 1** and **Disc 2**.
 
-**v0.9.0 is an experimental English translation patch.** You need your own
+**v0.9.0 is the latest stable English translation patch.** You need your own
 original Japanese discs; no complete game images are distributed.
 
 ### Apply
@@ -12,7 +12,7 @@ run `Retro-Trans.exe`; the ZIP includes the required runtime notices.
 
 Click **Refresh catalog** first (especially after upgrading), then browse to
 your original Japanese Disc 1 or Disc 2 **CUE**, keeping all three BIN
-tracks together. Automatic identifies the disc, offers experimental **v0.9.0**
+tracks together. Automatic identifies the disc, offers **v0.9.0**
 and downloads its matching DCP when you click **Patch**. Choose a new output
 folder and GDI or CUE/BIN output. Original tracks and downloaded packages are
 hash-verified; rebuilt game files, boot invariants and CD audio are verified.

@@ -5,7 +5,7 @@ English translation and native interface work for **Black/Matrix AD** on
 
 The current release is
 **[v0.9.0](https://github.com/retro-trans/Black-Matrix-AD/releases/tag/v0.9.0)**,
-an experimental English translation patch.
+the latest stable English translation patch.
 The release number identifies the translated game-file content; it does not imply that
 every route, screen or line has passed human review or a complete playthrough.
 
@@ -30,7 +30,7 @@ run `Retro-Trans.exe`; the ZIP includes the required runtime notices.
 
 Click **Refresh catalog** first (especially after upgrading), then browse to
 your original Japanese Disc 1 or Disc 2 **CUE**, with all three BIN
-tracks together. Automatic identifies the disc, offers experimental **v0.9.0**,
+tracks together. Automatic identifies the disc, offers **v0.9.0**,
 and downloads the matching DCP when you click **Patch**. Choose a **new output
 folder** and GDI or CUE/BIN output. Every original track, downloaded package,
 rebuilt game file, boot invariant and CD-audio content is verified.

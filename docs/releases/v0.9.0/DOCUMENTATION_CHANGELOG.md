@@ -1,5 +1,14 @@
 # Release documentation changes
 
+## 2026-11-03 — mark v0.9.0 as the latest stable release
+
+At pow's request, removed the experimental designation from the current README,
+release notes and downloadable instructions, and promoted the existing v0.9.0
+release from prerelease to Latest. Refreshed the instructions' checksum. Retained
+specific validation and compatibility limits; no new gameplay or hardware testing
+is claimed. The two DCP packages, game content and version tag are unchanged.
+The local v0.9.1 VGA test and upgrade packages are not published by this change.
+
 ## 2026-11-02 — focus public descriptions on the game
 
 At pow's request, removed repository-sanitation/replacement narrative, internal
