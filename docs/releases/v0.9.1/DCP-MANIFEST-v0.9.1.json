@@ -1,0 +1,99 @@
+{
+  "version": "0.9.1",
+  "format": "DCP",
+  "source_commit": "3450063debe4f54032bcb7bfb12c2245b63b4c1c",
+  "packages": [
+    {
+      "kind": "full",
+      "disc": 1,
+      "package": "Black-Matrix-AD-Disc1-English-v0.9.1.dcp",
+      "bytes": 106581942,
+      "sha256": "9e32d8d7d6bf10668ade53cd53936c3b9bf35660f0adca5f6858d996fc0429fd",
+      "metadata": {
+        "bootsector_invariant_sha256": "843ad80571bbaf620684b6c8495e8f09bedad342bc118b45cfe8e5802f7583b7",
+        "disc": 1,
+        "game_id": "black-matrix-ad-dreamcast",
+        "game_name": "Black/Matrix AD",
+        "retro_trans_dcp": 1,
+        "source_tree_sha256": "edfd8604fe60e2c73d88abca606fe64c519c3510e3f8e30b8f48bde74120e673",
+        "source_version": "original",
+        "target_tree_sha256": "55ec2a77c0e46b7ed0c53d6656c939f5488762176e9abfdbe4b26392ffce5e7c",
+        "target_version": "0.9.1",
+        "version": "0.9.1"
+      },
+      "tested_candidate_sha256": "416d415f442b15f9b90c4020ce97ad46d1377609652cdc1461289c5cb206d451",
+      "delta_payloads_unchanged": true
+    },
+    {
+      "kind": "full",
+      "disc": 2,
+      "package": "Black-Matrix-AD-Disc2-English-v0.9.1.dcp",
+      "bytes": 96519655,
+      "sha256": "3a8f69d6bed4a556805ac695bd5fb255b71e1871ab7d092579407a7b83dd2857",
+      "metadata": {
+        "bootsector_invariant_sha256": "63f0d1f3f66403e92d5ec0a48b4d18529d8b80c9766b2de5cb96ea9363a0bdca",
+        "disc": 2,
+        "game_id": "black-matrix-ad-dreamcast",
+        "game_name": "Black/Matrix AD",
+        "retro_trans_dcp": 1,
+        "source_tree_sha256": "6a3d04623c957f3892934792978d6c47a434b8b4fb156b4febe2b8226403309d",
+        "source_version": "original",
+        "target_tree_sha256": "73dc7bf6a8f9fec2e2f2d5032fc0b95fa3632832a075bc3c49c7be08c664b4af",
+        "target_version": "0.9.1",
+        "version": "0.9.1"
+      },
+      "tested_candidate_sha256": "66f40f3094470fdc4d7a858c5a3dc7c6a58a041fc5f589fc00f686ebe79b26e7",
+      "delta_payloads_unchanged": true
+    },
+    {
+      "kind": "upgrade",
+      "disc": 1,
+      "package": "Black-Matrix-AD-Disc1-Upgrade-v0.9.0-to-v0.9.1.dcp",
+      "bytes": 10092,
+      "sha256": "804390c58fb892bb0fca7f1b304f01c51b34f2e656280d61bf2fd2ddfda38074",
+      "metadata": {
+        "bootsector_invariant_sha256": "843ad80571bbaf620684b6c8495e8f09bedad342bc118b45cfe8e5802f7583b7",
+        "disc": 1,
+        "game_id": "black-matrix-ad-dreamcast",
+        "game_name": "Black/Matrix AD",
+        "patch_kind": "upgrade",
+        "retro_trans_dcp": 1,
+        "source_tree_sha256": "26a335145d4d8995b1dcc98c3e43faba632ba2b9821953fa6820a3fc5ffe9a9e",
+        "source_version": "0.9.0",
+        "target_tree_sha256": "55ec2a77c0e46b7ed0c53d6656c939f5488762176e9abfdbe4b26392ffce5e7c",
+        "target_version": "0.9.1",
+        "version": "0.9.1"
+      },
+      "tested_candidate_sha256": "60f9c572e574ded91ce1d149f73b2ca67e1c50301623f45a93137c8b0539b3b2",
+      "delta_payloads_unchanged": true
+    },
+    {
+      "kind": "upgrade",
+      "disc": 2,
+      "package": "Black-Matrix-AD-Disc2-Upgrade-v0.9.0-to-v0.9.1.dcp",
+      "bytes": 10092,
+      "sha256": "ed1c7ab96746be85f485ecd8d3bb409f1fef77074f158fad8f0c3e0b5ab520e7",
+      "metadata": {
+        "bootsector_invariant_sha256": "63f0d1f3f66403e92d5ec0a48b4d18529d8b80c9766b2de5cb96ea9363a0bdca",
+        "disc": 2,
+        "game_id": "black-matrix-ad-dreamcast",
+        "game_name": "Black/Matrix AD",
+        "patch_kind": "upgrade",
+        "retro_trans_dcp": 1,
+        "source_tree_sha256": "18ab41d9a8d53651ae65cbac2cb53ccd1800a6630f01eef1fc56ab0c66f5737e",
+        "source_version": "0.9.0",
+        "target_tree_sha256": "73dc7bf6a8f9fec2e2f2d5032fc0b95fa3632832a075bc3c49c7be08c664b4af",
+        "target_version": "0.9.1",
+        "version": "0.9.1"
+      },
+      "tested_candidate_sha256": "d5e4d2c36853572d5540d4908404eb7f99c786b93d1a1be8b38ef808af10f920",
+      "delta_payloads_unchanged": true
+    }
+  ],
+  "upstream_video_patch": {
+    "author": "Rolly (SEGA-SKY)",
+    "url": "https://segasky.itch.io/black-matrix-ad-vga-patch-for-sega-dreamcast"
+  },
+  "project_lead": "pow",
+  "game_images_distributed": false
+}

@@ -1,0 +1,23 @@
+{
+  "version": "0.9.1",
+  "status": "passed",
+  "checks": [
+    {
+      "disc": 1,
+      "version": "0.9.1",
+      "package": "Black-Matrix-AD-Disc1-English-v0.9.1.dcp",
+      "stable": true,
+      "recognized": true
+    },
+    {
+      "disc": 2,
+      "version": "0.9.1",
+      "package": "Black-Matrix-AD-Disc2-English-v0.9.1.dcp",
+      "stable": true,
+      "recognized": true
+    }
+  ],
+  "existing_catalog_entries_unchanged": true,
+  "actual_dcp_metadata_validated": true,
+  "successful_apply_proofs": "DCP-VALIDATION-v0.9.1.json"
+}

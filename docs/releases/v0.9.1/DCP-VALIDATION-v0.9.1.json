@@ -1,0 +1,642 @@
+{
+  "version": "0.9.1",
+  "status": "passed",
+  "checks": [
+    {
+      "disc": 1,
+      "kind": "full",
+      "package": "Black-Matrix-AD-Disc1-English-v0.9.1.dcp",
+      "sha256": "9e32d8d7d6bf10668ade53cd53936c3b9bf35660f0adca5f6858d996fc0429fd",
+      "source_format": "CUE",
+      "proof": {
+        "success": true,
+        "files_patched": 27,
+        "files_added": 0,
+        "files_overwritten": 0,
+        "format": "GDI",
+        "verified_game_tree_sha256": "55ec2a77c0e46b7ed0c53d6656c939f5488762176e9abfdbe4b26392ffce5e7c",
+        "bootsector_invariant_sha256": "843ad80571bbaf620684b6c8495e8f09bedad342bc118b45cfe8e5802f7583b7",
+        "audio_tracks_preserved": true,
+        "audio_tracks": {
+          "2": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          }
+        },
+        "audio_verification": "Identical CDDA content and sample alignment; format-specific silent padding may differ",
+        "audio_content": {
+          "2": {
+            "content_bytes": 1381396,
+            "content_sha256": "4d3e358e4dfec2b9773659e417434daed6173fdc3313d893ad83d5470618b698",
+            "sample_alignment": 0
+          }
+        },
+        "release_metadata_verified": true,
+        "metadata": {
+          "bootsector_invariant_sha256": "843ad80571bbaf620684b6c8495e8f09bedad342bc118b45cfe8e5802f7583b7",
+          "disc": 1,
+          "game_id": "black-matrix-ad-dreamcast",
+          "game_name": "Black/Matrix AD",
+          "retro_trans_dcp": 1,
+          "source_tree_sha256": "edfd8604fe60e2c73d88abca606fe64c519c3510e3f8e30b8f48bde74120e673",
+          "source_version": "original",
+          "target_tree_sha256": "55ec2a77c0e46b7ed0c53d6656c939f5488762176e9abfdbe4b26392ffce5e7c",
+          "target_version": "0.9.1",
+          "version": "0.9.1"
+        },
+        "output_files": {
+          "disc.gdi": {
+            "bytes": 87,
+            "sha256": "396548fe53f9b3641896398be563795ff190f9b0d7cc61c331901bc68f4e5392"
+          },
+          "track01.bin": {
+            "bytes": 705600,
+            "sha256": "0dfb00a7482c1cf3cd06dd072fe35b328ce151e334b4b88d00874a9402c2cf9f"
+          },
+          "track02.raw": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          },
+          "track03.bin": {
+            "bytes": 1185760800,
+            "sha256": "ecaf10ea0cebfa960180ba71c686e36640920a22ee24d46bf7eb52ca40e401ff"
+          }
+        }
+      }
+    },
+    {
+      "disc": 1,
+      "kind": "full",
+      "package": "Black-Matrix-AD-Disc1-English-v0.9.1.dcp",
+      "sha256": "9e32d8d7d6bf10668ade53cd53936c3b9bf35660f0adca5f6858d996fc0429fd",
+      "source_format": "CUE",
+      "proof": {
+        "success": true,
+        "files_patched": 27,
+        "files_added": 0,
+        "files_overwritten": 0,
+        "format": "CUE/BIN",
+        "verified_game_tree_sha256": "55ec2a77c0e46b7ed0c53d6656c939f5488762176e9abfdbe4b26392ffce5e7c",
+        "bootsector_invariant_sha256": "843ad80571bbaf620684b6c8495e8f09bedad342bc118b45cfe8e5802f7583b7",
+        "audio_tracks_preserved": true,
+        "audio_tracks": {
+          "2": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          }
+        },
+        "audio_verification": "Identical CDDA content and sample alignment; format-specific silent padding may differ",
+        "audio_content": {
+          "2": {
+            "content_bytes": 1381396,
+            "content_sha256": "4d3e358e4dfec2b9773659e417434daed6173fdc3313d893ad83d5470618b698",
+            "sample_alignment": 0
+          }
+        },
+        "release_metadata_verified": true,
+        "metadata": {
+          "bootsector_invariant_sha256": "843ad80571bbaf620684b6c8495e8f09bedad342bc118b45cfe8e5802f7583b7",
+          "disc": 1,
+          "game_id": "black-matrix-ad-dreamcast",
+          "game_name": "Black/Matrix AD",
+          "retro_trans_dcp": 1,
+          "source_tree_sha256": "edfd8604fe60e2c73d88abca606fe64c519c3510e3f8e30b8f48bde74120e673",
+          "source_version": "original",
+          "target_tree_sha256": "55ec2a77c0e46b7ed0c53d6656c939f5488762176e9abfdbe4b26392ffce5e7c",
+          "target_version": "0.9.1",
+          "version": "0.9.1"
+        },
+        "output_files": {
+          "Black-Matrix-AD-Disc1-English-v0.9.1 (Track 01).bin": {
+            "bytes": 705600,
+            "sha256": "0dfb00a7482c1cf3cd06dd072fe35b328ce151e334b4b88d00874a9402c2cf9f"
+          },
+          "Black-Matrix-AD-Disc1-English-v0.9.1 (Track 02).bin": {
+            "bytes": 2088576,
+            "sha256": "e6c6f921666e7d50c4f943f6ab0f0545732d0534903fc6e5c4b0181ed352dc85"
+          },
+          "Black-Matrix-AD-Disc1-English-v0.9.1 (Track 03).bin": {
+            "bytes": 1186113600,
+            "sha256": "0d2bef00fc78d882591a3c0452bf3e4c0708f579e0fc9b05a48b5c6fa7ab3895"
+          },
+          "Black-Matrix-AD-Disc1-English-v0.9.1.cue": {
+            "bytes": 405,
+            "sha256": "a1dc3615a9aca43a3951106f52f6d6dddf9bb03bfe04051c474ef548c7e39ec9"
+          }
+        }
+      }
+    },
+    {
+      "disc": 2,
+      "kind": "full",
+      "package": "Black-Matrix-AD-Disc2-English-v0.9.1.dcp",
+      "sha256": "3a8f69d6bed4a556805ac695bd5fb255b71e1871ab7d092579407a7b83dd2857",
+      "source_format": "CUE",
+      "proof": {
+        "success": true,
+        "files_patched": 20,
+        "files_added": 0,
+        "files_overwritten": 0,
+        "format": "GDI",
+        "verified_game_tree_sha256": "73dc7bf6a8f9fec2e2f2d5032fc0b95fa3632832a075bc3c49c7be08c664b4af",
+        "bootsector_invariant_sha256": "63f0d1f3f66403e92d5ec0a48b4d18529d8b80c9766b2de5cb96ea9363a0bdca",
+        "audio_tracks_preserved": true,
+        "audio_tracks": {
+          "2": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          }
+        },
+        "audio_verification": "Identical CDDA content and sample alignment; format-specific silent padding may differ",
+        "audio_content": {
+          "2": {
+            "content_bytes": 1381396,
+            "content_sha256": "4d3e358e4dfec2b9773659e417434daed6173fdc3313d893ad83d5470618b698",
+            "sample_alignment": 0
+          }
+        },
+        "release_metadata_verified": true,
+        "metadata": {
+          "bootsector_invariant_sha256": "63f0d1f3f66403e92d5ec0a48b4d18529d8b80c9766b2de5cb96ea9363a0bdca",
+          "disc": 2,
+          "game_id": "black-matrix-ad-dreamcast",
+          "game_name": "Black/Matrix AD",
+          "retro_trans_dcp": 1,
+          "source_tree_sha256": "6a3d04623c957f3892934792978d6c47a434b8b4fb156b4febe2b8226403309d",
+          "source_version": "original",
+          "target_tree_sha256": "73dc7bf6a8f9fec2e2f2d5032fc0b95fa3632832a075bc3c49c7be08c664b4af",
+          "target_version": "0.9.1",
+          "version": "0.9.1"
+        },
+        "output_files": {
+          "disc.gdi": {
+            "bytes": 87,
+            "sha256": "396548fe53f9b3641896398be563795ff190f9b0d7cc61c331901bc68f4e5392"
+          },
+          "track01.bin": {
+            "bytes": 705600,
+            "sha256": "b88520987ee5787102c16040d730321ac1f3b19ecd0bdde5cf7605a8412fb5d7"
+          },
+          "track02.raw": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          },
+          "track03.bin": {
+            "bytes": 1185760800,
+            "sha256": "4b39b469f75cfdca9d6e972cb4f7120a112ac1cb1b0a675747bc936789d0465f"
+          }
+        }
+      }
+    },
+    {
+      "disc": 2,
+      "kind": "full",
+      "package": "Black-Matrix-AD-Disc2-English-v0.9.1.dcp",
+      "sha256": "3a8f69d6bed4a556805ac695bd5fb255b71e1871ab7d092579407a7b83dd2857",
+      "source_format": "CUE",
+      "proof": {
+        "success": true,
+        "files_patched": 20,
+        "files_added": 0,
+        "files_overwritten": 0,
+        "format": "CUE/BIN",
+        "verified_game_tree_sha256": "73dc7bf6a8f9fec2e2f2d5032fc0b95fa3632832a075bc3c49c7be08c664b4af",
+        "bootsector_invariant_sha256": "63f0d1f3f66403e92d5ec0a48b4d18529d8b80c9766b2de5cb96ea9363a0bdca",
+        "audio_tracks_preserved": true,
+        "audio_tracks": {
+          "2": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          }
+        },
+        "audio_verification": "Identical CDDA content and sample alignment; format-specific silent padding may differ",
+        "audio_content": {
+          "2": {
+            "content_bytes": 1381396,
+            "content_sha256": "4d3e358e4dfec2b9773659e417434daed6173fdc3313d893ad83d5470618b698",
+            "sample_alignment": 0
+          }
+        },
+        "release_metadata_verified": true,
+        "metadata": {
+          "bootsector_invariant_sha256": "63f0d1f3f66403e92d5ec0a48b4d18529d8b80c9766b2de5cb96ea9363a0bdca",
+          "disc": 2,
+          "game_id": "black-matrix-ad-dreamcast",
+          "game_name": "Black/Matrix AD",
+          "retro_trans_dcp": 1,
+          "source_tree_sha256": "6a3d04623c957f3892934792978d6c47a434b8b4fb156b4febe2b8226403309d",
+          "source_version": "original",
+          "target_tree_sha256": "73dc7bf6a8f9fec2e2f2d5032fc0b95fa3632832a075bc3c49c7be08c664b4af",
+          "target_version": "0.9.1",
+          "version": "0.9.1"
+        },
+        "output_files": {
+          "Black-Matrix-AD-Disc2-English-v0.9.1 (Track 01).bin": {
+            "bytes": 705600,
+            "sha256": "b88520987ee5787102c16040d730321ac1f3b19ecd0bdde5cf7605a8412fb5d7"
+          },
+          "Black-Matrix-AD-Disc2-English-v0.9.1 (Track 02).bin": {
+            "bytes": 2088576,
+            "sha256": "e6c6f921666e7d50c4f943f6ab0f0545732d0534903fc6e5c4b0181ed352dc85"
+          },
+          "Black-Matrix-AD-Disc2-English-v0.9.1 (Track 03).bin": {
+            "bytes": 1186113600,
+            "sha256": "adc41bfde20e5229c35f0c2acabb6a27dd0b66e598a7aeb7824b0314815b7af0"
+          },
+          "Black-Matrix-AD-Disc2-English-v0.9.1.cue": {
+            "bytes": 405,
+            "sha256": "b53056bc34ad9b6764683b935c67949c04beacba9aa6690860c0c097f2dbd968"
+          }
+        }
+      }
+    },
+    {
+      "disc": 1,
+      "kind": "upgrade",
+      "package": "Black-Matrix-AD-Disc1-Upgrade-v0.9.0-to-v0.9.1.dcp",
+      "sha256": "804390c58fb892bb0fca7f1b304f01c51b34f2e656280d61bf2fd2ddfda38074",
+      "source_format": "GDI",
+      "proof": {
+        "success": true,
+        "files_patched": 1,
+        "files_added": 0,
+        "files_overwritten": 0,
+        "format": "GDI",
+        "verified_game_tree_sha256": "55ec2a77c0e46b7ed0c53d6656c939f5488762176e9abfdbe4b26392ffce5e7c",
+        "bootsector_invariant_sha256": "843ad80571bbaf620684b6c8495e8f09bedad342bc118b45cfe8e5802f7583b7",
+        "audio_tracks_preserved": true,
+        "audio_tracks": {
+          "2": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          }
+        },
+        "audio_verification": "Identical CDDA content and sample alignment; format-specific silent padding may differ",
+        "audio_content": {
+          "2": {
+            "content_bytes": 1381396,
+            "content_sha256": "4d3e358e4dfec2b9773659e417434daed6173fdc3313d893ad83d5470618b698",
+            "sample_alignment": 0
+          }
+        },
+        "release_metadata_verified": true,
+        "metadata": {
+          "bootsector_invariant_sha256": "843ad80571bbaf620684b6c8495e8f09bedad342bc118b45cfe8e5802f7583b7",
+          "disc": 1,
+          "game_id": "black-matrix-ad-dreamcast",
+          "game_name": "Black/Matrix AD",
+          "patch_kind": "upgrade",
+          "retro_trans_dcp": 1,
+          "source_tree_sha256": "26a335145d4d8995b1dcc98c3e43faba632ba2b9821953fa6820a3fc5ffe9a9e",
+          "source_version": "0.9.0",
+          "target_tree_sha256": "55ec2a77c0e46b7ed0c53d6656c939f5488762176e9abfdbe4b26392ffce5e7c",
+          "target_version": "0.9.1",
+          "version": "0.9.1"
+        },
+        "output_files": {
+          "disc.gdi": {
+            "bytes": 87,
+            "sha256": "396548fe53f9b3641896398be563795ff190f9b0d7cc61c331901bc68f4e5392"
+          },
+          "track01.bin": {
+            "bytes": 705600,
+            "sha256": "0dfb00a7482c1cf3cd06dd072fe35b328ce151e334b4b88d00874a9402c2cf9f"
+          },
+          "track02.raw": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          },
+          "track03.bin": {
+            "bytes": 1185760800,
+            "sha256": "ecaf10ea0cebfa960180ba71c686e36640920a22ee24d46bf7eb52ca40e401ff"
+          }
+        }
+      }
+    },
+    {
+      "disc": 1,
+      "kind": "upgrade",
+      "package": "Black-Matrix-AD-Disc1-Upgrade-v0.9.0-to-v0.9.1.dcp",
+      "sha256": "804390c58fb892bb0fca7f1b304f01c51b34f2e656280d61bf2fd2ddfda38074",
+      "source_format": "GDI",
+      "proof": {
+        "success": true,
+        "files_patched": 1,
+        "files_added": 0,
+        "files_overwritten": 0,
+        "format": "CUE/BIN",
+        "verified_game_tree_sha256": "55ec2a77c0e46b7ed0c53d6656c939f5488762176e9abfdbe4b26392ffce5e7c",
+        "bootsector_invariant_sha256": "843ad80571bbaf620684b6c8495e8f09bedad342bc118b45cfe8e5802f7583b7",
+        "audio_tracks_preserved": true,
+        "audio_tracks": {
+          "2": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          }
+        },
+        "audio_verification": "Identical CDDA content and sample alignment; format-specific silent padding may differ",
+        "audio_content": {
+          "2": {
+            "content_bytes": 1381396,
+            "content_sha256": "4d3e358e4dfec2b9773659e417434daed6173fdc3313d893ad83d5470618b698",
+            "sample_alignment": 0
+          }
+        },
+        "release_metadata_verified": true,
+        "metadata": {
+          "bootsector_invariant_sha256": "843ad80571bbaf620684b6c8495e8f09bedad342bc118b45cfe8e5802f7583b7",
+          "disc": 1,
+          "game_id": "black-matrix-ad-dreamcast",
+          "game_name": "Black/Matrix AD",
+          "patch_kind": "upgrade",
+          "retro_trans_dcp": 1,
+          "source_tree_sha256": "26a335145d4d8995b1dcc98c3e43faba632ba2b9821953fa6820a3fc5ffe9a9e",
+          "source_version": "0.9.0",
+          "target_tree_sha256": "55ec2a77c0e46b7ed0c53d6656c939f5488762176e9abfdbe4b26392ffce5e7c",
+          "target_version": "0.9.1",
+          "version": "0.9.1"
+        },
+        "output_files": {
+          "Black-Matrix-AD-Disc1-Upgrade-v0.9.0-to-v0.9.1 (Track 01).bin": {
+            "bytes": 705600,
+            "sha256": "0dfb00a7482c1cf3cd06dd072fe35b328ce151e334b4b88d00874a9402c2cf9f"
+          },
+          "Black-Matrix-AD-Disc1-Upgrade-v0.9.0-to-v0.9.1 (Track 02).bin": {
+            "bytes": 2088576,
+            "sha256": "15abc801f2d9b012e1ed02acc6bc99d277f9bb204fd75ee671293934f2d868c4"
+          },
+          "Black-Matrix-AD-Disc1-Upgrade-v0.9.0-to-v0.9.1 (Track 03).bin": {
+            "bytes": 1186113600,
+            "sha256": "0d2bef00fc78d882591a3c0452bf3e4c0708f579e0fc9b05a48b5c6fa7ab3895"
+          },
+          "Black-Matrix-AD-Disc1-Upgrade-v0.9.0-to-v0.9.1.cue": {
+            "bytes": 435,
+            "sha256": "5234312994849f46082a28b246baa4e8846739556070877eb621bbe7ce1b6a4e"
+          }
+        }
+      }
+    },
+    {
+      "disc": 2,
+      "kind": "upgrade",
+      "package": "Black-Matrix-AD-Disc2-Upgrade-v0.9.0-to-v0.9.1.dcp",
+      "sha256": "ed1c7ab96746be85f485ecd8d3bb409f1fef77074f158fad8f0c3e0b5ab520e7",
+      "source_format": "GDI",
+      "proof": {
+        "success": true,
+        "files_patched": 1,
+        "files_added": 0,
+        "files_overwritten": 0,
+        "format": "GDI",
+        "verified_game_tree_sha256": "73dc7bf6a8f9fec2e2f2d5032fc0b95fa3632832a075bc3c49c7be08c664b4af",
+        "bootsector_invariant_sha256": "63f0d1f3f66403e92d5ec0a48b4d18529d8b80c9766b2de5cb96ea9363a0bdca",
+        "audio_tracks_preserved": true,
+        "audio_tracks": {
+          "2": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          }
+        },
+        "audio_verification": "Identical CDDA content and sample alignment; format-specific silent padding may differ",
+        "audio_content": {
+          "2": {
+            "content_bytes": 1381396,
+            "content_sha256": "4d3e358e4dfec2b9773659e417434daed6173fdc3313d893ad83d5470618b698",
+            "sample_alignment": 0
+          }
+        },
+        "release_metadata_verified": true,
+        "metadata": {
+          "bootsector_invariant_sha256": "63f0d1f3f66403e92d5ec0a48b4d18529d8b80c9766b2de5cb96ea9363a0bdca",
+          "disc": 2,
+          "game_id": "black-matrix-ad-dreamcast",
+          "game_name": "Black/Matrix AD",
+          "patch_kind": "upgrade",
+          "retro_trans_dcp": 1,
+          "source_tree_sha256": "18ab41d9a8d53651ae65cbac2cb53ccd1800a6630f01eef1fc56ab0c66f5737e",
+          "source_version": "0.9.0",
+          "target_tree_sha256": "73dc7bf6a8f9fec2e2f2d5032fc0b95fa3632832a075bc3c49c7be08c664b4af",
+          "target_version": "0.9.1",
+          "version": "0.9.1"
+        },
+        "output_files": {
+          "disc.gdi": {
+            "bytes": 87,
+            "sha256": "396548fe53f9b3641896398be563795ff190f9b0d7cc61c331901bc68f4e5392"
+          },
+          "track01.bin": {
+            "bytes": 705600,
+            "sha256": "b88520987ee5787102c16040d730321ac1f3b19ecd0bdde5cf7605a8412fb5d7"
+          },
+          "track02.raw": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          },
+          "track03.bin": {
+            "bytes": 1185760800,
+            "sha256": "4b39b469f75cfdca9d6e972cb4f7120a112ac1cb1b0a675747bc936789d0465f"
+          }
+        }
+      }
+    },
+    {
+      "disc": 2,
+      "kind": "upgrade",
+      "package": "Black-Matrix-AD-Disc2-Upgrade-v0.9.0-to-v0.9.1.dcp",
+      "sha256": "ed1c7ab96746be85f485ecd8d3bb409f1fef77074f158fad8f0c3e0b5ab520e7",
+      "source_format": "GDI",
+      "proof": {
+        "success": true,
+        "files_patched": 1,
+        "files_added": 0,
+        "files_overwritten": 0,
+        "format": "CUE/BIN",
+        "verified_game_tree_sha256": "73dc7bf6a8f9fec2e2f2d5032fc0b95fa3632832a075bc3c49c7be08c664b4af",
+        "bootsector_invariant_sha256": "63f0d1f3f66403e92d5ec0a48b4d18529d8b80c9766b2de5cb96ea9363a0bdca",
+        "audio_tracks_preserved": true,
+        "audio_tracks": {
+          "2": {
+            "bytes": 1735776,
+            "sha256": "8364bc87848527f027fa6a9d13cae778c0132f3704dff6978173d92df1d71e06"
+          }
+        },
+        "audio_verification": "Identical CDDA content and sample alignment; format-specific silent padding may differ",
+        "audio_content": {
+          "2": {
+            "content_bytes": 1381396,
+            "content_sha256": "4d3e358e4dfec2b9773659e417434daed6173fdc3313d893ad83d5470618b698",
+            "sample_alignment": 0
+          }
+        },
+        "release_metadata_verified": true,
+        "metadata": {
+          "bootsector_invariant_sha256": "63f0d1f3f66403e92d5ec0a48b4d18529d8b80c9766b2de5cb96ea9363a0bdca",
+          "disc": 2,
+          "game_id": "black-matrix-ad-dreamcast",
+          "game_name": "Black/Matrix AD",
+          "patch_kind": "upgrade",
+          "retro_trans_dcp": 1,
+          "source_tree_sha256": "18ab41d9a8d53651ae65cbac2cb53ccd1800a6630f01eef1fc56ab0c66f5737e",
+          "source_version": "0.9.0",
+          "target_tree_sha256": "73dc7bf6a8f9fec2e2f2d5032fc0b95fa3632832a075bc3c49c7be08c664b4af",
+          "target_version": "0.9.1",
+          "version": "0.9.1"
+        },
+        "output_files": {
+          "Black-Matrix-AD-Disc2-Upgrade-v0.9.0-to-v0.9.1 (Track 01).bin": {
+            "bytes": 705600,
+            "sha256": "b88520987ee5787102c16040d730321ac1f3b19ecd0bdde5cf7605a8412fb5d7"
+          },
+          "Black-Matrix-AD-Disc2-Upgrade-v0.9.0-to-v0.9.1 (Track 02).bin": {
+            "bytes": 2088576,
+            "sha256": "15abc801f2d9b012e1ed02acc6bc99d277f9bb204fd75ee671293934f2d868c4"
+          },
+          "Black-Matrix-AD-Disc2-Upgrade-v0.9.0-to-v0.9.1 (Track 03).bin": {
+            "bytes": 1186113600,
+            "sha256": "adc41bfde20e5229c35f0c2acabb6a27dd0b66e598a7aeb7824b0314815b7af0"
+          },
+          "Black-Matrix-AD-Disc2-Upgrade-v0.9.0-to-v0.9.1.cue": {
+            "bytes": 435,
+            "sha256": "da5745e93940a9f3ac6f80b03a9001cfe432473c456978364737823c2c1cf191"
+          }
+        }
+      }
+    }
+  ],
+  "candidate_video_checks": {
+    "version": "0.9.1-vga-test1",
+    "status": "payload-and-four-cold-boot-checks-pass",
+    "discs": [
+      {
+        "disc": 1,
+        "executable_sha256": "bdd6330adeda1b2c9cd429b30819df97a0553e3c69841659a0a286c98b53f98e",
+        "source_track_sha256": "4eb243d79a6052e4b0a643b06c23e088acb00382ccf617538a5f087b5968c268",
+        "target_track_sha256": "3bb8ae90e86af5de026718e9f40724fcb40cca988bb693716046f64240d42886",
+        "non_executable_files_exactly_match_issued_manifest": true,
+        "changed_executable_bytes": 513,
+        "changed_raw_sectors": [
+          503537,
+          503830,
+          503864,
+          503884,
+          503940
+        ]
+      },
+      {
+        "disc": 2,
+        "executable_sha256": "5f9378ae21d1f58e991f7fedd371ed438ffb27aca8dacd18859e213d9782767c",
+        "source_track_sha256": "fc652c477c7a61227a332267cfe2d4153068953cf0f3710717702f759222130e",
+        "target_track_sha256": "37f8409cb393cdb910a76685b7821ab43a7d55ba5a02a3a8a3453f33fa75d84c",
+        "non_executable_files_exactly_match_issued_manifest": true,
+        "changed_executable_bytes": 513,
+        "changed_raw_sectors": [
+          503537,
+          503830,
+          503864,
+          503884,
+          503940
+        ]
+      }
+    ],
+    "cold_boots": [
+      {
+        "variant": "baseline",
+        "disc": 1,
+        "cable": 0,
+        "total_vblanks": 3600,
+        "authenticated_game_samples": 41,
+        "framebuffer": [
+          640,
+          480
+        ],
+        "display": [
+          640,
+          480
+        ],
+        "fb_read_ctrl": "00800001",
+        "video_csv_sha256": "87d15abb3e79602c9a21f7496ef87e84187232cd9fadac53ff53ae9df55bb9a2",
+        "guest_memory_writes": false,
+        "controller_input": false
+      },
+      {
+        "variant": "integrated",
+        "disc": 1,
+        "cable": 0,
+        "total_vblanks": 3600,
+        "authenticated_game_samples": 41,
+        "framebuffer": [
+          640,
+          240
+        ],
+        "display": [
+          640,
+          480
+        ],
+        "fb_read_ctrl": "00800003",
+        "video_csv_sha256": "649f5354e4b924f4765fb720e21470711add127b4aa56e4b2f312cb4065c9d72",
+        "guest_memory_writes": false,
+        "controller_input": false
+      },
+      {
+        "variant": "integrated",
+        "disc": 2,
+        "cable": 0,
+        "total_vblanks": 3600,
+        "authenticated_game_samples": 41,
+        "framebuffer": [
+          640,
+          240
+        ],
+        "display": [
+          640,
+          480
+        ],
+        "fb_read_ctrl": "00800003",
+        "video_csv_sha256": "649f5354e4b924f4765fb720e21470711add127b4aa56e4b2f312cb4065c9d72",
+        "guest_memory_writes": false,
+        "controller_input": false
+      },
+      {
+        "variant": "integrated",
+        "disc": 1,
+        "cable": 3,
+        "total_vblanks": 3600,
+        "authenticated_game_samples": 41,
+        "framebuffer": [
+          640,
+          240
+        ],
+        "display": [
+          640,
+          480
+        ],
+        "fb_read_ctrl": "00000001",
+        "video_csv_sha256": "3b6a16be4414d234511b4dbb66b0d2ef763a125121428516ef81cbde3cceee3a",
+        "guest_memory_writes": false,
+        "controller_input": false
+      }
+    ],
+    "redream_version": "1.5.0",
+    "redream_visual_check": {
+      "disc": 1,
+      "cable": "vga",
+      "full_height_logo_observed": true,
+      "full_height_opening_movie_observed": true,
+      "full_gameplay_or_all_movies_verified": false,
+      "guest_ram_authentication_available": false
+    },
+    "real_console_verified": false,
+    "ntsc_pal_hardware_comparison_verified": false,
+    "upstream_author": "Rolly (SEGA-SKY)",
+    "upstream_url": "https://segasky.itch.io/black-matrix-ad-vga-patch-for-sega-dreamcast"
+  },
+  "game_payloads_identical_to_tested_candidate": true,
+  "player_report": {
+    "date": "2026-11-04",
+    "reporter": "pow",
+    "result": "VGA and redream work",
+    "hardware_or_adapter_details_provided": false
+  },
+  "full_playthrough_verified": false,
+  "pal_hardware_verified": false
+}
