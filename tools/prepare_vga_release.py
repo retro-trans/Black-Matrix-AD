@@ -140,6 +140,7 @@ def finish(root, source_commit, notes):
         for fmt in ('gdi', 'cue-bin'):
             receipt = root / f'build/vga-release-0.9.1/disc{row["disc"]}-{row["kind"]}-{fmt}/verification.json'
             check = json.loads(receipt.read_text())
+            check['proof'].pop('extracted_source', None)
             if check['sha256'] != row['sha256'] or check['proof']['verified_game_tree_sha256'] != row['metadata']['target_tree_sha256']:
                 raise ValueError('Wrong stable package receipt')
             checks.append(check)
