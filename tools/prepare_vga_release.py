@@ -120,6 +120,7 @@ def verify(root, disc, kind, output_format):
         raise ValueError('Stable DCP round-trip failed')
     # Keep local absolute paths out of public validation records.
     proof.pop('output', None)
+    proof.pop('extracted_source', None)
     save(work / 'verification.json', dict(disc=disc, kind=kind, package=row['package'],
          sha256=row['sha256'], source_format=source.suffix[1:].upper(), proof=proof))
     print(f'PASS: Disc {disc} {kind} -> {output_format}', flush=True)
