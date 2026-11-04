@@ -99,6 +99,10 @@ class SH4:
                 self.t = (r[0] & (w & 255)) == 0
             elif w & 0xFF00 == 0xC900:
                 r[0] &= w & 255
+            elif w & 0xFF00 == 0xCA00:
+                r[0] ^= w & 255
+            elif w & 0xFF00 == 0xCB00:
+                r[0] |= w & 255
             elif w & 0xFF00 == 0xC700:
                 r[0] = (pc & ~3) + 4 + 4 * (w & 255)
             elif op == 0xF and (w & 0xFF) == 0x8D:
@@ -130,6 +134,8 @@ class SH4:
                 r[n] = r[m]
             elif op == 6 and low == 7:
                 r[n] = ~r[m]
+            elif op == 6 and low == 9:
+                r[n] = (r[m] << 16) | (r[m] >> 16)  # SWAP.W
             elif op == 6 and low in (4, 5, 6):
                 size = 1 << (low - 4)
                 value = signed(self.read(r[m], size),size*8)
@@ -182,8 +188,8 @@ class SH4:
                 self.write(r[n] + r[0], r[m], 1 << (low - 4))
             elif w & 0xF0FF in (0x4000, 0x4008):
                 r[n] <<= 1 if w & 255 == 0 else 2
-            elif w & 0xF0FF == 0x4018:
-                r[n] <<= 8
+            elif w & 0xF0FF in (0x4018, 0x4028):
+                r[n] <<= 8 if w & 255 == 0x18 else 16
             elif w & 0xF0FF == 0x4019:
                 r[n] >>= 8
             elif w & 0xF0FF in (0x4001, 0x4009):

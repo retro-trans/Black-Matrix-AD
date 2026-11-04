@@ -4,7 +4,7 @@ English translation and native interface work for **Black/Matrix AD** on
 **Dreamcast**, covering the Japanese two-disc edition.
 
 The current release is
-**[v0.9.0](https://github.com/retro-trans/Black-Matrix-AD/releases/tag/v0.9.0)**,
+**[v0.9.1](https://github.com/retro-trans/Black-Matrix-AD/releases/tag/v0.9.1)**,
 the latest stable English translation patch.
 The release number identifies the translated game-file content; it does not imply that
 every route, screen or line has passed human review or a complete playthrough.
@@ -19,8 +19,13 @@ memory cards. Machine review is not counted as human proofreading.
 ## Play it
 
 Download the patches and instructions from the
-[v0.9.0 release](https://github.com/retro-trans/Black-Matrix-AD/releases/tag/v0.9.0).
+[v0.9.1 release](https://github.com/retro-trans/Black-Matrix-AD/releases/tag/v0.9.1).
 You need your own exact Japanese disc dumps. No game image is distributed.
+
+**v0.9.1 fixes VGA/Redream's half-height picture**, integrating the VGA correction
+by [Rolly (SEGA-SKY)](https://segasky.itch.io/black-matrix-ad-vga-patch-for-sega-dreamcast).
+The English translation and bundled additions are retained. Do not stack the
+separate VGA patch on this release.
 
 ### Apply
 
@@ -30,7 +35,7 @@ run `Retro-Trans.exe`; the ZIP includes the required runtime notices.
 
 Click **Refresh catalog** first (especially after upgrading), then browse to
 your original Japanese Disc 1 or Disc 2 **CUE**, with all three BIN
-tracks together. Automatic identifies the disc, offers **v0.9.0**,
+tracks together. Automatic identifies the disc, offers **v0.9.1**,
 and downloads the matching DCP when you click **Patch**. Choose a **new output
 folder** and GDI or CUE/BIN output. Every original track, downloaded package,
 rebuilt game file, boot invariant and CD-audio content is verified.
@@ -44,8 +49,17 @@ Use the Windows build linked above for these instructions.
 
 | Your original Japanese disc | DCP package |
 | --- | --- |
-| Disc 1 | `Black-Matrix-AD-Disc1-English-v0.9.0.dcp` |
-| Disc 2 | `Black-Matrix-AD-Disc2-English-v0.9.0.dcp` |
+| Disc 1 | `Black-Matrix-AD-Disc1-English-v0.9.1.dcp` |
+| Disc 2 | `Black-Matrix-AD-Disc2-English-v0.9.1.dcp` |
+
+**Already using English v0.9.0?** Download
+`Black-Matrix-AD-v0.9.0-to-v0.9.1-Upgrade-DCP.zip` from the release, extract it,
+then use the **DCP** tab to apply the matching disc's upgrade to your English
+CUE/GDI. Upgrades are manual, not Automatic, and must rebuild into a new folder.
+They are not for Japanese originals, other builds or discs with a separate VGA
+patch. If verification rejects an upgrade, apply the full patch to your original
+Japanese disc instead. Both patch routes reach identical game files. The working
+VGA candidate already has those game files; it does not need a stacked upgrade.
 
 When applying manually, select the original disc's **CUE**, **GDI** or **CHD**, then its matching DCP and
 a **new output folder**. Keep every companion track beside its CUE/GDI. Choose
@@ -53,16 +67,17 @@ GDI or CUE/BIN output and apply; use the rebuilt descriptor to play. Do not
 select a loose Track 3 BIN or copy old tracks over the rebuilt result. Never
 overwrite your originals. Allow at least 12 GB of temporary/output space.
 
-The two discs are not interchangeable. These are full packages from the original
-Japanese game files, not upgrades from local test builds. The package's source
-and target game-file-tree hashes are in `DCP-MANIFEST-v0.9.0.json`; a DCP-enabled
+The two discs are not interchangeable. Full packages require the original
+Japanese game files; the separate upgrades require English v0.9.0, not other
+local builds. The package's source
+and target game-file-tree hashes are in `DCP-MANIFEST-v0.9.1.json`; a DCP-enabled
 Retro Trans build verifies that metadata, boot invariants and audio. Ordinary
 Universal Dreamcast Patcher applies the native per-file patch checks.
 
 DCP rebuilds the disc layout and verifies the translated game files. Local
-verification covers original CUE input to GDI and CUE/BIN output on both discs.
-GDI/CHD input and CHD output are supported by the patcher, but are not separately
-claimed tested for these packages. Keep verification enabled and report any
+verification covers original CUE full-patch input and English v0.9.0 GDI upgrade
+input, each to GDI and CUE/BIN output on both discs. CHD input/output is supported
+by the patcher, but is not separately tested for these packages. Keep verification enabled and report any
 source mismatch rather than forcing it through.
 
 **Boot fresh and load an in-game VMU save.** Old emulator save states can keep
@@ -76,8 +91,10 @@ when the game requests the other disc.
 Translated native graphics and the current font/layout fixes are included in
 the patches; no optional texture pack is required. A standalone HD pack and
 personal full-game/Steam Deck installation packages are not release assets.
-Existing VGA compatibility repairs are retained, but physical Dreamcast hardware
-has not been verified. Emulator-specific launcher settings are not bundled.
+The VGA correction is integrated; pow reports VGA and Redream working. The
+checked Redream 1.5.0 logo/opening movie is full-height, and Flycast cold boots
+cover both discs in VGA and Disc 1 in composite. This is not universal physical
+Dreamcast/PAL/adapter coverage. Emulator-specific launcher settings are not bundled.
 
 The patch also includes **Zero unlocked from the beginning** and
 **Domina initially highlighted in master selection**. It is not a
@@ -122,12 +139,13 @@ translation-only, original-unlock-order profile.
   alignment fixes, and raised movie subtitles to reduce bottom-edge clipping.
   Native translated artwork and the current font fixes are embedded in the disc
   patches; no external HD texture pack is needed.
-- **VGA compatibility repairs.** Retains VGA boot/video work and a cable-aware
-  graphics packet-buffer allocation correction used by the character-selection
-  screens. This is not a verified physical-Dreamcast compatibility claim.
+- **VGA and Redream compatibility.** Integrates Rolly (SEGA-SKY)'s video
+  correction for full-height VGA presentation, while retaining the cable-aware
+  graphics packet-buffer allocation safeguard used by character-selection screens.
+  No universal physical-Dreamcast compatibility claim is made.
 
-These additions are bundled in v0.9.0; it is not a strict translation-only patch.
-The list was checked against both release executables; see the
+These additions are bundled in v0.9.1; it is not a strict translation-only patch.
+The retained additions were checked against both v0.9.0 executables; see the
 [feature audit](docs/releases/v0.9.0/FEATURE_AUDIT.md).
 External HD portrait/background packs and personal Steam Deck installers are not
 bundled. Automated checks do not replace gameplay, route or hardware testing.
@@ -145,13 +163,14 @@ bundled. Automated checks do not replace gameplay, route or hardware testing.
   Sleep, Up, Down, Freeze, Stance and Magic. Their actual ImageGen lettering is
   packed into native sprites, rather than supplied only as a reference.
 
-See [the release notes](docs/releases/v0.9.0/RELEASE.md) and
-[internal build changelog](docs/ACTION_BADGES_CHANGELOG.md) for exact scope.
+See [the release notes](docs/releases/v0.9.1/RELEASE.md) and
+[changelog](docs/releases/v0.9.1/CHANGELOG.md) for exact scope.
 
 ## Validation and status
 
-Both DCP packages are applied to their original CUE sets, rebuilt as GDI and
-CUE/BIN, and re-extracted. Every game file must match the frozen translated build;
+Both full DCP packages are applied to original CUE sets and both upgrade DCPs
+to English v0.9.0 GDI sets, rebuilt as GDI and CUE/BIN, and re-extracted.
+Every game file must match the verified translated VGA target;
 boot code outside allowed track-table fields and CD audio content/sample alignment
 must be preserved. The DCP manifest, verification records and checksums accompany
 the packages. These checks do not replace gameplay or hardware testing.
@@ -180,7 +199,7 @@ game images, original dialogue sources or personal saves.
 
 | Path | Contents |
 | --- | --- |
-| `docs/releases/v0.9.0/` | Release notes, release provenance and patch instructions |
+| `docs/releases/v0.9.1/` | Current release notes, changelog and validation records |
 | `docs/RETRO_TRANS_RELEASES.md` | Patch-only release procedure and safety rules |
 | `tools/hd_ui/action_badges_english.py` | Final cumulative battle-badge build step |
 | `assets/ui/battle-labels/action-badges-v1/` | Actual generated English lettering, prompt and review |
@@ -193,6 +212,7 @@ reverse engineering and tooling were assisted by large language models,
 including Codex; the text is machine-produced and then edited, not represented
 as a hand translation by a fluent translator. Whisper supplied the initial
 post-credits voice transcripts. ImageGen supplied selected localized artwork.
+The integrated VGA correction is by **Rolly (SEGA-SKY)**, credited and linked above.
 Thanks to contributors and the original game's creators. Only work and review
 actually documented for this project are credited; SRW-Z's contributors and
 proofreading statistics are not borrowed.
